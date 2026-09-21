@@ -3362,3 +3362,424 @@ body::before {
     padding-top: 31px !important;
   }
 }
+
+
+/* -------------------------------------------------
+   v57 — iOS Safari browser UI colour matching
+-------------------------------------------------- */
+
+/*
+  Safari's top status/address area and bottom toolbar are browser UI,
+  not part of the webpage, so a CSS background image cannot be drawn there.
+  The page itself still extends correctly through safe areas; html/body are
+  given a matching warm fallback so Safari's translucent UI blends better.
+*/
+html {
+  background: #b7aea3 !important;
+}
+
+body {
+  background-color: #b7aea3 !important;
+}
+
+
+/* -------------------------------------------------
+   v58 — mobile burger menu
+-------------------------------------------------- */
+
+/* Desktop: keep the existing header layout unchanged */
+.mobile-menu-toggle,
+.mobile-site-menu {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .header-panel--logo-home {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    overflow: visible !important;
+  }
+
+  /* Left side: logo + menu button */
+  .header-panel--logo-home .header-nav {
+    width: auto !important;
+    flex: 1 1 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    overflow: visible !important;
+    padding-right: 0 !important;
+  }
+
+  /* Hide desktop page buttons on mobile */
+  .header-panel--logo-home .header-nav > a:not(.header-home-logo) {
+    display: none !important;
+  }
+
+  /* Keep the logo as the home button */
+  .header-home-logo {
+    flex: 0 0 auto !important;
+  }
+
+  /* Menu button directly to the right of the logo */
+  .mobile-menu-toggle {
+    display: inline-flex !important;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: rgba(255,255,255,.06);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3px;
+    cursor: pointer;
+    flex: 0 0 auto;
+  }
+
+  .mobile-menu-toggle span {
+    width: 14px;
+    height: 1px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.88);
+    transition: transform .18s ease, opacity .18s ease;
+  }
+
+  .mobile-menu-toggle.is-open span:nth-child(1) {
+    transform: translateY(4px) rotate(45deg);
+  }
+
+  .mobile-menu-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-toggle.is-open span:nth-child(3) {
+    transform: translateY(-4px) rotate(-45deg);
+  }
+
+  /* Languages back inside the header, at the far right */
+  .header-panel--logo-home .header-single-right {
+    position: static !important;
+    transform: none !important;
+    margin-left: auto !important;
+    display: flex !important;
+    flex: 0 0 auto !important;
+    align-items: center !important;
+    z-index: auto !important;
+  }
+
+  .header-panel--logo-home .language-switcher {
+    display: flex !important;
+    align-items: center !important;
+    gap: 2px !important;
+    margin: 0 !important;
+  }
+
+  .header-panel--logo-home .language-btn {
+    min-width: 19px !important;
+    width: 19px !important;
+    height: 16px !important;
+    padding: 0 2px !important;
+    border-radius: 4px !important;
+    font-size: 7px !important;
+    line-height: 1 !important;
+    font-weight: 400 !important;
+    letter-spacing: .02em !important;
+    background: rgba(18,16,14,.74) !important;
+    border: 1px solid rgba(255,255,255,.22) !important;
+  }
+
+  /* Dropdown menu */
+  .mobile-site-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    z-index: 50;
+    display: none;
+    padding: 8px;
+    border-radius: 14px;
+    background: rgba(18,16,14,.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 14px 32px rgba(0,0,0,.22);
+  }
+
+  .mobile-site-menu.is-open {
+    display: grid;
+    gap: 4px;
+  }
+
+  .mobile-menu__link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 0 12px;
+    border-radius: 8px;
+    color: rgba(255,255,255,.84);
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  .mobile-menu__link.is-active {
+    color: #fff;
+  }
+
+  .mobile-menu__link.is-active::after {
+    content: "";
+    position: absolute;
+    left: 12px;
+    bottom: 5px;
+    width: 42px;
+    height: 2px;
+    border-radius: 999px;
+    background: #E8CCA6;
+  }
+
+  /* No hover animation on mobile menu */
+  .mobile-menu__link:hover {
+    transform: none;
+    background: transparent;
+  }
+}
+
+@media (max-width: 390px) {
+  .mobile-menu-toggle {
+    width: 28px;
+    height: 28px;
+  }
+
+  .header-panel--logo-home .language-btn {
+    min-width: 18px !important;
+    width: 18px !important;
+    height: 15px !important;
+    font-size: 6.5px !important;
+  }
+}
+
+
+/* -------------------------------------------------
+   v59 — вернуть фон как раньше + языки внутри шапки
+   на desktop и mobile
+-------------------------------------------------- */
+
+/* Возвращаем исходный фон сайта */
+html,
+body {
+  min-height: 100%;
+}
+
+html {
+  background: transparent !important;
+}
+
+body {
+  background:
+    linear-gradient(rgba(0,0,0,.10), rgba(0,0,0,.10)),
+    url("images/mainfon.jpg") center center / cover fixed no-repeat !important;
+  background-color: transparent !important;
+}
+
+/* Убираем дополнительный fixed-слой фона из iPhone-эксперимента */
+body::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* На desktop языки также находятся ВНУТРИ шапки справа */
+.header-panel--logo-home .header-single-right {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  transform: none !important;
+  margin-left: auto !important;
+  z-index: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  flex: 0 0 auto !important;
+}
+
+.header-panel--logo-home .language-switcher {
+  position: static !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 2px !important;
+  margin: 0 !important;
+}
+
+/* Сохраняем компактный размер языков */
+.header-panel--logo-home .language-btn {
+  min-width: 19px !important;
+  width: 19px !important;
+  height: 16px !important;
+  padding: 0 2px !important;
+  border-radius: 4px !important;
+  font-size: 7px !important;
+  line-height: 1 !important;
+  font-weight: 400 !important;
+  letter-spacing: .02em !important;
+  background: rgba(18,16,14,.74) !important;
+  border: 1px solid rgba(255,255,255,.22) !important;
+}
+
+/* Убираем лишний верхний отступ, который был нужен,
+   когда языки висели над шапкой */
+.site-shell {
+  padding-top: 22px !important;
+}
+
+@media (max-width: 760px) {
+  .site-shell {
+    padding-top: 22px !important;
+  }
+
+  .header-panel--logo-home .header-single-right {
+    position: static !important;
+    transform: none !important;
+    margin-left: auto !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .site-shell {
+    padding-top: 22px !important;
+  }
+}
+
+
+/* -------------------------------------------------
+   v60 — Batumi + language buttons restored to v39 look
+   for desktop and mobile
+-------------------------------------------------- */
+
+.header-panel--logo-home .header-single-right {
+  position: static !important;
+  transform: none !important;
+  margin-left: auto !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 13px !important;
+  flex: 0 0 auto !important;
+}
+
+.header-panel--logo-home .header-location {
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  color: rgba(255,255,255,.68) !important;
+  white-space: nowrap !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: .05em !important;
+  line-height: 1 !important;
+}
+
+.header-panel--logo-home .header-location svg {
+  width: 14px !important;
+  height: 14px !important;
+  fill: currentColor !important;
+}
+
+.header-panel--logo-home .language-switcher {
+  position: static !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  margin: 0 !important;
+}
+
+.header-panel--logo-home .language-btn {
+  appearance: none !important;
+  min-width: 34px !important;
+  width: auto !important;
+  height: 28px !important;
+  padding: 0 8px !important;
+  border: 1px solid rgba(255,255,255,.34) !important;
+  background: rgba(255,255,255,.04) !important;
+  color: rgba(255,255,255,.66) !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  letter-spacing: .08em !important;
+  line-height: 1 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.header-panel--logo-home .language-btn:hover {
+  color: #fff !important;
+  border-color: rgba(255,255,255,.7) !important;
+  background: rgba(255,255,255,.04) !important;
+}
+
+.header-panel--logo-home .language-btn.is-active {
+  color: #fff !important;
+  background: rgba(255,255,255,.14) !important;
+  border-color: rgba(255,255,255,.72) !important;
+}
+
+/* Mobile: same v39 styling, just modestly scaled to fit */
+@media (max-width: 760px) {
+  .header-panel--logo-home .header-single-right {
+    gap: 8px !important;
+  }
+
+  .header-panel--logo-home .header-location {
+    gap: 3px !important;
+    font-size: 9px !important;
+  }
+
+  .header-panel--logo-home .header-location svg {
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  .header-panel--logo-home .language-switcher {
+    gap: 3px !important;
+  }
+
+  .header-panel--logo-home .language-btn {
+    min-width: 28px !important;
+    height: 24px !important;
+    padding: 0 6px !important;
+    border-radius: 7px !important;
+    font-size: 9px !important;
+    letter-spacing: .06em !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .header-panel--logo-home .header-single-right {
+    gap: 6px !important;
+  }
+
+  .header-panel--logo-home .header-location {
+    font-size: 8px !important;
+  }
+
+  .header-panel--logo-home .header-location svg {
+    width: 11px !important;
+    height: 11px !important;
+  }
+
+  .header-panel--logo-home .language-btn {
+    min-width: 26px !important;
+    height: 22px !important;
+    padding: 0 5px !important;
+    font-size: 8px !important;
+  }
+}

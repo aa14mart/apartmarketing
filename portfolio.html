@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#b7aea3">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>APART MARKETING — Portfolio</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
@@ -18,13 +20,36 @@
         <a class="header-home-logo" href="index.html" aria-label="Главная">
               <img src="images/header-wordmark.svg" alt="APART MARKETING">
             </a>
+            <button class="mobile-menu-toggle" type="button"
+                    aria-label="Открыть меню"
+                    aria-expanded="false"
+                    aria-controls="mobile-site-menu">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
             <a class="services-nav" href="services.html" data-i18n="services_btn">УСЛУГИ</a>
             <a class="about-nav" href="about.html" data-i18n="about_btn">ПРО НАС</a>
             <a class="portfolio-nav is-active" href="portfolio.html" data-i18n="portfolio_btn">ПОРТФОЛИО</a>
             <a class="contacts-nav" href="contacts.html" data-i18n="contacts_btn">КОНТАКТЫ</a>
       </nav>
 
+
+        <nav class="mobile-site-menu" id="mobile-site-menu" aria-label="Мобильное меню">
+          <a class="mobile-menu__link" href="services.html" data-i18n="services_btn">УСЛУГИ</a>
+          <a class="mobile-menu__link" href="about.html" data-i18n="about_btn">ПРО НАС</a>
+          <a class="mobile-menu__link is-active" href="portfolio.html" data-i18n="portfolio_btn">ПОРТФОЛИО</a>
+          <a class="mobile-menu__link" href="contacts.html" data-i18n="contacts_btn">КОНТАКТЫ</a>
+        </nav>
+
       <div class="header-single-right">
+
+        <span class="header-location" aria-label="Location: Batumi">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 10.2A3.2 3.2 0 1 1 12 5.8a3.2 3.2 0 0 1 0 6.4z"/>
+          </svg>
+          <span>Batumi</span>
+        </span>
 
         <div class="language-switcher" aria-label="Переключение языка">
           <button class="language-btn is-active" type="button" data-lang="ru">RU</button>
