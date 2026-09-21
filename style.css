@@ -3270,3 +3270,95 @@ body,
     height: 2px !important;
   }
 }
+
+
+/* -------------------------------------------------
+   v56 — iPhone safe areas + language buttons visibility
+-------------------------------------------------- */
+
+/* iOS Safari may leave unpainted areas around the visual viewport when
+   using a fixed body background. Move the background to a fixed layer. */
+html,
+body {
+  min-height: 100%;
+  background-color: #bdb6ad !important;
+}
+
+body {
+  position: relative;
+  background: none !important;
+  min-height: 100dvh;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  z-index: -2;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  background:
+    linear-gradient(rgba(0,0,0,.10), rgba(0,0,0,.10)),
+    url("images/mainfon.jpg") center center / cover no-repeat;
+  transform: translateZ(0);
+  pointer-events: none;
+}
+
+/* Make the fixed background extend through iPhone safe areas. */
+@supports (padding: max(0px)) {
+  body::before {
+    top: calc(-1 * env(safe-area-inset-top));
+    right: calc(-1 * env(safe-area-inset-right));
+    bottom: calc(-1 * env(safe-area-inset-bottom));
+    left: calc(-1 * env(safe-area-inset-left));
+    width: auto;
+    height: auto;
+  }
+
+  .site-shell {
+    padding-left: max(clamp(18px, 3vw, 46px), calc(env(safe-area-inset-left) + 12px)) !important;
+    padding-right: max(clamp(18px, 3vw, 46px), calc(env(safe-area-inset-right) + 12px)) !important;
+    padding-bottom: max(46px, calc(env(safe-area-inset-bottom) + 24px)) !important;
+  }
+}
+
+/* Reserve actual room above the header for the floating language buttons,
+   so they never leave the viewport on narrow phones. */
+.site-shell {
+  padding-top: 34px !important;
+}
+
+.header-panel--logo-home .header-single-right {
+  top: 0 !important;
+  right: 10px !important;
+  transform: translateY(-100%) !important;
+}
+
+@supports (right: max(0px)) {
+  .header-panel--logo-home .header-single-right {
+    right: max(10px, env(safe-area-inset-right)) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-shell {
+    padding-top: 32px !important;
+  }
+
+  .header-panel--logo-home .header-single-right {
+    right: 7px !important;
+    transform: translateY(-100%) !important;
+  }
+
+  @supports (right: max(0px)) {
+    .header-panel--logo-home .header-single-right {
+      right: max(7px, env(safe-area-inset-right)) !important;
+    }
+  }
+}
+
+@media (max-width: 390px) {
+  .site-shell {
+    padding-top: 31px !important;
+  }
+}
