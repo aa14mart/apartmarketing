@@ -1,0 +1,821 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+  background:
+    linear-gradient(rgba(0,0,0,.10), rgba(0,0,0,.10)),
+    url("images/mainfon.jpg") center center / cover fixed no-repeat;
+}
+
+/* Отдельный фон-слой больше не нужен */
+.page-bg {
+  display: none;
+}
+
+/* Общая колонка из 6 блоков */
+.site-shell {
+  width: 100%;
+  padding: 22px clamp(18px, 3vw, 46px) 46px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Общий стиль каждого блока */
+.panel {
+  width: 100%;
+  height: auto;
+  background: rgba(18, 16, 14, .74);
+  border: 1px solid rgba(255,255,255,.17);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 14px 40px rgba(0,0,0,.16);
+}
+
+/* Блок 1 — шапка */
+.header-panel {
+  min-height: 72px;
+  padding: 0 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+}
+
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.language-btn {
+  appearance: none;
+  border: 1px solid rgba(255,255,255,.34);
+  background: rgba(255,255,255,.04);
+  color: rgba(255,255,255,.66);
+  border-radius: 8px;
+  min-width: 34px;
+  height: 28px;
+  padding: 0 8px;
+  cursor: pointer;
+
+  font: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .08em;
+
+  transition:
+    color .18s ease,
+    background-color .18s ease,
+    border-color .18s ease;
+}
+
+.language-btn:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,.7);
+}
+
+.language-btn.is-active {
+  color: #fff;
+  background: rgba(255,255,255,.14);
+  border-color: rgba(255,255,255,.72);
+}
+
+.brand {
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  white-space: nowrap;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.social-link {
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+  place-items: center;
+
+  color: #fff;
+  text-decoration: none;
+
+  border: 1px solid rgba(255,255,255,.48);
+  border-radius: 50%;
+  background: rgba(255,255,255,.045);
+
+  transition:
+    transform .18s ease,
+    background-color .18s ease,
+    border-color .18s ease;
+}
+
+.social-link:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.13);
+  border-color: rgba(255,255,255,.95);
+}
+
+.social-link svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/*
+  Блоки 2–6 пока пустые.
+  Минимальная высота нужна только чтобы их было видно.
+  Когда добавим контент, блок автоматически увеличится.
+*/
+.content-panel {
+  min-height: 220px;
+  padding: 28px;
+}
+
+@media (max-width: 640px) {
+  .site-shell {
+    padding: 12px 12px 32px;
+    gap: 14px;
+  }
+
+  .panel {
+    border-radius: 16px;
+  }
+
+  .header-panel {
+    min-height: 62px;
+    padding: 0 14px;
+  }
+
+  .brand {
+    font-size: 11px;
+    letter-spacing: .11em;
+  }
+
+  .header-left {
+    gap: 9px;
+  }
+
+  .language-switcher {
+    gap: 3px;
+  }
+
+  .language-btn {
+    min-width: 27px;
+    height: 25px;
+    padding: 0 5px;
+    border-radius: 7px;
+    font-size: 9px;
+  }
+
+  .socials {
+    gap: 6px;
+  }
+
+  .social-link {
+    width: 30px;
+    height: 30px;
+  }
+
+  .social-link svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .content-panel {
+    min-height: 180px;
+    padding: 20px;
+  }
+}
+
+
+/* Блок 2 */
+.block-two {
+  padding: 0;
+  overflow: hidden;
+}
+
+.block-two__gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.block-two__card {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.block-two__card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.block-two__card--main img {
+  object-position: center 48%;
+}
+
+.block-two__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.46) 48%, rgba(0,0,0,.08) 100%),
+    linear-gradient(0deg, rgba(0,0,0,.28) 0%, rgba(0,0,0,0) 55%);
+}
+
+.block-two__text {
+  position: absolute;
+  z-index: 2;
+  left: clamp(20px, 3vw, 42px);
+  right: clamp(20px, 3vw, 42px);
+  bottom: clamp(20px, 3vw, 38px);
+  max-width: 690px;
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(0,0,0,.35);
+}
+
+
+
+@media (max-width: 760px) {
+  .block-two {
+    padding: 0;
+  }
+
+  .block-two__gallery {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+
+  .block-two__text {
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+  }
+
+  
+  }
+
+/* Блок 3 — компактный план работы */
+.workflow-block {
+  padding: 16px;
+}
+
+.workflow {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) auto
+    minmax(0, 1fr) auto
+    minmax(0, 1fr) auto
+    minmax(0, 1fr);
+  align-items: stretch;
+  gap: 9px;
+}
+
+.workflow-step {
+  min-height: 118px;
+  padding: 15px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border: 1px solid rgba(255,255,255,.24);
+  border-radius: 13px;
+  background: rgba(255,255,255,.035);
+}
+
+
+
+.workflow-arrow {
+  align-self: center;
+  padding: 0 1px;
+  font-size: 20px;
+  line-height: 1;
+  color: rgba(255,255,255,.55);
+}
+
+@media (max-width: 950px) {
+  .workflow-block {
+    padding: 12px;
+  }
+
+  .workflow {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .workflow-step {
+    min-height: 0;
+    padding: 14px 15px;
+  }
+
+  .workflow-arrow {
+    justify-self: center;
+    transform: rotate(90deg);
+    font-size: 18px;
+  }
+}
+
+
+/* Исправление блока 3: убираем минимальную высоту от общего .content-panel */
+.workflow-block {
+  min-height: 0;
+  height: auto;
+}
+
+
+/* Блок 4 — до / после */
+.block-four {
+  min-height: 0;
+  padding: 16px;
+}
+
+.comparison-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.comparison-pair + .comparison-pair {
+  margin-top: 14px;
+}
+
+.comparison-card {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.03);
+}
+
+
+.comparison-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 760px) {
+  .block-four {
+    padding: 12px;
+  }
+
+  .comparison-pair {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .comparison-pair + .comparison-pair {
+    margin-top: 10px;
+  }
+
+  .comparison-card {
+    border-radius: 12px;
+  }
+}
+
+
+/* Блок 2: текст поверх изображения не участвует в размере картинки */
+.block-two__card--main {
+  position: relative;
+}
+
+.block-two__text,
+.block-two__overlay {
+  pointer-events: none;
+}
+
+/* Оба изображения имеют одинаковый масштаб и сохраняют исходные пропорции */
+.block-two__gallery {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.block-two__card img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+
+/* -------------------------------------------------
+   Единая типографика сайта: только 2 текстовых формата
+   1) крупный — как APART MARKETING, жирный
+   2) мелкий — тот же стиль, но обычный
+-------------------------------------------------- */
+
+:root {
+  --type-big-size: 17px;
+  --type-small-size: 14px;
+  --type-big-spacing: .16em;
+  --type-small-spacing: .06em;
+}
+
+.brand,
+.block-two__text h1,
+.workflow-step h3 {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--type-big-size);
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: var(--type-big-spacing);
+  text-transform: uppercase;
+}
+
+.block-two__text p,
+.workflow-step p,
+.comparison-label,
+.language-btn {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--type-small-size);
+  line-height: 1.45;
+  font-weight: 400;
+  letter-spacing: var(--type-small-spacing);
+}
+
+.block-two__text p,
+.workflow-step p {
+  text-transform: none;
+}
+
+.comparison-label,
+.language-btn {
+  text-transform: uppercase;
+}
+
+/* Блок 2 */
+.block-two__text h1 {
+  margin-bottom: 8px;
+}
+
+.block-two__text p {
+  margin: 0;
+  max-width: 520px;
+  color: rgba(255,255,255,.94);
+}
+
+/* Блок 3 */
+.workflow-step h3 {
+  margin-bottom: 8px;
+}
+
+.workflow-step p {
+  margin: 0;
+  color: rgba(255,255,255,.78);
+}
+
+.comparison-label {
+  line-height: 1;
+  background: rgba(18,16,14,.72);
+}
+
+/* RU / EN чуть плотнее */
+.language-btn {
+  line-height: 1;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --type-big-size: 13px;
+    --type-small-size: 12px;
+    --type-big-spacing: .11em;
+    --type-small-spacing: .05em;
+  }
+
+  .block-two__text p {
+    max-width: 100%;
+  }
+}
+
+
+/* -------------------------------------------------
+   v13: JPEG-изображения не растягиваются больше
+   своего реального разрешения. На больших экранах
+   контент центрируется, по краям остаётся фон блока.
+-------------------------------------------------- */
+
+/* Блок 2 */
+.block-two__gallery {
+  justify-items: center;
+  align-items: start;
+}
+
+.block-two__card {
+  width: 100%;
+  max-width: 724px;
+  justify-self: center;
+}
+
+.block-two__card img {
+  display: block;
+  width: 100%;
+  max-width: 724px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Блок 4 — возвращаем рамки и правильные плашки До/После */
+.comparison-pair {
+  justify-items: center;
+}
+
+.comparison-card {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  max-width: 724px;
+  justify-self: center;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.03);
+}
+
+.comparison-card img {
+  display: block;
+  width: 100%;
+  max-width: 724px;
+  height: auto;
+  object-fit: contain;
+}
+
+.comparison-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(18,16,14,.72);
+  color: #fff;
+}
+
+/* Мелкие шрифты сайта: единый стиль */
+.block-two__text p,
+.workflow-step p,
+.comparison-label,
+.language-btn {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--type-small-size);
+  line-height: 1.45;
+  font-weight: 400;
+  letter-spacing: var(--type-small-spacing);
+}
+
+@media (max-width: 760px) {
+  .block-two__card,
+  .comparison-card {
+    max-width: 100%;
+  }
+
+  .block-two__card img,
+  .comparison-card img {
+    max-width: 100%;
+  }
+
+  .comparison-card {
+    border-radius: 12px;
+  }
+}
+
+
+/* -------------------------------------------------
+   v14
+   1) Блок 2: такие же рамки у картинок, как в блоке 4
+   2) Весь сайт больше не расширяется шире контента картинок.
+      На больших экранах контент центрируется, по краям
+      остаётся только фоновое изображение страницы.
+-------------------------------------------------- */
+
+/* Ограничиваем максимальную ширину всей колонке сайта */
+.site-shell {
+  max-width: 1540px;
+  margin: 0 auto;
+}
+
+/* Блок 2 — возвращаем карточные рамки как в блоке 4 */
+.block-two {
+  padding: 16px;
+}
+
+.block-two__gallery {
+  gap: 14px;
+  justify-items: center;
+}
+
+.block-two__card {
+  width: 100%;
+  max-width: 724px;
+  justify-self: center;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.03);
+}
+
+.block-two__card img {
+  display: block;
+  width: 100%;
+  max-width: 724px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* На больших экранах карточки не растягиваем больше фото */
+.comparison-pair,
+.block-two__gallery {
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .block-two {
+    padding: 12px;
+  }
+
+  .block-two__gallery {
+    gap: 10px;
+  }
+
+  .block-two__card {
+    max-width: 100%;
+    border-radius: 12px;
+  }
+
+  .block-two__card img {
+    max-width: 100%;
+  }
+}
+
+
+/* -------------------------------------------------
+   v16 — переработка блока 2
+-------------------------------------------------- */
+
+.block-two {
+  padding: 16px;
+}
+
+.block-two__gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  justify-items: center;
+  align-items: start;
+}
+
+.block-two__card {
+  position: relative;
+  width: 100%;
+  max-width: 724px;
+  margin: 0;
+  justify-self: center;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.03);
+}
+
+.block-two__card img {
+  display: block;
+  width: 100%;
+  max-width: 724px;
+  height: auto;
+  object-fit: contain;
+}
+
+.block-two__overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.block-two__overlay--top {
+  background: linear-gradient(to bottom,
+    rgba(0,0,0,.68) 0%,
+    rgba(0,0,0,.38) 28%,
+    rgba(0,0,0,.08) 58%,
+    rgba(0,0,0,0) 100%);
+}
+
+.block-two__overlay--bottom {
+  background: linear-gradient(to top,
+    rgba(0,0,0,.72) 0%,
+    rgba(0,0,0,.42) 28%,
+    rgba(0,0,0,.08) 58%,
+    rgba(0,0,0,0) 100%);
+}
+
+.block-two__text {
+  position: absolute;
+  z-index: 2;
+  left: clamp(18px, 2.6vw, 28px);
+  right: clamp(18px, 2.6vw, 28px);
+  pointer-events: none;
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0,0,0,.38);
+}
+
+.block-two__text--top {
+  top: clamp(16px, 2.6vw, 26px);
+  bottom: auto;
+}
+
+.block-two__text--bottom {
+  bottom: clamp(16px, 2.6vw, 26px);
+  top: auto;
+}
+
+.block-two__headline {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 760px) {
+  .block-two {
+    padding: 12px;
+  }
+
+  .block-two__gallery {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .block-two__card {
+    max-width: 100%;
+    border-radius: 12px;
+  }
+
+  .block-two__card img {
+    max-width: 100%;
+  }
+
+  .block-two__text {
+    left: 16px;
+    right: 16px;
+  }
+
+  .block-two__text--top {
+    top: 16px;
+  }
+
+  .block-two__text--bottom {
+    bottom: 16px;
+  }
+
+  .block-two__headline {
+    font-size: 13px;
+    line-height: 1.35;
+    letter-spacing: .11em;
+  }
+}
+
+
+/* -------------------------------------------------
+   v18 — убираем все обводки у блоков и картинок
+-------------------------------------------------- */
+
+.panel,
+.workflow-step,
+.block-two__card,
+.comparison-card {
+  border: 0 !important;
+}
