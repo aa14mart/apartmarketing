@@ -856,3 +856,84 @@ body {
     margin-left: 14px;
   }
 }
+
+
+/* -------------------------------------------------
+   v20 — цветные контакты + более спокойные языки
+-------------------------------------------------- */
+
+.header-panel {
+  position: relative;
+}
+
+/* Цветные иконки контактов */
+.header-left .social-link:nth-child(1) {
+  color: #2AABEE; /* Telegram */
+  background: rgba(42,171,238,.08);
+}
+
+.header-left .social-link:nth-child(2) {
+  color: #25D366; /* WhatsApp */
+  background: rgba(37,211,102,.08);
+}
+
+.header-left .social-link:nth-child(3) {
+  color: #E4405F; /* Instagram */
+  background: rgba(228,64,95,.08);
+}
+
+.header-left .social-link:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.08);
+}
+
+/* Языки ставим на один уровень с контактами */
+.header-panel > .language-switcher {
+  position: absolute;
+  right: 22px;
+  bottom: 17px;
+  margin: 0;
+  gap: 3px;
+  align-items: center;
+}
+
+/* Делаем переключатели компактнее и менее заметными */
+.header-panel .language-btn {
+  min-width: 25px;
+  height: 22px;
+  padding: 0 5px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: rgba(255,255,255,.42);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: .06em;
+  opacity: .88;
+}
+
+.header-panel .language-btn:hover {
+  color: rgba(255,255,255,.75);
+  background: rgba(255,255,255,.04);
+}
+
+.header-panel .language-btn.is-active {
+  color: rgba(255,255,255,.78);
+  background: rgba(255,255,255,.07);
+}
+
+@media (max-width: 640px) {
+  .header-panel > .language-switcher {
+    right: 14px;
+    bottom: 18px;
+    gap: 2px;
+  }
+
+  .header-panel .language-btn {
+    min-width: 22px;
+    height: 20px;
+    padding: 0 4px;
+    border-radius: 5px;
+    font-size: 7px;
+  }
+}
