@@ -2656,3 +2656,170 @@ a.contact-row:hover {
     max-height: 28px !important;
   }
 }
+
+
+/* -------------------------------------------------
+   v48 — Batumi + languages снова в одну строку
+   + крупный шрифт уменьшен на 15%
+-------------------------------------------------- */
+
+:root {
+  --type-big-size: 14.45px;
+}
+
+.header-panel--logo-home .header-single-right {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 13px !important;
+  margin-left: auto !important;
+  padding-top: 0 !important;
+}
+
+.header-panel--logo-home .header-location {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+}
+
+.header-panel--logo-home .language-switcher {
+  position: static !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 3px !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --type-big-size: 11.05px;
+  }
+
+  .header-panel--logo-home .header-single-right {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 5px !important;
+  }
+
+  .header-panel--logo-home .header-location span {
+    display: inline !important;
+  }
+
+  .header-panel--logo-home .language-switcher {
+    transform: none !important;
+  }
+}
+
+
+/* -------------------------------------------------
+   v49 — only 2 text styles on the whole site
+   BIG  = like “Подготавливаем интерьер...”
+   SMALL = like “Для продажи и аренды...”
+-------------------------------------------------- */
+
+:root {
+  --type-big-size: 14.45px !important;
+  --type-small-size: 14px !important;
+  --type-big-spacing: .08em !important;
+  --type-small-spacing: .06em !important;
+}
+
+/* BIG text — one unified large style */
+.header-panel--logo-home .header-nav > a:not(.header-home-logo),
+.header-location,
+.language-btn,
+.block-two__headline,
+.value-copy > p,
+.workflow-step h3,
+.pricing-card h2,
+.other-services h3,
+.included-services h3,
+.equipment-title,
+.equipment-photo-label,
+.info-page__title,
+.comparison-label {
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: var(--type-big-size) !important;
+  line-height: 1.45 !important;
+  font-weight: 700 !important;
+  letter-spacing: var(--type-big-spacing) !important;
+}
+
+/* SMALL text — one unified small style */
+.block-two__text p,
+.value-points p,
+.pricing-lead,
+.pricing-lines p,
+.services-notes p,
+.included-services p,
+.equipment-item,
+.info-page__copy p,
+.contacts-page__intro,
+.contact-row__label,
+.contact-row__value,
+.site-footer__copy,
+.site-footer__phone {
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: var(--type-small-size) !important;
+  line-height: 1.55 !important;
+  letter-spacing: var(--type-small-spacing) !important;
+}
+
+/* weight tuning inside the small style */
+.block-two__text p,
+.value-points p,
+.pricing-lines p,
+.services-notes p,
+.included-services p,
+.equipment-item,
+.info-page__copy p,
+.contacts-page__intro,
+.contact-row__value,
+.site-footer__copy,
+.site-footer__phone {
+  font-weight: 400 !important;
+}
+
+.pricing-lead,
+.contact-row__label {
+  font-weight: 700 !important;
+}
+
+/* keep header and image texts inside the same two-style system */
+.header-panel--logo-home .header-nav > a:not(.header-home-logo),
+.language-btn,
+.comparison-label,
+.equipment-photo-label {
+  text-transform: uppercase !important;
+}
+
+.header-location {
+  text-transform: none !important;
+}
+
+.block-two__headline,
+.value-copy > p,
+.workflow-step h3,
+.pricing-card h2,
+.other-services h3,
+.included-services h3,
+.equipment-title,
+.info-page__title {
+  text-transform: uppercase !important;
+}
+
+/* mobile: still only the same 2 sizes */
+@media (max-width: 640px) {
+  :root {
+    --type-big-size: 14.45px !important;
+    --type-small-size: 14px !important;
+  }
+
+  .header-location span {
+    display: inline !important;
+  }
+}
