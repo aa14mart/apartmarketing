@@ -682,9 +682,8 @@ body {
 
 
 /* -------------------------------------------------
-   v16 — переработка блока 2
+   v17 — текущая компоновка блока 2
 -------------------------------------------------- */
-
 .block-two {
   padding: 16px;
 }
@@ -705,7 +704,6 @@ body {
   justify-self: center;
   overflow: hidden;
   border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.18);
   background: rgba(255,255,255,.03);
 }
 
@@ -721,14 +719,6 @@ body {
   position: absolute;
   inset: 0;
   pointer-events: none;
-}
-
-.block-two__overlay--top {
-  background: linear-gradient(to bottom,
-    rgba(0,0,0,.68) 0%,
-    rgba(0,0,0,.38) 28%,
-    rgba(0,0,0,.08) 58%,
-    rgba(0,0,0,0) 100%);
 }
 
 .block-two__overlay--bottom {
@@ -747,11 +737,6 @@ body {
   pointer-events: none;
   color: #fff;
   text-shadow: 0 2px 12px rgba(0,0,0,.38);
-}
-
-.block-two__text--top {
-  top: clamp(16px, 2.6vw, 26px);
-  bottom: auto;
 }
 
 .block-two__text--bottom {
@@ -779,22 +764,18 @@ body {
     gap: 10px;
   }
 
-  .block-two__card {
-    max-width: 100%;
-    border-radius: 12px;
-  }
-
+  .block-two__card,
   .block-two__card img {
     max-width: 100%;
+  }
+
+  .block-two__card {
+    border-radius: 12px;
   }
 
   .block-two__text {
     left: 16px;
     right: 16px;
-  }
-
-  .block-two__text--top {
-    top: 16px;
   }
 
   .block-two__text--bottom {
@@ -808,14 +789,70 @@ body {
   }
 }
 
-
-/* -------------------------------------------------
-   v18 — убираем все обводки у блоков и картинок
--------------------------------------------------- */
-
+/* v18 — все обводки блоков и картинок = 0 */
 .panel,
 .workflow-step,
 .block-two__card,
 .comparison-card {
   border: 0 !important;
+}
+
+/* -------------------------------------------------
+   v19 — шапка
+   Контакты под APART MARKETING, языки справа
+-------------------------------------------------- */
+.header-panel {
+  min-height: 86px;
+  padding: 10px 22px;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.header-left .socials {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.header-panel > .language-switcher {
+  margin-left: auto;
+  align-self: center;
+}
+
+.header-left .social-link {
+  width: 28px;
+  height: 28px;
+  border: 0;
+}
+
+.header-left .social-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+@media (max-width: 640px) {
+  .header-panel {
+    min-height: 80px;
+    padding: 9px 14px;
+  }
+
+  .header-left {
+    gap: 6px;
+  }
+
+  .header-left .social-link {
+    width: 26px;
+    height: 26px;
+  }
+
+  .header-panel > .language-switcher {
+    margin-left: 14px;
+  }
 }
