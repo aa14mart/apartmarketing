@@ -937,3 +937,631 @@ body {
     font-size: 7px;
   }
 }
+
+
+/* -------------------------------------------------
+   v21 — portfolio page + navigation button
+-------------------------------------------------- */
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.portfolio-nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 0 11px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.72);
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  transition: background-color .18s ease, color .18s ease, transform .18s ease;
+}
+
+.portfolio-nav:hover {
+  color: #fff;
+  background: rgba(255,255,255,.10);
+  transform: translateY(-1px);
+}
+
+.portfolio-nav.is-active {
+  color: #fff;
+  background: rgba(255,255,255,.14);
+}
+
+.chamfer-panel {
+  clip-path: polygon(
+    18px 0,
+    calc(100% - 18px) 0,
+    100% 18px,
+    100% calc(100% - 18px),
+    calc(100% - 18px) 100%,
+    18px 100%,
+    0 calc(100% - 18px),
+    0 18px
+  );
+}
+
+.portfolio-block {
+  min-height: 0;
+  padding: 16px;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  justify-items: center;
+  align-items: start;
+}
+
+.portfolio-card {
+  margin: 0;
+  width: min(100%, 640px);
+  overflow: hidden;
+  background: rgba(255,255,255,.03);
+  clip-path: polygon(
+    14px 0,
+    calc(100% - 14px) 0,
+    100% 14px,
+    100% calc(100% - 14px),
+    calc(100% - 14px) 100%,
+    14px 100%,
+    0 calc(100% - 14px),
+    0 14px
+  );
+}
+
+.portfolio-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 1020px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .brand-row {
+    gap: 10px;
+  }
+
+  .portfolio-nav {
+    min-height: 24px;
+    padding: 0 9px;
+    border-radius: 7px;
+    font-size: 10px;
+    letter-spacing: .11em;
+  }
+
+  .portfolio-block {
+    padding: 12px;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+
+/* -------------------------------------------------
+   v22 — services/pricing page + value block on home
+-------------------------------------------------- */
+
+.services-nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 0 11px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.72);
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  transition: background-color .18s ease, color .18s ease, transform .18s ease;
+}
+
+.services-nav:hover {
+  color: #fff;
+  background: rgba(255,255,255,.10);
+  transform: translateY(-1px);
+}
+
+.services-nav.is-active {
+  color: #fff;
+  background: rgba(255,255,255,.14);
+}
+
+.value-block {
+  min-height: 0;
+  padding: 28px;
+}
+
+.value-copy {
+  max-width: 1080px;
+}
+
+.value-copy > p,
+.value-points p {
+  margin: 0;
+  color: rgba(255,255,255,.88);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--type-small-size);
+  line-height: 1.7;
+  letter-spacing: var(--type-small-spacing);
+}
+
+.value-copy > p {
+  font-size: var(--type-big-size);
+  line-height: 1.5;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.value-points {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.services-block {
+  min-height: 0;
+  padding: 16px;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.pricing-card {
+  min-height: 310px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  border-radius: 16px;
+  background: rgba(255,255,255,.045);
+}
+
+.pricing-card h2,
+.other-services h3 {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--type-big-size);
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: var(--type-big-spacing);
+  text-transform: uppercase;
+}
+
+.pricing-lead {
+  margin: 18px 0 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--type-small-size);
+  line-height: 1.55;
+  font-weight: 700;
+  letter-spacing: var(--type-small-spacing);
+  color: rgba(255,255,255,.92);
+}
+
+.pricing-lines {
+  margin-top: auto;
+  padding-top: 26px;
+  display: grid;
+  gap: 10px;
+}
+
+.pricing-lines p,
+.services-notes p {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--type-small-size);
+  line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: var(--type-small-spacing);
+  color: rgba(255,255,255,.78);
+}
+
+.services-notes {
+  margin-top: 14px;
+  padding: 22px 24px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.035);
+}
+
+.services-notes > p {
+  color: rgba(255,255,255,.9);
+}
+
+.other-services {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.other-services p {
+  margin-top: 10px;
+}
+
+@media (max-width: 900px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-card {
+    min-height: 0;
+  }
+
+  .pricing-lines {
+    margin-top: 18px;
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .services-nav {
+    min-height: 24px;
+    padding: 0 9px;
+    border-radius: 7px;
+    font-size: 10px;
+    letter-spacing: .11em;
+  }
+
+  .value-block {
+    padding: 20px;
+  }
+
+  .services-block {
+    padding: 12px;
+  }
+
+  .pricing-card,
+  .services-notes {
+    padding: 20px;
+    border-radius: 14px;
+  }
+}
+
+
+/* -------------------------------------------------
+   v23 — перестановка смысловых блоков
+-------------------------------------------------- */
+
+.value-block--main {
+  padding: 26px 28px;
+}
+
+.included-services {
+  margin-top: 14px;
+  padding: 22px 24px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.04);
+}
+
+.included-services h3 {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--type-big-size);
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: var(--type-big-spacing);
+  text-transform: uppercase;
+}
+
+.included-services p {
+  margin: 12px 0 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--type-small-size);
+  line-height: 1.65;
+  font-weight: 400;
+  letter-spacing: var(--type-small-spacing);
+  color: rgba(255,255,255,.82);
+}
+
+.other-services {
+  display: grid;
+  gap: 8px;
+}
+
+.other-services h3 {
+  margin-bottom: 2px;
+}
+
+.workflow-block--services {
+  margin-top: 0;
+}
+
+@media (max-width: 640px) {
+  .value-block--main {
+    padding: 20px;
+  }
+
+  .included-services {
+    padding: 20px;
+    border-radius: 14px;
+  }
+}
+
+
+/* -------------------------------------------------
+   v24 — Portfolio: скругления + оборудование
+-------------------------------------------------- */
+
+/* Убираем старое скашивание углов */
+.chamfer-panel {
+  clip-path: none !important;
+}
+
+/* Блок портфолио — обычное скругление, как на главной */
+.portfolio-block {
+  border-radius: 20px;
+  overflow: visible;
+}
+
+/* Карточки фото — тоже обычные скругления */
+.portfolio-card {
+  clip-path: none !important;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* Блок оборудования */
+.equipment-block {
+  min-height: 0;
+  padding: 24px;
+  border-radius: 20px;
+}
+
+.equipment-title {
+  margin: 0 0 18px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--type-big-size);
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: var(--type-big-spacing);
+  text-transform: uppercase;
+}
+
+.equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.equipment-item {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  padding: 13px 15px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.045);
+  color: rgba(255,255,255,.88);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--type-small-size);
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: var(--type-small-spacing);
+  text-decoration: none;
+}
+
+.equipment-link {
+  transition: background-color .18s ease, color .18s ease, transform .18s ease;
+}
+
+.equipment-link:hover {
+  color: #fff;
+  background: rgba(255,255,255,.08);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .equipment-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .equipment-block {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .equipment-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .equipment-item {
+    min-height: 46px;
+    padding: 11px 13px;
+  }
+
+  .portfolio-block {
+    border-radius: 16px;
+  }
+
+  .portfolio-card {
+    border-radius: 12px;
+  }
+}
+
+
+/* -------------------------------------------------
+   v25 — Equipment block with photos
+-------------------------------------------------- */
+.equipment-block {
+  min-height: 0;
+  padding: 24px;
+}
+
+.equipment-title {
+  margin: 0 0 18px;
+}
+
+.equipment-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.equipment-photo-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: rgba(255,255,255,.04);
+  min-height: 170px;
+}
+
+.equipment-photo-card img {
+  display: block;
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+
+.equipment-photo-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 24px 12px 10px;
+  background: linear-gradient(to top, rgba(0,0,0,.72), rgba(0,0,0,.32), rgba(0,0,0,0));
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--type-small-size);
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: var(--type-small-spacing);
+}
+
+@media (max-width: 980px) {
+  .equipment-photo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .equipment-photo-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .equipment-photo-card {
+    border-radius: 14px;
+    min-height: 160px;
+  }
+
+  .equipment-photo-card img {
+    height: 160px;
+  }
+
+  .equipment-photo-label {
+    padding: 22px 10px 9px;
+  }
+}
+
+
+/* -------------------------------------------------
+   v28 — Batumi в шапке + TG/WA в первом шаге
+-------------------------------------------------- */
+
+.header-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 2px;
+  color: rgba(255,255,255,.62);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: .05em;
+  white-space: nowrap;
+}
+
+.header-location svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  opacity: .9;
+}
+
+.workflow-contact-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.workflow-contact-link {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,.05);
+  text-decoration: none;
+  transition: transform .18s ease, background-color .18s ease;
+}
+
+.workflow-contact-link svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.workflow-contact-link--telegram {
+  color: #2AABEE;
+}
+
+.workflow-contact-link--whatsapp {
+  color: #25D366;
+}
+
+.workflow-contact-link:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.09);
+}
+
+@media (max-width: 640px) {
+  .header-location {
+    gap: 4px;
+    font-size: 10px;
+  }
+
+  .header-location svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .workflow-contact-link {
+    width: 26px;
+    height: 26px;
+  }
+}
