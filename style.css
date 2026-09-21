@@ -1565,3 +1565,1094 @@ body {
     height: 26px;
   }
 }
+
+
+/* -------------------------------------------------
+   v30 — новая двухстрочная шапка
+-------------------------------------------------- */
+
+.header-panel--two-row {
+  display: block !important;
+  min-height: 0;
+  padding: 13px 20px 12px;
+}
+
+.header-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-row--top {
+  min-height: 30px;
+}
+
+.header-row--bottom {
+  margin-top: 8px;
+  min-height: 30px;
+}
+
+.header-top-right {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-left: auto;
+}
+
+.header-panel--two-row .brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+}
+
+.header-panel--two-row .language-switcher {
+  position: static !important;
+  right: auto !important;
+  bottom: auto !important;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.header-panel--two-row .header-location {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: rgba(255,255,255,.68);
+}
+
+.header-panel--two-row .header-location svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.header-socials {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.header-panel--two-row .social-link {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-panel--two-row .social-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+@media (max-width: 640px) {
+  .header-panel--two-row {
+    padding: 10px 12px;
+  }
+
+  .header-row--bottom {
+    margin-top: 7px;
+  }
+
+  .header-top-right {
+    gap: 8px;
+  }
+
+  .header-panel--two-row .header-location {
+    gap: 3px;
+    font-size: 9px;
+  }
+
+  .header-panel--two-row .header-location svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .header-nav {
+    gap: 5px;
+  }
+
+  .header-panel--two-row .services-nav,
+  .header-panel--two-row .portfolio-nav {
+    min-height: 23px;
+    padding: 0 7px;
+    font-size: 9px;
+    letter-spacing: .08em;
+  }
+
+  .header-panel--two-row .social-link {
+    width: 25px;
+    height: 25px;
+  }
+
+  .header-panel--two-row .social-link svg {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+
+/* -------------------------------------------------
+   v31 — logo header layout
+-------------------------------------------------- */
+
+.header-panel--logo-grid {
+  display: grid !important;
+  grid-template-columns: 96px minmax(0, 1fr);
+  align-items: stretch;
+  column-gap: 18px;
+  min-height: 0;
+  padding: 12px 18px;
+}
+
+.header-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-logo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.header-logo {
+  display: block;
+  width: 86px;
+  height: 86px;
+  object-fit: contain;
+}
+
+.header-content-wrap {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header-panel--logo-grid .header-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-panel--logo-grid .header-row--bottom {
+  margin-top: 8px;
+}
+
+.header-panel--logo-grid .brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  margin: 0;
+}
+
+.header-panel--logo-grid .header-top-right {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-left: auto;
+}
+
+.header-panel--logo-grid .header-location {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: rgba(255,255,255,.68);
+}
+
+.header-panel--logo-grid .header-location svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.header-panel--logo-grid .language-switcher {
+  position: static !important;
+  right: auto !important;
+  bottom: auto !important;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.header-panel--logo-grid .header-nav {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.header-panel--logo-grid .header-socials {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.header-panel--logo-grid .social-link {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-panel--logo-grid .social-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+@media (max-width: 640px) {
+  .header-panel--logo-grid {
+    grid-template-columns: 68px minmax(0, 1fr);
+    column-gap: 10px;
+    padding: 10px 12px;
+  }
+
+  .header-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .header-panel--logo-grid .header-row--bottom {
+    margin-top: 7px;
+  }
+
+  .header-panel--logo-grid .header-top-right {
+    gap: 8px;
+  }
+
+  .header-panel--logo-grid .header-location {
+    gap: 3px;
+    font-size: 9px;
+  }
+
+  .header-panel--logo-grid .header-location svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .header-panel--logo-grid .header-nav {
+    gap: 5px;
+  }
+
+  .header-panel--logo-grid .services-nav,
+  .header-panel--logo-grid .portfolio-nav {
+    min-height: 23px;
+    padding: 0 7px;
+    font-size: 9px;
+    letter-spacing: .08em;
+  }
+
+  .header-panel--logo-grid .social-link {
+    width: 25px;
+    height: 25px;
+  }
+
+  .header-panel--logo-grid .social-link svg {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+
+/* -------------------------------------------------
+   v34 — footer
+-------------------------------------------------- */
+
+.site-footer {
+  width: 100%;
+  padding: 8px 4px 2px;
+}
+
+.site-footer__line {
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,.18);
+}
+
+.site-footer__content {
+  min-height: 54px;
+  padding: 12px 2px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.site-footer__copy,
+.site-footer__phone {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: .08em;
+  color: rgba(255,255,255,.68);
+}
+
+.site-footer__copy {
+  white-space: nowrap;
+}
+
+.site-footer__phone {
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .18s ease;
+}
+
+.site-footer__phone:hover {
+  color: #fff;
+}
+
+.site-footer__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.site-footer__socials {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.site-footer .social-link {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  text-decoration: none;
+}
+
+.site-footer .social-link svg {
+  width: 13px;
+  height: 13px;
+}
+
+.site-footer .social-link:nth-child(1) {
+  color: #2AABEE;
+  background: rgba(42,171,238,.08);
+}
+
+.site-footer .social-link:nth-child(2) {
+  color: #25D366;
+  background: rgba(37,211,102,.08);
+}
+
+.site-footer .social-link:nth-child(3) {
+  color: #E4405F;
+  background: rgba(228,64,95,.08);
+}
+
+@media (max-width: 640px) {
+  .site-footer__content {
+    min-height: 0;
+    padding-top: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .site-footer__right {
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .site-footer__copy,
+  .site-footer__phone {
+    font-size: 10px;
+  }
+}
+
+
+/* -------------------------------------------------
+   v36 — footer contacts in black
+-------------------------------------------------- */
+
+.site-footer__phone {
+  color: #111 !important;
+}
+
+.site-footer__phone:hover {
+  color: #000 !important;
+}
+
+.site-footer .social-link {
+  color: #111 !important;
+  background: transparent !important;
+}
+
+.site-footer .social-link:hover {
+  color: #000 !important;
+  background: rgba(0,0,0,.04) !important;
+}
+
+
+/* -------------------------------------------------
+   v37 — footer text + icon outlines darker
+-------------------------------------------------- */
+
+.site-footer__copy {
+  color: #111 !important;
+}
+
+.site-footer .social-link {
+  color: #111 !important;
+  border: 1px solid #111 !important;
+  background: transparent !important;
+}
+
+.site-footer .social-link:hover {
+  color: #000 !important;
+  border-color: #000 !important;
+  background: rgba(0,0,0,.04) !important;
+}
+
+
+/* -------------------------------------------------
+   v38 — footer line + About / Contacts + header nav
+-------------------------------------------------- */
+
+.site-footer__line {
+  background: #111 !important;
+}
+
+/* One shared style for all four header navigation buttons */
+.header-panel--logo-grid .header-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 0 11px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.72);
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  transition: background-color .18s ease, color .18s ease, transform .18s ease;
+}
+
+.header-panel--logo-grid .header-nav a:hover {
+  color: #fff;
+  background: rgba(255,255,255,.10);
+  transform: translateY(-1px);
+}
+
+.header-panel--logo-grid .header-nav a.is-active {
+  color: #fff;
+  background: rgba(255,255,255,.14);
+}
+
+.header-panel--logo-grid .header-nav {
+  flex-wrap: nowrap;
+}
+
+/* informational pages */
+.info-page {
+  min-height: 0;
+  padding: 34px;
+}
+
+.info-page__title {
+  margin: 0 0 22px;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--type-big-size);
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: var(--type-big-spacing);
+  text-transform: uppercase;
+}
+
+.info-page__copy {
+  max-width: 980px;
+}
+
+.info-page__copy p,
+.contacts-page__intro {
+  margin: 0 0 16px;
+  color: rgba(255,255,255,.88);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--type-small-size);
+  line-height: 1.75;
+  letter-spacing: var(--type-small-spacing);
+}
+
+.info-page__copy .info-page__lead {
+  color: #fff;
+  font-weight: 700;
+}
+
+.contacts-page__intro {
+  margin-bottom: 22px;
+}
+
+.contacts-list {
+  max-width: 760px;
+  display: grid;
+  gap: 9px;
+}
+
+.contact-row {
+  display: grid;
+  grid-template-columns: 145px minmax(0,1fr);
+  align-items: center;
+  gap: 18px;
+  min-height: 50px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.05);
+  text-decoration: none;
+  transition: background-color .18s ease, transform .18s ease;
+}
+
+a.contact-row:hover {
+  background: rgba(255,255,255,.09);
+  transform: translateY(-1px);
+}
+
+.contact-row__label,
+.contact-row__value {
+  color: rgba(255,255,255,.86);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--type-small-size);
+  line-height: 1.4;
+  letter-spacing: var(--type-small-spacing);
+}
+
+.contact-row__label {
+  color: rgba(255,255,255,.58);
+  font-weight: 700;
+}
+
+.contact-row__value {
+  color: #fff;
+}
+
+@media (max-width: 760px) {
+  .header-panel--logo-grid .header-nav {
+    gap: 4px;
+  }
+
+  .header-panel--logo-grid .header-nav a,
+  .header-panel--logo-grid .services-nav,
+  .header-panel--logo-grid .portfolio-nav {
+    min-height: 23px;
+    padding: 0 6px;
+    font-size: 8px;
+    letter-spacing: .055em;
+  }
+
+  .info-page {
+    padding: 24px 18px;
+  }
+
+  .contact-row {
+    grid-template-columns: 105px minmax(0,1fr);
+    gap: 10px;
+    padding: 9px 11px;
+  }
+}
+
+@media (max-width: 430px) {
+  .header-panel--logo-grid {
+    grid-template-columns: 60px minmax(0, 1fr);
+    column-gap: 8px;
+  }
+
+  .header-logo {
+    width: 54px;
+    height: 54px;
+  }
+
+  .header-panel--logo-grid .header-nav {
+    gap: 3px;
+  }
+
+  .header-panel--logo-grid .header-nav a {
+    padding: 0 4px;
+    font-size: 7px;
+    letter-spacing: .025em;
+  }
+}
+
+
+/* -------------------------------------------------
+   v39 — шапка в одну строку, без логотипа и названия
+-------------------------------------------------- */
+
+.header-panel--single-row {
+  min-height: 0;
+  padding: 12px 16px;
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.header-panel--single-row .header-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 7px;
+  min-width: 0;
+}
+
+.header-panel--single-row .header-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 0 11px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.72);
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  transition: background-color .18s ease, color .18s ease, transform .18s ease;
+}
+
+.header-panel--single-row .header-nav a:hover {
+  color: #fff;
+  background: rgba(255,255,255,.10);
+  transform: translateY(-1px);
+}
+
+.header-panel--single-row .header-nav a.is-active {
+  color: #fff;
+  background: rgba(255,255,255,.14);
+}
+
+.header-panel--single-row .header-home-btn {
+  width: 34px;
+  min-width: 34px;
+  padding: 0;
+}
+
+.header-panel--single-row .header-home-btn svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+}
+
+.header-single-right {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+
+.header-panel--single-row .header-location {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: rgba(255,255,255,.68);
+  white-space: nowrap;
+}
+
+.header-panel--single-row .header-location svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.header-panel--single-row .language-switcher {
+  position: static !important;
+  right: auto !important;
+  bottom: auto !important;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+@media (max-width: 760px) {
+  .header-panel--single-row {
+    padding: 10px 12px;
+    gap: 9px;
+  }
+
+  .header-panel--single-row .header-nav {
+    gap: 4px;
+  }
+
+  .header-panel--single-row .header-nav a {
+    min-height: 25px;
+    padding: 0 6px;
+    font-size: 8px;
+    letter-spacing: .055em;
+  }
+
+  .header-panel--single-row .header-home-btn {
+    width: 28px;
+    min-width: 28px;
+    padding: 0;
+  }
+
+  .header-panel--single-row .header-home-btn svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .header-single-right {
+    gap: 7px;
+  }
+
+  .header-panel--single-row .header-location {
+    gap: 3px;
+    font-size: 9px;
+  }
+
+  .header-panel--single-row .header-location svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  .header-panel--single-row {
+    gap: 6px;
+  }
+
+  .header-panel--single-row .header-nav {
+    gap: 3px;
+  }
+
+  .header-panel--single-row .header-nav a {
+    padding: 0 4px;
+    font-size: 7px;
+    letter-spacing: .02em;
+  }
+
+  .header-panel--single-row .header-home-btn {
+    width: 26px;
+    min-width: 26px;
+    padding: 0;
+  }
+
+  .header-panel--single-row .header-location span {
+    display: none;
+  }
+
+  .header-single-right {
+    gap: 5px;
+  }
+}
+
+
+/* -------------------------------------------------
+   v40 FIXED — real transparent logo inside one-line header
+-------------------------------------------------- */
+
+.header-panel--brand-center {
+  display: grid !important;
+  grid-template-columns: auto minmax(120px, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  min-height: 0;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.header-panel--brand-center .header-nav {
+  min-width: 0;
+}
+
+.header-wordmark-link {
+  min-width: 0;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.header-wordmark {
+  display: block;
+  width: auto;
+  height: 40px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.header-panel--brand-center .header-single-right {
+  margin-left: 0;
+}
+
+@media (max-width: 1050px) {
+  .header-panel--brand-center {
+    grid-template-columns: auto minmax(95px, 1fr) auto;
+    gap: 10px;
+  }
+
+  .header-wordmark-link,
+  .header-wordmark {
+    height: 34px;
+  }
+}
+
+@media (max-width: 760px) {
+  .header-panel--brand-center {
+    grid-template-columns: auto minmax(72px, 1fr) auto;
+    gap: 6px;
+  }
+
+  .header-wordmark-link,
+  .header-wordmark {
+    height: 28px;
+  }
+}
+
+@media (max-width: 560px) {
+  .header-panel--brand-center {
+    grid-template-columns: auto minmax(58px, 1fr) auto;
+    gap: 4px;
+  }
+
+  .header-wordmark-link,
+  .header-wordmark {
+    height: 24px;
+  }
+}
+
+
+/* -------------------------------------------------
+   v41 — логотип вместо кнопки с домиком
+-------------------------------------------------- */
+
+.header-panel--logo-home {
+  min-height: 0;
+  padding: 8px 16px;
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.header-panel--logo-home .header-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 7px;
+  min-width: 0;
+}
+
+.header-panel--logo-home .header-nav > a:not(.header-home-logo) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 0 11px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.72);
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.header-home-logo {
+  height: 40px;
+  width: 92px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 0 0 auto;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.header-home-logo img {
+  display: block;
+  width: auto;
+  height: 40px;
+  object-fit: contain;
+}
+
+.header-home-logo.is-active {
+  opacity: 1;
+}
+
+.header-panel--logo-home .header-single-right {
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 900px) {
+  .header-panel--logo-home {
+    gap: 10px;
+  }
+
+  .header-panel--logo-home .header-nav {
+    gap: 5px;
+  }
+
+  .header-panel--logo-home .header-nav > a:not(.header-home-logo) {
+    min-height: 26px;
+    padding: 0 7px;
+    font-size: 9px;
+    letter-spacing: .07em;
+  }
+
+  .header-home-logo {
+    width: 78px;
+    height: 34px;
+  }
+
+  .header-home-logo img {
+    height: 34px;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-panel--logo-home {
+    padding: 8px 10px;
+    gap: 6px;
+  }
+
+  .header-panel--logo-home .header-nav {
+    gap: 3px;
+  }
+
+  .header-panel--logo-home .header-nav > a:not(.header-home-logo) {
+    min-height: 24px;
+    padding: 0 5px;
+    font-size: 7px;
+    letter-spacing: .03em;
+  }
+
+  .header-home-logo {
+    width: 64px;
+    height: 28px;
+  }
+
+  .header-home-logo img {
+    height: 28px;
+  }
+
+  .header-panel--logo-home .header-location span {
+    display: none;
+  }
+}
+
+
+/* -------------------------------------------------
+   v45 — keep Batumi text visible on small screens
+-------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .header-panel--logo-home .header-location span {
+    display: inline !important;
+  }
+
+  .header-panel--logo-home .header-location {
+    font-size: 8px !important;
+    gap: 2px !important;
+    white-space: nowrap !important;
+  }
+
+  .header-panel--logo-home .header-location svg {
+    width: 10px !important;
+    height: 10px !important;
+    flex: 0 0 auto;
+  }
+
+  .header-panel--logo-home .header-single-right {
+    gap: 5px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .header-panel--logo-home .header-location {
+    font-size: 7px !important;
+  }
+
+  .header-panel--logo-home .header-location svg {
+    width: 9px !important;
+    height: 9px !important;
+  }
+}
+
+
+/* -------------------------------------------------
+   v46 — vector logo, same header height
+-------------------------------------------------- */
+
+.header-home-logo {
+  height: 40px !important;
+  width: 92px !important;
+  overflow: hidden !important;
+}
+
+.header-home-logo img {
+  height: 40px !important;
+  width: auto !important;
+  max-height: 40px !important;
+  max-width: 92px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+@media (max-width: 900px) {
+  .header-home-logo {
+    width: 78px !important;
+    height: 34px !important;
+  }
+
+  .header-home-logo img {
+    max-width: 78px !important;
+    width: auto !important;
+    height: 34px !important;
+    max-height: 34px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-home-logo {
+    width: 64px !important;
+    height: 28px !important;
+  }
+
+  .header-home-logo img {
+    max-width: 64px !important;
+    width: auto !important;
+    height: 28px !important;
+    max-height: 28px !important;
+  }
+}

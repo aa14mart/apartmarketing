@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>APART MARKETING</title>
+  <title>APART MARKETING — Про нас</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
@@ -11,14 +11,15 @@
 
   <div class="page-bg" aria-hidden="true"></div>
 
-  <main class="site-shell">    <!-- БЛОК 1: ШАПКА -->
+  <main class="site-shell">
+    <!-- БЛОК 1: ШАПКА -->
     <section class="panel header-panel header-panel--logo-home">
       <nav class="header-nav" aria-label="Навигация">
-        <a class="header-home-logo is-active" href="index.html" aria-label="Главная">
+        <a class="header-home-logo" href="index.html" aria-label="Главная">
               <img src="images/header-wordmark.svg" alt="APART MARKETING">
             </a>
             <a class="services-nav" href="services.html" data-i18n="services_btn">УСЛУГИ</a>
-            <a class="about-nav" href="about.html" data-i18n="about_btn">ПРО НАС</a>
+            <a class="about-nav is-active" href="about.html" data-i18n="about_btn">ПРО НАС</a>
             <a class="portfolio-nav" href="portfolio.html" data-i18n="portfolio_btn">ПОРТФОЛИО</a>
             <a class="contacts-nav" href="contacts.html" data-i18n="contacts_btn">КОНТАКТЫ</a>
       </nav>
@@ -37,64 +38,17 @@
           <button class="language-btn" type="button" data-lang="ka">GE</button>
         </div>
       </div>
-    </section>    <!-- БЛОК 2 -->
-    <section class="panel content-panel block-two">
-      <div class="block-two__gallery">
-        <figure class="block-two__card">
-          <img src="images/block2-styling.jpg" alt="Девушка украшает интерьер декором">
-          <div class="block-two__overlay block-two__overlay--bottom"></div>
-          <div class="block-two__text block-two__text--bottom">
-            <div class="block-two__headline" data-i18n="hero_subtitle">Создаем визуал, который повысит привлекательность объекта</div>
-          </div>
-        </figure>
+    </section>
 
-        <figure class="block-two__card">
-          <img src="images/block2-photographer.jpg" alt="Фотограф снимает интерьер большим объективом">
-          <div class="block-two__overlay block-two__overlay--bottom"></div>
-          <div class="block-two__text block-two__text--bottom">
-            <div class="block-two__headline" data-i18n="hero_title">Профессиональная интерьерная съемка</div>
-          </div>
-        </figure>
+    <section class="panel content-panel info-page about-page">
+      <h1 class="info-page__title" data-i18n="about_title">ПРО НАС</h1>
+      <div class="info-page__copy">
+        <p class="info-page__lead" data-i18n="about_intro">APART MARKETING — интерьерная съёмка и подготовка пространств в Батуми.</p>
+        <p data-i18n="about_text_1">Работаем с квартирами, апартаментами, отелями, ресторанами и другими пространствами для продажи, аренды и продвижения.</p>
+        <p data-i18n="about_text_2">Перед съёмкой помогаем подготовить интерьер, подобрать ракурсы и выстроить визуальную подачу, а затем создаём готовый комплект профессионально обработанных фотографий.</p>
       </div>
     </section>
 
-        <!-- БЛОК 3 -->
-    <section class="panel content-panel value-block value-block--main">
-      <div class="value-copy">
-        <p data-i18n="value_intro">Подготавливаем интерьер и создаём профессиональные фотографии для недвижимости, отелей и заведений.</p>
-
-        <div class="value-points">
-          <p data-i18n="value_sale">Для продажи и аренды — помогаем объекту выглядеть привлекательнее и дороже.</p>
-          <p data-i18n="value_booking">Для Booking и Airbnb — создаём фотографии, которые выделяют объявление среди конкурентов.</p>
-          <p data-i18n="value_business">Для бизнеса — показываем атмосферу и интерьер так, чтобы клиент захотел прийти.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- БЛОК 4 -->
-    <section class="panel content-panel block-four">
-      <div class="comparison-pair">
-        <figure class="comparison-card">
-          <span class="comparison-label" data-i18n="before_label">До</span>
-          <img src="images/block4-before-1.jpg" alt="До: простая гостиная, снятая на телефон">
-        </figure>
-        <figure class="comparison-card">
-          <span class="comparison-label" data-i18n="after_label">После</span>
-          <img src="images/block4-after-1.jpg" alt="После: та же гостиная после стейджинга и профессиональной съемки">
-        </figure>
-      </div>
-
-      <div class="comparison-pair">
-        <figure class="comparison-card">
-          <span class="comparison-label" data-i18n="before_label">До</span>
-          <img src="images/block4-before-2.jpg" alt="До: простая спальня, снятая на телефон">
-        </figure>
-        <figure class="comparison-card">
-          <span class="comparison-label" data-i18n="after_label">После</span>
-          <img src="images/block4-after-2.jpg" alt="После: та же спальня после стейджинга и профессиональной съемки">
-        </figure>
-      </div>
-    </section>
 
     <footer class="site-footer">
       <div class="site-footer__line"></div>
