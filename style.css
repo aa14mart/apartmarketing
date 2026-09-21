@@ -2823,3 +2823,450 @@ a.contact-row:hover {
     display: inline !important;
   }
 }
+
+
+/* -------------------------------------------------
+   v50 — весь текст одного размера 13px
+   + убрать жирность в шапке
+-------------------------------------------------- */
+
+:root {
+  --type-big-size: 13px !important;
+  --type-small-size: 13px !important;
+  --type-big-spacing: .06em !important;
+  --type-small-spacing: .06em !important;
+}
+
+/* единый размер текста на всём сайте */
+body,
+.header-panel--logo-home .header-nav > a:not(.header-home-logo),
+.header-location,
+.language-btn,
+.block-two__headline,
+.value-copy > p,
+.workflow-step h3,
+.pricing-card h2,
+.other-services h3,
+.included-services h3,
+.equipment-title,
+.equipment-photo-label,
+.info-page__title,
+.comparison-label,
+.block-two__text p,
+.value-points p,
+.pricing-lead,
+.pricing-lines p,
+.services-notes p,
+.included-services p,
+.equipment-item,
+.info-page__copy p,
+.contacts-page__intro,
+.contact-row__label,
+.contact-row__value,
+.site-footer__copy,
+.site-footer__phone {
+  font-size: 13px !important;
+}
+
+/* единый обычный вес в шапке */
+.header-panel--logo-home .header-nav > a:not(.header-home-logo),
+.header-location,
+.language-btn {
+  font-weight: 400 !important;
+  letter-spacing: .06em !important;
+}
+
+/* сохраняем обычный вес Batumi и языков также на мобильном */
+@media (max-width: 640px) {
+  body,
+  .header-panel--logo-home .header-nav > a:not(.header-home-logo),
+  .header-location,
+  .language-btn,
+  .block-two__headline,
+  .value-copy > p,
+  .workflow-step h3,
+  .pricing-card h2,
+  .other-services h3,
+  .included-services h3,
+  .equipment-title,
+  .equipment-photo-label,
+  .info-page__title,
+  .comparison-label,
+  .block-two__text p,
+  .value-points p,
+  .pricing-lead,
+  .pricing-lines p,
+  .services-notes p,
+  .included-services p,
+  .equipment-item,
+  .info-page__copy p,
+  .contacts-page__intro,
+  .contact-row__label,
+  .contact-row__value,
+  .site-footer__copy,
+  .site-footer__phone {
+    font-size: 13px !important;
+  }
+
+  .header-location,
+  .language-btn,
+  .header-panel--logo-home .header-nav > a:not(.header-home-logo) {
+    font-weight: 400 !important;
+  }
+}
+
+
+/* -------------------------------------------------
+   v51 — remove Batumi/map from header
+-------------------------------------------------- */
+
+.header-panel--logo-home .header-single-right {
+  gap: 0 !important;
+}
+
+
+/* -------------------------------------------------
+   v52 — mobile header:
+   languages smaller + half outside header,
+   navigation always stays in one row
+-------------------------------------------------- */
+
+.header-panel--logo-home {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+/* Language buttons: smaller and floating half above the header */
+.header-panel--logo-home .header-single-right {
+  position: absolute !important;
+  top: 0 !important;
+  right: 10px !important;
+  margin: 0 !important;
+  z-index: 20 !important;
+  transform: translateY(-50%) !important;
+}
+
+.header-panel--logo-home .language-switcher {
+  display: flex !important;
+  align-items: center !important;
+  gap: 2px !important;
+  margin: 0 !important;
+}
+
+.header-panel--logo-home .language-btn {
+  min-width: 27px !important;
+  width: 27px !important;
+  height: 22px !important;
+  padding: 0 4px !important;
+  border-radius: 6px !important;
+  font-size: 10px !important;
+  line-height: 1 !important;
+  font-weight: 400 !important;
+  letter-spacing: .04em !important;
+}
+
+/* Navigation: never wrap, never overlap */
+.header-panel--logo-home .header-nav {
+  width: 100% !important;
+  min-width: 0 !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 7px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  padding-right: 94px !important;
+  scrollbar-width: none !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+.header-panel--logo-home .header-nav::-webkit-scrollbar {
+  display: none !important;
+}
+
+.header-panel--logo-home .header-nav > a {
+  flex: 0 0 auto !important;
+  white-space: nowrap !important;
+}
+
+.header-panel--logo-home .header-nav > a:not(.header-home-logo) {
+  min-width: max-content !important;
+}
+
+@media (max-width: 640px) {
+  .header-panel--logo-home {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .header-panel--logo-home .header-nav {
+    gap: 4px !important;
+    padding-right: 84px !important;
+  }
+
+  .header-panel--logo-home .header-nav > a:not(.header-home-logo) {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+
+  .header-panel--logo-home .header-single-right {
+    right: 7px !important;
+  }
+
+  .header-panel--logo-home .language-btn {
+    min-width: 25px !important;
+    width: 25px !important;
+    height: 20px !important;
+    font-size: 9px !important;
+    border-radius: 5px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .header-panel--logo-home .header-nav {
+    gap: 3px !important;
+    padding-right: 78px !important;
+  }
+
+  .header-panel--logo-home .header-nav > a:not(.header-home-logo) {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+
+  .header-panel--logo-home .language-btn {
+    min-width: 23px !important;
+    width: 23px !important;
+    height: 19px !important;
+    padding: 0 3px !important;
+    font-size: 9px !important;
+  }
+}
+
+
+/* -------------------------------------------------
+   v53 — языки меньше и полностью над шапкой;
+   без hover-реакции у меню; active = жирный
+-------------------------------------------------- */
+
+/* Языки полностью над шапкой, справа */
+.header-panel--logo-home .header-single-right {
+  position: absolute !important;
+  top: 0 !important;
+  right: 10px !important;
+  margin: 0 !important;
+  z-index: 30 !important;
+  transform: translateY(-115%) !important;
+}
+
+.header-panel--logo-home .language-switcher {
+  display: flex !important;
+  align-items: center !important;
+  gap: 2px !important;
+  margin: 0 !important;
+}
+
+/* ещё примерно на 30% меньше относительно v52 */
+.header-panel--logo-home .language-btn {
+  min-width: 19px !important;
+  width: 19px !important;
+  height: 15px !important;
+  padding: 0 2px !important;
+  border-radius: 4px !important;
+  border: 1px solid rgba(255,255,255,.22) !important;
+  background: rgba(18,16,14,.74) !important;
+  color: rgba(255,255,255,.74) !important;
+  font-size: 7px !important;
+  line-height: 1 !important;
+  font-weight: 400 !important;
+  letter-spacing: .02em !important;
+  box-shadow: none !important;
+}
+
+.header-panel--logo-home .language-btn.is-active {
+  background: rgba(18,16,14,.74) !important;
+  color: #fff !important;
+  border-color: rgba(255,255,255,.36) !important;
+  font-weight: 700 !important;
+}
+
+/* Полностью убираем реакцию на наведение со всех кнопок меню */
+.header-panel--logo-home .header-nav > a:not(.header-home-logo),
+.header-panel--logo-home .header-nav > a:not(.header-home-logo):hover,
+.services-nav,
+.services-nav:hover,
+.about-nav,
+.about-nav:hover,
+.portfolio-nav,
+.portfolio-nav:hover,
+.contacts-nav,
+.contacts-nav:hover {
+  transform: none !important;
+  transition: none !important;
+  background: rgba(255,255,255,.06) !important;
+  color: rgba(255,255,255,.72) !important;
+  font-weight: 400 !important;
+}
+
+/* Текущая страница — только жирнее, без отдельной hover-реакции */
+.header-panel--logo-home .header-nav > a.is-active:not(.header-home-logo),
+.services-nav.is-active,
+.about-nav.is-active,
+.portfolio-nav.is-active,
+.contacts-nav.is-active {
+  background: rgba(255,255,255,.06) !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+}
+
+/* Лого-главная тоже без hover-эффектов */
+.header-home-logo,
+.header-home-logo:hover,
+.header-home-logo.is-active {
+  transform: none !important;
+  transition: none !important;
+}
+
+@media (max-width: 640px) {
+  .header-panel--logo-home .header-single-right {
+    right: 7px !important;
+    transform: translateY(-115%) !important;
+  }
+
+  .header-panel--logo-home .language-btn {
+    min-width: 18px !important;
+    width: 18px !important;
+    height: 14px !important;
+    padding: 0 2px !important;
+    border-radius: 4px !important;
+    font-size: 6.5px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .header-panel--logo-home .language-btn {
+    min-width: 17px !important;
+    width: 17px !important;
+    height: 13px !important;
+    font-size: 6px !important;
+  }
+}
+
+
+/* -------------------------------------------------
+   v54 — active page = subtle beige underline
+-------------------------------------------------- */
+
+/* Все пункты меню обычной толщины */
+.header-panel--logo-home .header-nav > a:not(.header-home-logo),
+.header-panel--logo-home .header-nav > a.is-active:not(.header-home-logo),
+.services-nav,
+.services-nav.is-active,
+.about-nav,
+.about-nav.is-active,
+.portfolio-nav,
+.portfolio-nav.is-active,
+.contacts-nav,
+.contacts-nav.is-active {
+  position: relative !important;
+  font-weight: 400 !important;
+}
+
+/* Убираем любое старое визуальное выделение active */
+.header-panel--logo-home .header-nav > a.is-active:not(.header-home-logo),
+.services-nav.is-active,
+.about-nav.is-active,
+.portfolio-nav.is-active,
+.contacts-nav.is-active {
+  background: rgba(255,255,255,.06) !important;
+  color: #fff !important;
+}
+
+/* Тонкая акцентная линия под текущей страницей */
+.header-panel--logo-home .header-nav > a.is-active:not(.header-home-logo)::after,
+.services-nav.is-active::after,
+.about-nav.is-active::after,
+.portfolio-nav.is-active::after,
+.contacts-nav.is-active::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 18% !important;
+  right: 18% !important;
+  bottom: -5px !important;
+  height: 2px !important;
+  border-radius: 999px !important;
+  background: #E8CCA6 !important;
+  pointer-events: none !important;
+}
+
+/* Не даём hover менять вид */
+.header-panel--logo-home .header-nav > a:not(.header-home-logo):hover {
+  font-weight: 400 !important;
+  transform: none !important;
+}
+
+@media (max-width: 640px) {
+  .header-panel--logo-home .header-nav > a.is-active:not(.header-home-logo)::after,
+  .services-nav.is-active::after,
+  .about-nav.is-active::after,
+  .portfolio-nav.is-active::after,
+  .contacts-nav.is-active::after {
+    left: 20% !important;
+    right: 20% !important;
+    bottom: -4px !important;
+    height: 1.5px !important;
+  }
+}
+
+
+/* -------------------------------------------------
+   v55 — active underline always visible on narrow screens
+-------------------------------------------------- */
+
+/* The underline now sits INSIDE the button so horizontal nav clipping
+   can never hide it on narrow screens. */
+.header-panel--logo-home .header-nav > a.is-active:not(.header-home-logo)::after,
+.services-nav.is-active::after,
+.about-nav.is-active::after,
+.portfolio-nav.is-active::after,
+.contacts-nav.is-active::after {
+  left: 18% !important;
+  right: 18% !important;
+  bottom: 2px !important;
+  height: 2px !important;
+  z-index: 3 !important;
+}
+
+/* Keep the active item and its underline visible inside the scrolling row */
+.header-panel--logo-home .header-nav {
+  overflow-y: visible !important;
+}
+
+.header-panel--logo-home .header-nav > a {
+  overflow: visible !important;
+}
+
+@media (max-width: 640px) {
+  .header-panel--logo-home .header-nav > a.is-active:not(.header-home-logo)::after,
+  .services-nav.is-active::after,
+  .about-nav.is-active::after,
+  .portfolio-nav.is-active::after,
+  .contacts-nav.is-active::after {
+    left: 18% !important;
+    right: 18% !important;
+    bottom: 2px !important;
+    height: 2px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .header-panel--logo-home .header-nav > a.is-active:not(.header-home-logo)::after,
+  .services-nav.is-active::after,
+  .about-nav.is-active::after,
+  .portfolio-nav.is-active::after,
+  .contacts-nav.is-active::after {
+    left: 16% !important;
+    right: 16% !important;
+    bottom: 2px !important;
+    height: 2px !important;
+  }
+}
