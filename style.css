@@ -2799,3 +2799,64 @@ figcaption {
 .mobile-menu-toggle[aria-expanded="true"] span:nth-child(2) {
   opacity: 0 !important;
 }
+
+
+/* -------------------------------------------------
+   v91 — main header height = mobile dropdown height
+-------------------------------------------------- */
+
+/*
+  Mobile dropdown = 30px link height + 10px top + 10px bottom = 50px.
+  Main header is now exactly 50px in desktop and mobile.
+  Logo remains 92x40px.
+*/
+
+.header-panel--logo-home {
+  height: 50px !important;
+  min-height: 50px !important;
+  max-height: 50px !important;
+  padding: 5px 16px !important;
+  align-items: center !important;
+}
+
+/* keep internal header rows inside the fixed 50px height */
+.header-nav,
+.header-single-right {
+  height: 40px !important;
+  min-height: 40px !important;
+  max-height: 40px !important;
+}
+
+/* mobile uses the exact same header height */
+@media (max-width: 739px) {
+  .header-panel--logo-home {
+    height: 50px !important;
+    min-height: 50px !important;
+    max-height: 50px !important;
+    padding: 5px 16px !important;
+  }
+
+  .header-nav,
+  .header-single-right {
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+  }
+
+  .mobile-site-menu.is-open {
+    min-height: 50px !important;
+    height: 50px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .header-panel--logo-home {
+    height: 50px !important;
+    min-height: 50px !important;
+    max-height: 50px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+  }
+}
