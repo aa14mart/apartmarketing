@@ -957,3 +957,45 @@ html, body, body * {
   font-size: 12px !important;
   font-weight: 400 !important;
 }
+
+
+/* -------------------------------------------------
+   v111 — mobile: both homepage photos always stay
+   side-by-side on one row
+-------------------------------------------------- */
+
+@media (max-width: 739px) {
+  .home-photo-row {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 24px !important;
+    width: 100% !important;
+    align-items: start !important;
+    justify-content: stretch !important;
+  }
+
+  .home-photo-card {
+    width: 100% !important;
+    max-width: 300px !important;
+    min-width: 0 !important;
+    height: auto !important;
+    flex: none !important;
+    aspect-ratio: 1 / 1 !important;
+    justify-self: center !important;
+  }
+}
+
+/* Override the old <=430px 200px minimum that forced wrapping */
+@media (max-width: 430px) {
+  .home-photo-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 24px !important;
+  }
+
+  .home-photo-card {
+    width: 100% !important;
+    max-width: 300px !important;
+    min-width: 0 !important;
+    flex-basis: auto !important;
+  }
+}
