@@ -224,3 +224,32 @@ document.querySelectorAll(".language-btn").forEach((button) => {
 
 const savedLanguage = localStorage.getItem("apartmarketing-language") || "ru";
 setLanguage(savedLanguage);
+
+
+
+// v86 — mobile menu opens as a separate normal-flow block below the header.
+const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
+const mobileSiteMenu = document.querySelector(".mobile-site-menu");
+
+if (mobileMenuToggle && mobileSiteMenu) {
+  const setMobileMenuOpen = (open) => {
+    mobileSiteMenu.classList.toggle("is-open", open);
+    mobileMenuToggle.setAttribute("aria-expanded", String(open));
+  };
+
+  mobileMenuToggle.addEventListener("click", () => {
+    setMobileMenuOpen(!mobileSiteMenu.classList.contains("is-open"));
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      setMobileMenuOpen(false);
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 740) {
+      setMobileMenuOpen(false);
+    }
+  });
+}

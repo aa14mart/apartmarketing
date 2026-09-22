@@ -2205,3 +2205,597 @@ figcaption {
     gap: 5px !important;
   }
 }
+
+
+/* -------------------------------------------------
+   v84 — remove browser "button" flash on nav press
+-------------------------------------------------- */
+
+/* Safari / Chrome mobile tap overlay was still visible on <a> links.
+   Keep every interaction state shape-free. */
+.header-nav > a:not(.header-home-logo),
+.mobile-menu__link {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  appearance: none !important;
+  outline: none !important;
+}
+
+/* Mouse/touch press: absolutely no capsule/background/frame. */
+.header-nav > a:not(.header-home-logo):active,
+.mobile-menu__link:active,
+.header-nav > a:not(.header-home-logo):focus,
+.mobile-menu__link:focus {
+  background: transparent !important;
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Keyboard focus remains visible, but only through the text itself. */
+.header-nav > a:not(.header-home-logo):focus-visible,
+.mobile-menu__link:focus-visible {
+  background: transparent !important;
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  color: rgba(255,255,255,.90) !important;
+  text-shadow: 0 0 6px rgba(238,218,190,.12) !important;
+}
+
+/* Active page remains text-only even while pressed/focused. */
+.header-nav > a:not(.header-home-logo).is-active:active,
+.mobile-menu__link.is-active:active,
+.header-nav > a:not(.header-home-logo).is-active:focus,
+.mobile-menu__link.is-active:focus,
+.header-nav > a:not(.header-home-logo).is-active:focus-visible,
+.mobile-menu__link.is-active:focus-visible {
+  background: transparent !important;
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  color: rgba(255,255,255,.98) !important;
+  text-shadow:
+    0 0 5px rgba(238,218,190,.16),
+    0 0 12px rgba(238,218,190,.07) !important;
+}
+
+/* -------------------------------------------------
+   v86 — mobile header identical in height to desktop
+   + text MENU button next to logo
+   + separate normal-flow menu panel
+-------------------------------------------------- */
+
+/* Batumi, map icon and languages = same tone as inactive navigation */
+.header-location,
+.language-btn,
+.language-btn.is-active,
+.language-btn:hover,
+.language-btn:focus,
+.language-btn:active,
+.language-btn.is-active:hover,
+.language-btn.is-active:focus,
+.language-btn.is-active:active {
+  color: rgba(255,255,255,.54) !important;
+}
+
+.header-location svg {
+  fill: currentColor !important;
+  color: inherit !important;
+}
+
+/* Mobile MENU button: text only, same visual language as inactive nav */
+.mobile-menu-toggle {
+  display: none;
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  box-shadow: none;
+  color: rgba(255,255,255,.54);
+  font-family: "Manrope", Arial, Helvetica, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-menu-toggle:hover,
+.mobile-menu-toggle:focus,
+.mobile-menu-toggle:active {
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: rgba(255,255,255,.54) !important;
+  transform: none !important;
+}
+
+/* The dropdown is a separate real panel in normal document flow. */
+.mobile-site-menu {
+  display: none !important;
+}
+
+/* Desktop */
+@media (min-width: 740px) {
+  .mobile-menu-toggle,
+  .mobile-site-menu {
+    display: none !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 739px) {
+  /* SAME vertical dimensions as desktop header */
+  .header-panel--logo-home {
+    min-height: 0 !important;
+    padding: 8px 16px !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  /* Logo stays 92x40, MENU is immediately beside it */
+  .header-nav {
+    width: auto !important;
+    min-width: 0 !important;
+    min-height: 40px !important;
+    height: 40px !important;
+    flex: 0 1 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 18px !important;
+  }
+
+  .header-home-logo {
+    width: 92px !important;
+    height: 40px !important;
+    min-width: 92px !important;
+    min-height: 40px !important;
+    max-width: 92px !important;
+    max-height: 40px !important;
+    flex: 0 0 92px !important;
+  }
+
+  .header-home-logo img {
+    width: auto !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    max-width: 92px !important;
+  }
+
+  /* Hide the 4 desktop page links only */
+  .header-nav > a:not(.header-home-logo) {
+    display: none !important;
+  }
+
+  .mobile-menu-toggle {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 auto !important;
+  }
+
+  /* Right side keeps desktop header height too */
+  .header-single-right {
+    margin-left: auto !important;
+    min-width: 0 !important;
+    min-height: 40px !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 26px !important;
+    flex: 0 1 auto !important;
+  }
+
+  /* Separate block BELOW the header.
+     It is normal-flow content, so opening it pushes every following block down. */
+  .mobile-site-menu.is-open {
+    width: 100% !important;
+    min-height: 0 !important;
+    margin-top: -12px !important;
+    padding: 10px 16px !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    align-items: center !important;
+    gap: 8px !important;
+    position: static !important;
+    inset: auto !important;
+    transform: none !important;
+    border: 0 !important;
+    border-radius: 15px !important;
+    background: rgba(18,16,14,.74) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 14px 40px rgba(0,0,0,.16) !important;
+  }
+
+  /* Same clean visual language as desktop navigation */
+  .mobile-menu__link {
+    min-width: 0 !important;
+    min-height: 30px !important;
+    height: 30px !important;
+    padding: 0 4px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    outline: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: rgba(255,255,255,.54) !important;
+    text-decoration: none !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+
+  .mobile-menu__link:hover {
+    color: rgba(255,255,255,.72) !important;
+  }
+
+  .mobile-menu__link.is-active,
+  .mobile-menu__link.is-active:hover,
+  .mobile-menu__link.is-active:focus,
+  .mobile-menu__link.is-active:active,
+  .mobile-menu__link.is-active:focus-visible {
+    border: 0 !important;
+    outline: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: rgba(255,255,255,.98) !important;
+    text-shadow:
+      0 0 5px rgba(238,218,190,.16),
+      0 0 12px rgba(238,218,190,.07) !important;
+  }
+}
+
+/* Keep the same desktop-height header on narrow phones too.
+   Only horizontal spacing is tightened enough to fit. */
+@media (max-width: 430px) {
+  .header-panel--logo-home {
+    padding: 8px 10px !important;
+    gap: 8px !important;
+  }
+
+  .header-nav {
+    gap: 10px !important;
+  }
+
+  .header-single-right {
+    gap: 12px !important;
+  }
+
+  .language-switcher {
+    gap: 4px !important;
+  }
+
+  .mobile-site-menu.is-open {
+    margin-top: -10px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    gap: 3px !important;
+  }
+
+  .mobile-menu__link {
+    padding-left: 1px !important;
+    padding-right: 1px !important;
+    letter-spacing: 0 !important;
+  }
+}
+
+
+/* -------------------------------------------------
+   v87 — fix mobile menu position + hamburger icon
+-------------------------------------------------- */
+
+/* OLD responsive rules had order:10 !important on mobile-site-menu.
+   This is why the separate panel was being moved to the bottom of site-shell. */
+.mobile-site-menu {
+  order: 0 !important;
+  flex: 0 0 auto !important;
+  align-self: stretch !important;
+}
+
+/* Hamburger next to logo, same color as inactive nav */
+.mobile-menu-toggle {
+  display: none;
+  appearance: none !important;
+  width: 28px !important;
+  height: 28px !important;
+  flex: 0 0 28px !important;
+  margin: 0 !important;
+  padding: 5px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: rgba(255,255,255,.54) !important;
+  cursor: pointer !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+.mobile-menu-toggle span {
+  display: block !important;
+  width: 16px !important;
+  height: 1px !important;
+  margin: 4px auto !important;
+  padding: 0 !important;
+  background: currentColor !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transform-origin: center !important;
+  transition: transform .18s ease, opacity .18s ease !important;
+}
+
+.mobile-menu-toggle:hover,
+.mobile-menu-toggle:focus,
+.mobile-menu-toggle:active {
+  color: rgba(255,255,255,.54) !important;
+  background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+.mobile-menu-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(5px) rotate(45deg) !important;
+}
+.mobile-menu-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0 !important;
+}
+.mobile-menu-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-5px) rotate(-45deg) !important;
+}
+
+@media (min-width: 740px) {
+  .mobile-menu-toggle,
+  .mobile-site-menu {
+    display: none !important;
+  }
+}
+
+@media (max-width: 739px) {
+  /* Same height and padding as desktop */
+  .header-panel--logo-home {
+    padding: 8px 16px !important;
+    min-height: 0 !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .header-nav {
+    width: auto !important;
+    min-width: 0 !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    flex: 0 1 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+  }
+
+  .header-nav > a:not(.header-home-logo) {
+    display: none !important;
+  }
+
+  .mobile-menu-toggle {
+    display: block !important;
+  }
+
+  /* Hidden state */
+  .mobile-site-menu {
+    display: none !important;
+    order: 0 !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    height: auto !important;
+    position: static !important;
+    inset: auto !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  /* Open state: a separate normal-flow panel directly below header */
+  .mobile-site-menu.is-open {
+    display: grid !important;
+    order: 0 !important;
+    flex: 0 0 auto !important;
+    grid-template-columns: repeat(4, minmax(0,1fr)) !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 10px 16px !important;
+    position: static !important;
+    inset: auto !important;
+    transform: none !important;
+    border-radius: 15px !important;
+    background: rgba(18,16,14,.74) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 14px 40px rgba(0,0,0,.16) !important;
+  }
+
+  .mobile-menu__link {
+    min-height: 30px !important;
+    height: 30px !important;
+    padding: 0 4px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .header-panel--logo-home {
+    padding: 8px 10px !important;
+    gap: 8px !important;
+  }
+
+  .header-nav {
+    gap: 10px !important;
+  }
+
+  .header-single-right {
+    gap: 12px !important;
+  }
+
+  .mobile-site-menu.is-open {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    gap: 3px !important;
+  }
+}
+
+
+/* -------------------------------------------------
+   v88 — active state uses exact logo color
+   logo color: #E8CCA6
+-------------------------------------------------- */
+
+:root {
+  --logo-gold: #E8CCA6;
+}
+
+/* Active desktop navigation */
+.header-nav > a:not(.header-home-logo).is-active,
+.header-nav > a:not(.header-home-logo).is-active:hover,
+.header-nav > a:not(.header-home-logo).is-active:focus,
+.header-nav > a:not(.header-home-logo).is-active:active,
+.header-nav > a:not(.header-home-logo).is-active:focus-visible {
+  color: var(--logo-gold) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-shadow:
+    0 0 5px rgba(232,204,166,.12),
+    0 0 10px rgba(232,204,166,.05) !important;
+}
+
+/* Active mobile navigation */
+.mobile-menu__link.is-active,
+.mobile-menu__link.is-active:hover,
+.mobile-menu__link.is-active:focus,
+.mobile-menu__link.is-active:active,
+.mobile-menu__link.is-active:focus-visible {
+  color: var(--logo-gold) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-shadow:
+    0 0 5px rgba(232,204,166,.12),
+    0 0 10px rgba(232,204,166,.05) !important;
+}
+
+/* Active language */
+.language-btn.is-active,
+.language-btn.is-active:hover,
+.language-btn.is-active:focus,
+.language-btn.is-active:active {
+  color: var(--logo-gold) !important;
+  text-shadow:
+    0 0 4px rgba(232,204,166,.10) !important;
+}
+
+
+/* -------------------------------------------------
+   v89 — exact hamburger color + softer hover color
+-------------------------------------------------- */
+
+:root {
+  --nav-inactive: rgba(255,255,255,.54);
+  --nav-hover: #C7B59D;
+  --logo-gold: #E8CCA6;
+}
+
+/* Inactive nav + metadata */
+.header-nav > a:not(.header-home-logo),
+.mobile-menu__link,
+.header-location,
+.language-btn {
+  color: var(--nav-inactive) !important;
+}
+
+/* Hamburger lines: exact same color as inactive navigation */
+.mobile-menu-toggle {
+  color: var(--nav-inactive) !important;
+}
+
+.mobile-menu-toggle span {
+  background: rgba(255,255,255,.54) !important;
+  opacity: 1 !important;
+}
+
+/* Softer hover — halfway visually between inactive and logo gold */
+.header-nav > a:not(.header-home-logo):hover,
+.mobile-menu__link:hover {
+  color: var(--nav-hover) !important;
+  text-shadow: none !important;
+}
+
+/* Keep active state in logo gold */
+.header-nav > a:not(.header-home-logo).is-active,
+.header-nav > a:not(.header-home-logo).is-active:hover,
+.header-nav > a:not(.header-home-logo).is-active:focus,
+.header-nav > a:not(.header-home-logo).is-active:active,
+.header-nav > a:not(.header-home-logo).is-active:focus-visible,
+.mobile-menu__link.is-active,
+.mobile-menu__link.is-active:hover,
+.mobile-menu__link.is-active:focus,
+.mobile-menu__link.is-active:active,
+.mobile-menu__link.is-active:focus-visible,
+.language-btn.is-active,
+.language-btn.is-active:hover,
+.language-btn.is-active:focus,
+.language-btn.is-active:active {
+  color: var(--logo-gold) !important;
+}
+
+/* Language hover is also restrained */
+.language-btn:not(.is-active):hover {
+  color: var(--nav-hover) !important;
+}
+
+
+/* -------------------------------------------------
+   v90 — visually match closed hamburger to the X
+-------------------------------------------------- */
+
+/*
+  Diagonal 1px lines of the X are anti-aliased by the browser,
+  so they visually look softer/darker than the same horizontal
+  rgba line. Keep the SAME base currentColor, but slightly lower
+  closed-bar opacity so both states look identical to the eye.
+*/
+
+.mobile-menu-toggle span {
+  background: currentColor !important;
+}
+
+/* Closed hamburger */
+.mobile-menu-toggle[aria-expanded="false"] span {
+  opacity: .70 !important;
+}
+
+/* Open X — keep the state the user approved */
+.mobile-menu-toggle[aria-expanded="true"] span:nth-child(1),
+.mobile-menu-toggle[aria-expanded="true"] span:nth-child(3) {
+  opacity: 1 !important;
+}
+
+.mobile-menu-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0 !important;
+}

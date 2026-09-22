@@ -20,21 +20,21 @@
         <a class="header-home-logo" href="index.html" aria-label="Главная">
               <img src="images/header-wordmark.svg" alt="APART MARKETING">
             </a>
+            <button class="mobile-menu-toggle"
+                    type="button"
+                    aria-label="Открыть меню"
+                    aria-controls="mobile-site-menu"
+                    aria-expanded="false">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </button>
             <a class="services-nav is-active" href="services.html" data-i18n="services_btn">УСЛУГИ</a>
             <a class="about-nav" href="about.html" data-i18n="about_btn">ПРО НАС</a>
             <a class="portfolio-nav" href="portfolio.html" data-i18n="portfolio_btn">ПОРТФОЛИО</a>
             <a class="contacts-nav" href="contacts.html" data-i18n="contacts_btn">КОНТАКТЫ</a>
       </nav>
-
-
-        <nav class="mobile-site-menu" aria-label="Мобильное меню">
-          <a class="mobile-menu__link is-active" href="services.html" data-i18n="services_btn">УСЛУГИ</a>
-          <a class="mobile-menu__link" href="about.html" data-i18n="about_btn">ПРО НАС</a>
-          <a class="mobile-menu__link" href="portfolio.html" data-i18n="portfolio_btn">ПОРТФОЛИО</a>
-          <a class="mobile-menu__link" href="contacts.html" data-i18n="contacts_btn">КОНТАКТЫ</a>
-        </nav>
-
-      <div class="header-single-right">
+<div class="header-single-right">
 
         <span class="header-location" aria-label="Location: Batumi">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -49,7 +49,14 @@
           <button class="language-btn" type="button" data-lang="ka">GE</button>
         </div>
       </div>
-    </section>
+</section>
+
+    <nav class="panel mobile-site-menu" id="mobile-site-menu" aria-label="Мобильное меню">
+          <a class="mobile-menu__link is-active" href="services.html" data-i18n="services_btn">УСЛУГИ</a>
+          <a class="mobile-menu__link" href="about.html" data-i18n="about_btn">ПРО НАС</a>
+          <a class="mobile-menu__link" href="portfolio.html" data-i18n="portfolio_btn">ПОРТФОЛИО</a>
+          <a class="mobile-menu__link" href="contacts.html" data-i18n="contacts_btn">КОНТАКТЫ</a>
+        </nav>
 
         <!-- УСЛУГИ И ЦЕНЫ -->
     <section class="panel content-panel services-block">
