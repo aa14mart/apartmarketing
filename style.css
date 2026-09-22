@@ -1,6 +1,8 @@
-* {
-  box-sizing: border-box;
-}
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400&display=swap");
+
+/* APART MARKETING — clean stylesheet v70 */
+
+* { box-sizing: border-box; }
 
 html,
 body {
@@ -8,222 +10,242 @@ body {
   min-height: 100%;
 }
 
+html {
+  background: #b7aea3;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
   color: #fff;
   background:
     linear-gradient(rgba(0,0,0,.10), rgba(0,0,0,.10)),
     url("images/mainfon.jpg") center center / cover fixed no-repeat;
 }
 
-/* Отдельный фон-слой больше не нужен */
-.page-bg {
-  display: none;
+a,
+button {
+  font: inherit;
 }
 
-/* Общая колонка из 6 блоков */
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.page-bg { display: none; }
+
 .site-shell {
   width: 100%;
-  padding: 22px clamp(18px, 3vw, 46px) 46px;
+  max-width: 1540px;
+  margin: 0 auto;
+  padding:
+    max(22px, env(safe-area-inset-top))
+    max(clamp(18px, 3vw, 46px), env(safe-area-inset-right))
+    max(46px, calc(env(safe-area-inset-bottom) + 24px))
+    max(clamp(18px, 3vw, 46px), env(safe-area-inset-left));
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-/* Общий стиль каждого блока */
 .panel {
   width: 100%;
-  height: auto;
-  background: rgba(18, 16, 14, .74);
-  border: 1px solid rgba(255,255,255,.17);
+  border: 0;
   border-radius: 20px;
-  backdrop-filter: blur(10px);
+  background: rgba(18,16,14,.74);
   -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   box-shadow: 0 14px 40px rgba(0,0,0,.16);
 }
 
-/* Блок 1 — шапка */
-.header-panel {
-  min-height: 72px;
-  padding: 0 22px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.content-panel {
+  min-height: 0;
+  padding: 28px;
 }
 
+/* ---------------- HEADER ---------------- */
 
-.header-left {
+.header-panel--logo-home {
+  min-height: 0;
+  padding: 8px 16px;
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 12px;
+  overflow: visible;
+}
+
+.header-nav {
   min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex: 1 1 auto;
 }
 
-.language-switcher {
+.header-home-logo {
+  width: 92px;
+  height: 40px;
+  flex: 0 0 92px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.header-home-logo img {
+  display: block;
+  width: auto;
+  height: 40px;
+  max-width: 92px;
+  object-fit: contain;
+}
+
+.header-nav > a:not(.header-home-logo),
+.mobile-menu__link {
+  min-height: 30px;
+  padding: 0 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.76);
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.header-nav > a:not(.header-home-logo).is-active,
+.mobile-menu__link.is-active {
+  background: rgba(232,204,166,.18);
+  color: #fff;
+}
+
+/* No hover animation / no geometry changes */
+.header-nav > a:not(.header-home-logo):hover,
+.mobile-menu__link:hover {
+  transform: none;
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.76);
+}
+
+.header-nav > a:not(.header-home-logo).is-active:hover,
+.mobile-menu__link.is-active:hover {
+  background: rgba(232,204,166,.18);
+  color: #fff;
+}
+
+.header-single-right {
+  margin-left: auto;
+  flex: 0 0 auto;
   display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 13px;
+}
+
+.header-location {
+  display: inline-flex;
   align-items: center;
   gap: 5px;
+  color: rgba(255,255,255,.76);
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: .06em;
+  white-space: nowrap;
+}
+
+.header-location svg {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  fill: currentColor;
+  opacity: .86;
+}
+
+/* Language switcher: globe + RU|EN|GE, no boxes */
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  white-space: nowrap;
+}
+
+.language-switcher::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  margin-right: 5px;
+  opacity: .72;
+  background: center / contain no-repeat url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='9'/><path d='M3 12h18'/><path d='M12 3a14 14 0 0 1 0 18'/><path d='M12 3a14 14 0 0 0 0 18'/></svg>");
 }
 
 .language-btn {
   appearance: none;
-  border: 1px solid rgba(255,255,255,.34);
-  background: rgba(255,255,255,.04);
-  color: rgba(255,255,255,.66);
-  border-radius: 8px;
-  min-width: 34px;
-  height: 28px;
-  padding: 0 8px;
-  cursor: pointer;
-
-  font: inherit;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  width: auto;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  background: transparent;
+  box-shadow: none;
+  color: rgba(255,255,255,.58);
   font-size: 10px;
-  font-weight: 600;
-  letter-spacing: .08em;
-
-  transition:
-    color .18s ease,
-    background-color .18s ease,
-    border-color .18s ease;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: .06em;
+  cursor: pointer;
+  transform: none;
+  transition: none;
 }
 
-.language-btn:hover {
-  color: #fff;
-  border-color: rgba(255,255,255,.7);
+.language-btn:hover,
+.language-btn:focus,
+.language-btn:active {
+  color: rgba(255,255,255,.58);
+  transform: none;
 }
 
 .language-btn.is-active {
-  color: #fff;
-  background: rgba(255,255,255,.14);
-  border-color: rgba(255,255,255,.72);
+  color: rgba(255,255,255,.94);
+  font-weight: 400;
 }
 
-.brand {
-  color: #fff;
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: .16em;
-  white-space: nowrap;
+.language-separator {
+  display: inline-block;
+  margin: 0 3px;
+  color: rgba(255,255,255,.38);
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 400;
+  pointer-events: none;
 }
 
-.socials {
-  display: flex;
-  align-items: center;
-  gap: 9px;
+/* desktop: mobile row hidden */
+.mobile-site-menu {
+  display: none;
 }
 
-.social-link {
-  width: 34px;
-  height: 34px;
+/* ---------------- MAIN PAGE ---------------- */
 
-  display: grid;
-  place-items: center;
-
-  color: #fff;
-  text-decoration: none;
-
-  border: 1px solid rgba(255,255,255,.48);
-  border-radius: 50%;
-  background: rgba(255,255,255,.045);
-
-  transition:
-    transform .18s ease,
-    background-color .18s ease,
-    border-color .18s ease;
-}
-
-.social-link:hover {
-  transform: translateY(-1px);
-  background: rgba(255,255,255,.13);
-  border-color: rgba(255,255,255,.95);
-}
-
-.social-link svg {
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
-}
-
-/*
-  Блоки 2–6 пока пустые.
-  Минимальная высота нужна только чтобы их было видно.
-  Когда добавим контент, блок автоматически увеличится.
-*/
-.content-panel {
-  min-height: 220px;
-  padding: 28px;
-}
-
-@media (max-width: 640px) {
-  .site-shell {
-    padding: 12px 12px 32px;
-    gap: 14px;
-  }
-
-  .panel {
-    border-radius: 16px;
-  }
-
-  .header-panel {
-    min-height: 62px;
-    padding: 0 14px;
-  }
-
-  .brand {
-    font-size: 11px;
-    letter-spacing: .11em;
-  }
-
-  .header-left {
-    gap: 9px;
-  }
-
-  .language-switcher {
-    gap: 3px;
-  }
-
-  .language-btn {
-    min-width: 27px;
-    height: 25px;
-    padding: 0 5px;
-    border-radius: 7px;
-    font-size: 9px;
-  }
-
-  .socials {
-    gap: 6px;
-  }
-
-  .social-link {
-    width: 30px;
-    height: 30px;
-  }
-
-  .social-link svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  .content-panel {
-    min-height: 180px;
-    padding: 20px;
-  }
-}
-
-
-/* Блок 2 */
 .block-two {
-  padding: 0;
-  overflow: hidden;
+  padding: 16px;
 }
 
 .block-two__gallery {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0,1fr));
   gap: 14px;
-  align-items: start;
 }
 
 .block-two__card {
@@ -231,343 +253,99 @@ body {
   margin: 0;
   overflow: hidden;
   border: 0;
-  border-radius: 0;
-  background: transparent;
-}
-
-.block-two__card img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-.block-two__card--main img {
-  object-position: center 48%;
-}
-
-.block-two__overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.46) 48%, rgba(0,0,0,.08) 100%),
-    linear-gradient(0deg, rgba(0,0,0,.28) 0%, rgba(0,0,0,0) 55%);
-}
-
-.block-two__text {
-  position: absolute;
-  z-index: 2;
-  left: clamp(20px, 3vw, 42px);
-  right: clamp(20px, 3vw, 42px);
-  bottom: clamp(20px, 3vw, 38px);
-  max-width: 690px;
-  color: #fff;
-  text-shadow: 0 2px 14px rgba(0,0,0,.35);
-}
-
-
-
-@media (max-width: 760px) {
-  .block-two {
-    padding: 0;
-  }
-
-  .block-two__gallery {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-
-  .block-two__text {
-    left: 18px;
-    right: 18px;
-    bottom: 18px;
-  }
-
-  
-  }
-
-/* Блок 3 — компактный план работы */
-.workflow-block {
-  padding: 16px;
-}
-
-.workflow {
-  display: grid;
-  grid-template-columns:
-    minmax(0, 1fr) auto
-    minmax(0, 1fr) auto
-    minmax(0, 1fr) auto
-    minmax(0, 1fr);
-  align-items: stretch;
-  gap: 9px;
-}
-
-.workflow-step {
-  min-height: 118px;
-  padding: 15px 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  border: 1px solid rgba(255,255,255,.24);
-  border-radius: 13px;
+  border-radius: 16px;
   background: rgba(255,255,255,.035);
 }
 
-
-
-.workflow-arrow {
-  align-self: center;
-  padding: 0 1px;
-  font-size: 20px;
-  line-height: 1;
-  color: rgba(255,255,255,.55);
-}
-
-@media (max-width: 950px) {
-  .workflow-block {
-    padding: 12px;
-  }
-
-  .workflow {
-    grid-template-columns: 1fr;
-    gap: 7px;
-  }
-
-  .workflow-step {
-    min-height: 0;
-    padding: 14px 15px;
-  }
-
-  .workflow-arrow {
-    justify-self: center;
-    transform: rotate(90deg);
-    font-size: 18px;
-  }
-}
-
-
-/* Исправление блока 3: убираем минимальную высоту от общего .content-panel */
-.workflow-block {
-  min-height: 0;
+.block-two__card img {
+  display: block;
+  width: 100%;
   height: auto;
+  object-fit: contain;
 }
 
+.block-two__overlay--bottom {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 42%;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(0,0,0,.72), rgba(0,0,0,0));
+}
 
-/* Блок 4 — до / после */
+.block-two__text--bottom {
+  position: absolute;
+  left: clamp(16px,2.6vw,26px);
+  right: clamp(16px,2.6vw,26px);
+  bottom: clamp(16px,2.6vw,26px);
+  z-index: 2;
+}
+
+.block-two__headline {
+  margin: 0;
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.45;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.value-block {
+  padding: 26px 28px;
+}
+
+.value-copy {
+  max-width: 1080px;
+}
+
+.value-copy > p,
+.value-points p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.7;
+  letter-spacing: .06em;
+}
+
+.value-copy > p {
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.value-points {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.value-points p {
+  color: rgba(255,255,255,.88);
+  font-weight: 400;
+}
+
 .block-four {
-  min-height: 0;
-  padding: 16px;
+  display: grid;
+  gap: 18px;
 }
 
 .comparison-pair {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2,minmax(0,1fr));
   gap: 14px;
 }
 
-.comparison-pair + .comparison-pair {
-  margin-top: 14px;
-}
-
 .comparison-card {
   position: relative;
   margin: 0;
   overflow: hidden;
+  border: 0;
   border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.03);
-}
-
-
-.comparison-card img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-@media (max-width: 760px) {
-  .block-four {
-    padding: 12px;
-  }
-
-  .comparison-pair {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
-  .comparison-pair + .comparison-pair {
-    margin-top: 10px;
-  }
-
-  .comparison-card {
-    border-radius: 12px;
-  }
-}
-
-
-/* Блок 2: текст поверх изображения не участвует в размере картинки */
-.block-two__card--main {
-  position: relative;
-}
-
-.block-two__text,
-.block-two__overlay {
-  pointer-events: none;
-}
-
-/* Оба изображения имеют одинаковый масштаб и сохраняют исходные пропорции */
-.block-two__gallery {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-}
-
-.block-two__card img {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  object-fit: contain;
-}
-
-
-/* -------------------------------------------------
-   Единая типографика сайта: только 2 текстовых формата
-   1) крупный — как APART MARKETING, жирный
-   2) мелкий — тот же стиль, но обычный
--------------------------------------------------- */
-
-:root {
-  --type-big-size: 17px;
-  --type-small-size: 14px;
-  --type-big-spacing: .16em;
-  --type-small-spacing: .06em;
-}
-
-.brand,
-.block-two__text h1,
-.workflow-step h3 {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: var(--type-big-size);
-  line-height: 1.35;
-  font-weight: 700;
-  letter-spacing: var(--type-big-spacing);
-  text-transform: uppercase;
-}
-
-.block-two__text p,
-.workflow-step p,
-.comparison-label,
-.language-btn {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: var(--type-small-size);
-  line-height: 1.45;
-  font-weight: 400;
-  letter-spacing: var(--type-small-spacing);
-}
-
-.block-two__text p,
-.workflow-step p {
-  text-transform: none;
-}
-
-.comparison-label,
-.language-btn {
-  text-transform: uppercase;
-}
-
-/* Блок 2 */
-.block-two__text h1 {
-  margin-bottom: 8px;
-}
-
-.block-two__text p {
-  margin: 0;
-  max-width: 520px;
-  color: rgba(255,255,255,.94);
-}
-
-/* Блок 3 */
-.workflow-step h3 {
-  margin-bottom: 8px;
-}
-
-.workflow-step p {
-  margin: 0;
-  color: rgba(255,255,255,.78);
-}
-
-.comparison-label {
-  line-height: 1;
-  background: rgba(18,16,14,.72);
-}
-
-/* RU / EN чуть плотнее */
-.language-btn {
-  line-height: 1;
-}
-
-@media (max-width: 640px) {
-  :root {
-    --type-big-size: 13px;
-    --type-small-size: 12px;
-    --type-big-spacing: .11em;
-    --type-small-spacing: .05em;
-  }
-
-  .block-two__text p {
-    max-width: 100%;
-  }
-}
-
-
-/* -------------------------------------------------
-   v13: JPEG-изображения не растягиваются больше
-   своего реального разрешения. На больших экранах
-   контент центрируется, по краям остаётся фон блока.
--------------------------------------------------- */
-
-/* Блок 2 */
-.block-two__gallery {
-  justify-items: center;
-  align-items: start;
-}
-
-.block-two__card {
-  width: 100%;
-  max-width: 724px;
-  justify-self: center;
-}
-
-.block-two__card img {
-  display: block;
-  width: 100%;
-  max-width: 724px;
-  height: auto;
-  object-fit: contain;
-}
-
-/* Блок 4 — возвращаем рамки и правильные плашки До/После */
-.comparison-pair {
-  justify-items: center;
-}
-
-.comparison-card {
-  position: relative;
-  margin: 0;
-  width: 100%;
-  max-width: 724px;
-  justify-self: center;
-  overflow: hidden;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.03);
+  background: rgba(255,255,255,.035);
 }
 
 .comparison-card img {
   display: block;
   width: 100%;
-  max-width: 724px;
   height: auto;
   object-fit: contain;
 }
@@ -579,562 +357,24 @@ body {
   z-index: 2;
   padding: 6px 10px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.18);
   background: rgba(18,16,14,.72);
   color: #fff;
-}
-
-/* Мелкие шрифты сайта: единый стиль */
-.block-two__text p,
-.workflow-step p,
-.comparison-label,
-.language-btn {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: var(--type-small-size);
-  line-height: 1.45;
+  font-size: 13px;
+  line-height: 1;
   font-weight: 400;
-  letter-spacing: var(--type-small-spacing);
-}
-
-@media (max-width: 760px) {
-  .block-two__card,
-  .comparison-card {
-    max-width: 100%;
-  }
-
-  .block-two__card img,
-  .comparison-card img {
-    max-width: 100%;
-  }
-
-  .comparison-card {
-    border-radius: 12px;
-  }
-}
-
-
-/* -------------------------------------------------
-   v14
-   1) Блок 2: такие же рамки у картинок, как в блоке 4
-   2) Весь сайт больше не расширяется шире контента картинок.
-      На больших экранах контент центрируется, по краям
-      остаётся только фоновое изображение страницы.
--------------------------------------------------- */
-
-/* Ограничиваем максимальную ширину всей колонке сайта */
-.site-shell {
-  max-width: 1540px;
-  margin: 0 auto;
-}
-
-/* Блок 2 — возвращаем карточные рамки как в блоке 4 */
-.block-two {
-  padding: 16px;
-}
-
-.block-two__gallery {
-  gap: 14px;
-  justify-items: center;
-}
-
-.block-two__card {
-  width: 100%;
-  max-width: 724px;
-  justify-self: center;
-  overflow: hidden;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.03);
-}
-
-.block-two__card img {
-  display: block;
-  width: 100%;
-  max-width: 724px;
-  height: auto;
-  object-fit: contain;
-}
-
-/* На больших экранах карточки не растягиваем больше фото */
-.comparison-pair,
-.block-two__gallery {
-  align-items: start;
-}
-
-@media (max-width: 760px) {
-  .block-two {
-    padding: 12px;
-  }
-
-  .block-two__gallery {
-    gap: 10px;
-  }
-
-  .block-two__card {
-    max-width: 100%;
-    border-radius: 12px;
-  }
-
-  .block-two__card img {
-    max-width: 100%;
-  }
-}
-
-
-/* -------------------------------------------------
-   v17 — текущая компоновка блока 2
--------------------------------------------------- */
-.block-two {
-  padding: 16px;
-}
-
-.block-two__gallery {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  justify-items: center;
-  align-items: start;
-}
-
-.block-two__card {
-  position: relative;
-  width: 100%;
-  max-width: 724px;
-  margin: 0;
-  justify-self: center;
-  overflow: hidden;
-  border-radius: 14px;
-  background: rgba(255,255,255,.03);
-}
-
-.block-two__card img {
-  display: block;
-  width: 100%;
-  max-width: 724px;
-  height: auto;
-  object-fit: contain;
-}
-
-.block-two__overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.block-two__overlay--bottom {
-  background: linear-gradient(to top,
-    rgba(0,0,0,.72) 0%,
-    rgba(0,0,0,.42) 28%,
-    rgba(0,0,0,.08) 58%,
-    rgba(0,0,0,0) 100%);
-}
-
-.block-two__text {
-  position: absolute;
-  z-index: 2;
-  left: clamp(18px, 2.6vw, 28px);
-  right: clamp(18px, 2.6vw, 28px);
-  pointer-events: none;
-  color: #fff;
-  text-shadow: 0 2px 12px rgba(0,0,0,.38);
-}
-
-.block-two__text--bottom {
-  bottom: clamp(16px, 2.6vw, 26px);
-  top: auto;
-}
-
-.block-two__headline {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 17px;
-  line-height: 1.35;
-  font-weight: 700;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-}
-
-@media (max-width: 760px) {
-  .block-two {
-    padding: 12px;
-  }
-
-  .block-two__gallery {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
-  .block-two__card,
-  .block-two__card img {
-    max-width: 100%;
-  }
-
-  .block-two__card {
-    border-radius: 12px;
-  }
-
-  .block-two__text {
-    left: 16px;
-    right: 16px;
-  }
-
-  .block-two__text--bottom {
-    bottom: 16px;
-  }
-
-  .block-two__headline {
-    font-size: 13px;
-    line-height: 1.35;
-    letter-spacing: .11em;
-  }
-}
-
-/* v18 — все обводки блоков и картинок = 0 */
-.panel,
-.workflow-step,
-.block-two__card,
-.comparison-card {
-  border: 0 !important;
-}
-
-/* -------------------------------------------------
-   v19 — шапка
-   Контакты под APART MARKETING, языки справа
--------------------------------------------------- */
-.header-panel {
-  min-height: 86px;
-  padding: 10px 22px;
-}
-
-.header-left {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 7px;
-  min-width: 0;
-}
-
-.header-left .socials {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
-.header-panel > .language-switcher {
-  margin-left: auto;
-  align-self: center;
-}
-
-.header-left .social-link {
-  width: 28px;
-  height: 28px;
-  border: 0;
-}
-
-.header-left .social-link svg {
-  width: 14px;
-  height: 14px;
-}
-
-@media (max-width: 640px) {
-  .header-panel {
-    min-height: 80px;
-    padding: 9px 14px;
-  }
-
-  .header-left {
-    gap: 6px;
-  }
-
-  .header-left .social-link {
-    width: 26px;
-    height: 26px;
-  }
-
-  .header-panel > .language-switcher {
-    margin-left: 14px;
-  }
-}
-
-
-/* -------------------------------------------------
-   v20 — цветные контакты + более спокойные языки
--------------------------------------------------- */
-
-.header-panel {
-  position: relative;
-}
-
-/* Цветные иконки контактов */
-.header-left .social-link:nth-child(1) {
-  color: #2AABEE; /* Telegram */
-  background: rgba(42,171,238,.08);
-}
-
-.header-left .social-link:nth-child(2) {
-  color: #25D366; /* WhatsApp */
-  background: rgba(37,211,102,.08);
-}
-
-.header-left .social-link:nth-child(3) {
-  color: #E4405F; /* Instagram */
-  background: rgba(228,64,95,.08);
-}
-
-.header-left .social-link:hover {
-  transform: translateY(-1px);
-  background: rgba(255,255,255,.08);
-}
-
-/* Языки ставим на один уровень с контактами */
-.header-panel > .language-switcher {
-  position: absolute;
-  right: 22px;
-  bottom: 17px;
-  margin: 0;
-  gap: 3px;
-  align-items: center;
-}
-
-/* Делаем переключатели компактнее и менее заметными */
-.header-panel .language-btn {
-  min-width: 25px;
-  height: 22px;
-  padding: 0 5px;
-  border: 0;
-  border-radius: 6px;
-  background: transparent;
-  color: rgba(255,255,255,.42);
-  font-size: 8px;
-  font-weight: 500;
   letter-spacing: .06em;
-  opacity: .88;
-}
-
-.header-panel .language-btn:hover {
-  color: rgba(255,255,255,.75);
-  background: rgba(255,255,255,.04);
-}
-
-.header-panel .language-btn.is-active {
-  color: rgba(255,255,255,.78);
-  background: rgba(255,255,255,.07);
-}
-
-@media (max-width: 640px) {
-  .header-panel > .language-switcher {
-    right: 14px;
-    bottom: 18px;
-    gap: 2px;
-  }
-
-  .header-panel .language-btn {
-    min-width: 22px;
-    height: 20px;
-    padding: 0 4px;
-    border-radius: 5px;
-    font-size: 7px;
-  }
-}
-
-
-/* -------------------------------------------------
-   v21 — portfolio page + navigation button
--------------------------------------------------- */
-
-.brand-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-.portfolio-nav {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 28px;
-  padding: 0 11px;
-  border-radius: 8px;
-  background: rgba(255,255,255,.06);
-  color: rgba(255,255,255,.72);
-  text-decoration: none;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: .14em;
   text-transform: uppercase;
-  transition: background-color .18s ease, color .18s ease, transform .18s ease;
 }
 
-.portfolio-nav:hover {
-  color: #fff;
-  background: rgba(255,255,255,.10);
-  transform: translateY(-1px);
-}
-
-.portfolio-nav.is-active {
-  color: #fff;
-  background: rgba(255,255,255,.14);
-}
-
-.chamfer-panel {
-  clip-path: polygon(
-    18px 0,
-    calc(100% - 18px) 0,
-    100% 18px,
-    100% calc(100% - 18px),
-    calc(100% - 18px) 100%,
-    18px 100%,
-    0 calc(100% - 18px),
-    0 18px
-  );
-}
-
-.portfolio-block {
-  min-height: 0;
-  padding: 16px;
-}
-
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  justify-items: center;
-  align-items: start;
-}
-
-.portfolio-card {
-  margin: 0;
-  width: min(100%, 640px);
-  overflow: hidden;
-  background: rgba(255,255,255,.03);
-  clip-path: polygon(
-    14px 0,
-    calc(100% - 14px) 0,
-    100% 14px,
-    100% calc(100% - 14px),
-    calc(100% - 14px) 100%,
-    14px 100%,
-    0 calc(100% - 14px),
-    0 14px
-  );
-}
-
-.portfolio-card img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-@media (max-width: 1020px) {
-  .portfolio-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 640px) {
-  .brand-row {
-    gap: 10px;
-  }
-
-  .portfolio-nav {
-    min-height: 24px;
-    padding: 0 9px;
-    border-radius: 7px;
-    font-size: 10px;
-    letter-spacing: .11em;
-  }
-
-  .portfolio-block {
-    padding: 12px;
-  }
-
-  .portfolio-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-}
-
-
-/* -------------------------------------------------
-   v22 — services/pricing page + value block on home
--------------------------------------------------- */
-
-.services-nav {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 28px;
-  padding: 0 11px;
-  border-radius: 8px;
-  background: rgba(255,255,255,.06);
-  color: rgba(255,255,255,.72);
-  text-decoration: none;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  transition: background-color .18s ease, color .18s ease, transform .18s ease;
-}
-
-.services-nav:hover {
-  color: #fff;
-  background: rgba(255,255,255,.10);
-  transform: translateY(-1px);
-}
-
-.services-nav.is-active {
-  color: #fff;
-  background: rgba(255,255,255,.14);
-}
-
-.value-block {
-  min-height: 0;
-  padding: 28px;
-}
-
-.value-copy {
-  max-width: 1080px;
-}
-
-.value-copy > p,
-.value-points p {
-  margin: 0;
-  color: rgba(255,255,255,.88);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: var(--type-small-size);
-  line-height: 1.7;
-  letter-spacing: var(--type-small-spacing);
-}
-
-.value-copy > p {
-  font-size: var(--type-big-size);
-  line-height: 1.5;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: #fff;
-}
-
-.value-points {
-  display: grid;
-  gap: 10px;
-  margin-top: 18px;
-}
+/* ---------------- SERVICES ---------------- */
 
 .services-block {
-  min-height: 0;
   padding: 16px;
 }
 
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3,minmax(0,1fr));
   gap: 14px;
 }
 
@@ -1143,30 +383,31 @@ body {
   padding: 24px;
   display: flex;
   flex-direction: column;
-  border: 0;
   border-radius: 16px;
   background: rgba(255,255,255,.045);
 }
 
 .pricing-card h2,
-.other-services h3 {
+.included-services h3,
+.other-services h3,
+.workflow-step h3,
+.equipment-title,
+.info-page__title {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: var(--type-big-size);
-  line-height: 1.35;
+  font-size: 13px;
+  line-height: 1.4;
   font-weight: 700;
-  letter-spacing: var(--type-big-spacing);
+  letter-spacing: .06em;
   text-transform: uppercase;
 }
 
 .pricing-lead {
   margin: 18px 0 0;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: var(--type-small-size);
+  color: rgba(255,255,255,.92);
+  font-size: 13px;
   line-height: 1.55;
   font-weight: 700;
-  letter-spacing: var(--type-small-spacing);
-  color: rgba(255,255,255,.92);
+  letter-spacing: .06em;
 }
 
 .pricing-lines {
@@ -1177,21 +418,33 @@ body {
 }
 
 .pricing-lines p,
-.services-notes p {
+.services-notes p,
+.included-services p,
+.other-services p,
+.workflow-step p {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: var(--type-small-size);
+  font-size: 13px;
   line-height: 1.55;
   font-weight: 400;
-  letter-spacing: var(--type-small-spacing);
-  color: rgba(255,255,255,.78);
+  letter-spacing: .06em;
 }
 
+.pricing-lines p,
+.services-notes p,
+.included-services p {
+  color: rgba(255,255,255,.82);
+}
+
+.included-services,
 .services-notes {
   margin-top: 14px;
   padding: 22px 24px;
   border-radius: 16px;
-  background: rgba(255,255,255,.035);
+  background: rgba(255,255,255,.04);
+}
+
+.included-services p {
+  margin-top: 12px;
 }
 
 .services-notes > p {
@@ -1202,239 +455,93 @@ body {
   margin-top: 20px;
   padding-top: 18px;
   border-top: 1px solid rgba(255,255,255,.08);
-}
-
-.other-services p {
-  margin-top: 10px;
-}
-
-@media (max-width: 900px) {
-  .pricing-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .pricing-card {
-    min-height: 0;
-  }
-
-  .pricing-lines {
-    margin-top: 18px;
-    padding-top: 0;
-  }
-}
-
-@media (max-width: 640px) {
-  .services-nav {
-    min-height: 24px;
-    padding: 0 9px;
-    border-radius: 7px;
-    font-size: 10px;
-    letter-spacing: .11em;
-  }
-
-  .value-block {
-    padding: 20px;
-  }
-
-  .services-block {
-    padding: 12px;
-  }
-
-  .pricing-card,
-  .services-notes {
-    padding: 20px;
-    border-radius: 14px;
-  }
-}
-
-
-/* -------------------------------------------------
-   v23 — перестановка смысловых блоков
--------------------------------------------------- */
-
-.value-block--main {
-  padding: 26px 28px;
-}
-
-.included-services {
-  margin-top: 14px;
-  padding: 22px 24px;
-  border-radius: 16px;
-  background: rgba(255,255,255,.04);
-}
-
-.included-services h3 {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: var(--type-big-size);
-  line-height: 1.35;
-  font-weight: 700;
-  letter-spacing: var(--type-big-spacing);
-  text-transform: uppercase;
-}
-
-.included-services p {
-  margin: 12px 0 0;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: var(--type-small-size);
-  line-height: 1.65;
-  font-weight: 400;
-  letter-spacing: var(--type-small-spacing);
-  color: rgba(255,255,255,.82);
-}
-
-.other-services {
   display: grid;
   gap: 8px;
 }
 
-.other-services h3 {
-  margin-bottom: 2px;
+.other-services p {
+  margin-top: 2px;
 }
 
-.workflow-block--services {
-  margin-top: 0;
+.workflow-block {
+  padding: 20px;
 }
 
-@media (max-width: 640px) {
-  .value-block--main {
-    padding: 20px;
-  }
-
-  .included-services {
-    padding: 20px;
-    border-radius: 14px;
-  }
-}
-
-
-/* -------------------------------------------------
-   v24 — Portfolio: скругления + оборудование
--------------------------------------------------- */
-
-/* Убираем старое скашивание углов */
-.chamfer-panel {
-  clip-path: none !important;
-}
-
-/* Блок портфолио — обычное скругление, как на главной */
-.portfolio-block {
-  border-radius: 20px;
-  overflow: visible;
-}
-
-/* Карточки фото — тоже обычные скругления */
-.portfolio-card {
-  clip-path: none !important;
-  border-radius: 14px;
-  overflow: hidden;
-}
-
-/* Блок оборудования */
-.equipment-block {
-  min-height: 0;
-  padding: 24px;
-  border-radius: 20px;
-}
-
-.equipment-title {
-  margin: 0 0 18px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: var(--type-big-size);
-  line-height: 1.35;
-  font-weight: 700;
-  letter-spacing: var(--type-big-spacing);
-  text-transform: uppercase;
-}
-
-.equipment-grid {
+.workflow {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
   gap: 10px;
+  align-items: stretch;
 }
 
-.equipment-item {
-  min-height: 52px;
+.workflow-step {
+  min-width: 0;
+  padding: 18px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.04);
+}
+
+.workflow-step p {
+  margin-top: 10px;
+  color: rgba(255,255,255,.78);
+}
+
+.workflow-arrow {
   display: flex;
   align-items: center;
-  padding: 13px 15px;
-  border-radius: 12px;
-  background: rgba(255,255,255,.045);
-  color: rgba(255,255,255,.88);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: var(--type-small-size);
-  line-height: 1.4;
-  font-weight: 400;
-  letter-spacing: var(--type-small-spacing);
+  justify-content: center;
+  color: rgba(255,255,255,.45);
+  font-size: 13px;
+}
+
+.workflow-contact-links {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.workflow-contact-link {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,.05);
   text-decoration: none;
 }
 
-.equipment-link {
-  transition: background-color .18s ease, color .18s ease, transform .18s ease;
+.workflow-contact-link svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
 }
 
-.equipment-link:hover {
-  color: #fff;
-  background: rgba(255,255,255,.08);
-  transform: translateY(-1px);
-}
+.workflow-contact-link--telegram { color: #2AABEE; }
+.workflow-contact-link--whatsapp { color: #25D366; }
 
-@media (max-width: 900px) {
-  .equipment-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
+/* ---------------- PORTFOLIO ---------------- */
 
-@media (max-width: 640px) {
-  .equipment-block {
-    padding: 20px;
-    border-radius: 16px;
-  }
-
-  .equipment-grid {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .equipment-item {
-    min-height: 46px;
-    padding: 11px 13px;
-  }
-
-  .portfolio-block {
-    border-radius: 16px;
-  }
-
-  .portfolio-card {
-    border-radius: 12px;
-  }
-}
-
-
-/* -------------------------------------------------
-   v25 — Equipment block with photos
--------------------------------------------------- */
 .equipment-block {
-  min-height: 0;
   padding: 24px;
 }
 
 .equipment-title {
-  margin: 0 0 18px;
+  margin-bottom: 18px;
 }
 
 .equipment-photo-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3,minmax(0,1fr));
   gap: 12px;
 }
 
 .equipment-photo-card {
   position: relative;
+  min-height: 170px;
   overflow: hidden;
   border-radius: 16px;
   background: rgba(255,255,255,.04);
-  min-height: 170px;
 }
 
 .equipment-photo-card img {
@@ -1450,431 +557,107 @@ body {
   right: 0;
   bottom: 0;
   padding: 24px 12px 10px;
-  background: linear-gradient(to top, rgba(0,0,0,.72), rgba(0,0,0,.32), rgba(0,0,0,0));
+  background: linear-gradient(to top,rgba(0,0,0,.72),rgba(0,0,0,.32),rgba(0,0,0,0));
   color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: var(--type-small-size);
+  font-size: 13px;
   line-height: 1.35;
   font-weight: 700;
-  letter-spacing: var(--type-small-spacing);
+  letter-spacing: .06em;
 }
 
-@media (max-width: 980px) {
-  .equipment-photo-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.portfolio-block {
+  padding: 16px;
+  border-radius: 20px;
 }
 
-@media (max-width: 640px) {
-  .equipment-photo-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
-  .equipment-photo-card {
-    border-radius: 14px;
-    min-height: 160px;
-  }
-
-  .equipment-photo-card img {
-    height: 160px;
-  }
-
-  .equipment-photo-label {
-    padding: 22px 10px 9px;
-  }
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 12px;
 }
 
+.portfolio-card {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 14px;
+  background: rgba(255,255,255,.035);
+}
 
-/* -------------------------------------------------
-   v28 — Batumi в шапке + TG/WA в первом шаге
--------------------------------------------------- */
+.portfolio-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 
-.header-location {
-  display: inline-flex;
+/* ---------------- INFO / CONTACTS ---------------- */
+
+.info-page {
+  padding: 34px;
+}
+
+.info-page__title {
+  margin-bottom: 22px;
+}
+
+.info-page__copy {
+  max-width: 980px;
+}
+
+.info-page__copy p,
+.contacts-page__intro {
+  margin: 0 0 16px;
+  color: rgba(255,255,255,.88);
+  font-size: 13px;
+  line-height: 1.75;
+  font-weight: 400;
+  letter-spacing: .06em;
+}
+
+.info-page__copy .info-page__lead {
+  color: #fff;
+  font-weight: 700;
+}
+
+.contacts-page__intro {
+  margin-bottom: 22px;
+}
+
+.contacts-list {
+  max-width: 760px;
+  display: grid;
+  gap: 9px;
+}
+
+.contact-row {
+  min-height: 50px;
+  padding: 10px 14px;
+  display: grid;
+  grid-template-columns: 145px minmax(0,1fr);
   align-items: center;
-  gap: 5px;
-  margin-left: 2px;
-  color: rgba(255,255,255,.62);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 11px;
-  line-height: 1;
-  font-weight: 500;
-  letter-spacing: .05em;
-  white-space: nowrap;
-}
-
-.header-location svg {
-  width: 14px;
-  height: 14px;
-  fill: currentColor;
-  opacity: .9;
-}
-
-.workflow-contact-links {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.workflow-contact-link {
-  width: 28px;
-  height: 28px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
+  gap: 18px;
+  border-radius: 12px;
   background: rgba(255,255,255,.05);
   text-decoration: none;
-  transition: transform .18s ease, background-color .18s ease;
 }
 
-.workflow-contact-link svg {
-  width: 14px;
-  height: 14px;
-  fill: currentColor;
+.contact-row__label,
+.contact-row__value {
+  font-size: 13px;
+  line-height: 1.4;
+  letter-spacing: .06em;
 }
 
-.workflow-contact-link--telegram {
-  color: #2AABEE;
+.contact-row__label {
+  color: rgba(255,255,255,.58);
+  font-weight: 700;
 }
 
-.workflow-contact-link--whatsapp {
-  color: #25D366;
+.contact-row__value {
+  color: #fff;
+  font-weight: 400;
 }
 
-.workflow-contact-link:hover {
-  transform: translateY(-1px);
-  background: rgba(255,255,255,.09);
-}
-
-@media (max-width: 640px) {
-  .header-location {
-    gap: 4px;
-    font-size: 10px;
-  }
-
-  .header-location svg {
-    width: 13px;
-    height: 13px;
-  }
-
-  .workflow-contact-link {
-    width: 26px;
-    height: 26px;
-  }
-}
-
-
-/* -------------------------------------------------
-   v30 — новая двухстрочная шапка
--------------------------------------------------- */
-
-.header-panel--two-row {
-  display: block !important;
-  min-height: 0;
-  padding: 13px 20px 12px;
-}
-
-.header-row {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.header-row--top {
-  min-height: 30px;
-}
-
-.header-row--bottom {
-  margin-top: 8px;
-  min-height: 30px;
-}
-
-.header-top-right {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  margin-left: auto;
-}
-
-.header-panel--two-row .brand {
-  display: inline-flex;
-  align-items: center;
-  min-height: 28px;
-}
-
-.header-panel--two-row .language-switcher {
-  position: static !important;
-  right: auto !important;
-  bottom: auto !important;
-  margin: 0 !important;
-  display: flex;
-  align-items: center;
-  gap: 3px;
-}
-
-.header-panel--two-row .header-location {
-  margin: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  color: rgba(255,255,255,.68);
-}
-
-.header-panel--two-row .header-location svg {
-  width: 14px;
-  height: 14px;
-  fill: currentColor;
-}
-
-.header-nav {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.header-socials {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-left: auto;
-}
-
-.header-panel--two-row .social-link {
-  width: 28px;
-  height: 28px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.header-panel--two-row .social-link svg {
-  width: 14px;
-  height: 14px;
-}
-
-@media (max-width: 640px) {
-  .header-panel--two-row {
-    padding: 10px 12px;
-  }
-
-  .header-row--bottom {
-    margin-top: 7px;
-  }
-
-  .header-top-right {
-    gap: 8px;
-  }
-
-  .header-panel--two-row .header-location {
-    gap: 3px;
-    font-size: 9px;
-  }
-
-  .header-panel--two-row .header-location svg {
-    width: 12px;
-    height: 12px;
-  }
-
-  .header-nav {
-    gap: 5px;
-  }
-
-  .header-panel--two-row .services-nav,
-  .header-panel--two-row .portfolio-nav {
-    min-height: 23px;
-    padding: 0 7px;
-    font-size: 9px;
-    letter-spacing: .08em;
-  }
-
-  .header-panel--two-row .social-link {
-    width: 25px;
-    height: 25px;
-  }
-
-  .header-panel--two-row .social-link svg {
-    width: 13px;
-    height: 13px;
-  }
-}
-
-
-/* -------------------------------------------------
-   v31 — logo header layout
--------------------------------------------------- */
-
-.header-panel--logo-grid {
-  display: grid !important;
-  grid-template-columns: 96px minmax(0, 1fr);
-  align-items: stretch;
-  column-gap: 18px;
-  min-height: 0;
-  padding: 12px 18px;
-}
-
-.header-logo-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.header-logo-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-}
-
-.header-logo {
-  display: block;
-  width: 86px;
-  height: 86px;
-  object-fit: contain;
-}
-
-.header-content-wrap {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.header-panel--logo-grid .header-row {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.header-panel--logo-grid .header-row--bottom {
-  margin-top: 8px;
-}
-
-.header-panel--logo-grid .brand {
-  display: inline-flex;
-  align-items: center;
-  min-height: 28px;
-  margin: 0;
-}
-
-.header-panel--logo-grid .header-top-right {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  margin-left: auto;
-}
-
-.header-panel--logo-grid .header-location {
-  margin: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  color: rgba(255,255,255,.68);
-}
-
-.header-panel--logo-grid .header-location svg {
-  width: 14px;
-  height: 14px;
-  fill: currentColor;
-}
-
-.header-panel--logo-grid .language-switcher {
-  position: static !important;
-  right: auto !important;
-  bottom: auto !important;
-  margin: 0 !important;
-  display: flex;
-  align-items: center;
-  gap: 3px;
-}
-
-.header-panel--logo-grid .header-nav {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.header-panel--logo-grid .header-socials {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-left: auto;
-}
-
-.header-panel--logo-grid .social-link {
-  width: 28px;
-  height: 28px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.header-panel--logo-grid .social-link svg {
-  width: 14px;
-  height: 14px;
-}
-
-@media (max-width: 640px) {
-  .header-panel--logo-grid {
-    grid-template-columns: 68px minmax(0, 1fr);
-    column-gap: 10px;
-    padding: 10px 12px;
-  }
-
-  .header-logo {
-    width: 60px;
-    height: 60px;
-  }
-
-  .header-panel--logo-grid .header-row--bottom {
-    margin-top: 7px;
-  }
-
-  .header-panel--logo-grid .header-top-right {
-    gap: 8px;
-  }
-
-  .header-panel--logo-grid .header-location {
-    gap: 3px;
-    font-size: 9px;
-  }
-
-  .header-panel--logo-grid .header-location svg {
-    width: 12px;
-    height: 12px;
-  }
-
-  .header-panel--logo-grid .header-nav {
-    gap: 5px;
-  }
-
-  .header-panel--logo-grid .services-nav,
-  .header-panel--logo-grid .portfolio-nav {
-    min-height: 23px;
-    padding: 0 7px;
-    font-size: 9px;
-    letter-spacing: .08em;
-  }
-
-  .header-panel--logo-grid .social-link {
-    width: 25px;
-    height: 25px;
-  }
-
-  .header-panel--logo-grid .social-link svg {
-    width: 13px;
-    height: 13px;
-  }
-}
-
-
-/* -------------------------------------------------
-   v34 — footer
--------------------------------------------------- */
+/* ---------------- FOOTER ---------------- */
 
 .site-footer {
   width: 100%;
@@ -1884,7 +667,7 @@ body {
 .site-footer__line {
   width: 100%;
   height: 1px;
-  background: rgba(255,255,255,.18);
+  background: #111;
 }
 
 .site-footer__content {
@@ -1898,26 +681,12 @@ body {
 
 .site-footer__copy,
 .site-footer__phone {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 11px;
+  color: #111;
+  font-size: 13px;
   line-height: 1.4;
-  font-weight: 500;
-  letter-spacing: .08em;
-  color: rgba(255,255,255,.68);
-}
-
-.site-footer__copy {
-  white-space: nowrap;
-}
-
-.site-footer__phone {
+  font-weight: 400;
+  letter-spacing: .06em;
   text-decoration: none;
-  white-space: nowrap;
-  transition: color .18s ease;
-}
-
-.site-footer__phone:hover {
-  color: #fff;
 }
 
 .site-footer__right {
@@ -1938,233 +707,212 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid #111;
   border-radius: 50%;
+  background: transparent;
+  color: #111;
   text-decoration: none;
 }
 
 .site-footer .social-link svg {
   width: 13px;
   height: 13px;
+  fill: currentColor;
 }
 
-.site-footer .social-link:nth-child(1) {
-  color: #2AABEE;
-  background: rgba(42,171,238,.08);
-}
+/* ---------------- RESPONSIVE ---------------- */
 
-.site-footer .social-link:nth-child(2) {
-  color: #25D366;
-  background: rgba(37,211,102,.08);
-}
-
-.site-footer .social-link:nth-child(3) {
-  color: #E4405F;
-  background: rgba(228,64,95,.08);
-}
-
-@media (max-width: 640px) {
-  .site-footer__content {
-    min-height: 0;
-    padding-top: 12px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+@media (max-width: 1100px) {
+  .site-shell {
+    gap: 18px;
   }
 
-  .site-footer__right {
+  .header-panel--logo-home {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 12px;
+  }
+
+  /* First row: logo + metadata */
+  .header-nav {
+    width: auto;
+    flex: 1 1 auto;
+  }
+
+  .header-nav > a:not(.header-home-logo) {
+    display: none;
+  }
+
+  .header-single-right {
+    gap: 8px;
+  }
+
+  .header-location {
+    font-size: 11px;
+    gap: 3px;
+  }
+
+  .header-location svg {
+    width: 12px;
+    height: 12px;
+    flex-basis: 12px;
+  }
+
+  .language-switcher::before {
+    width: 12px;
+    height: 12px;
+    flex-basis: 12px;
+    margin-right: 4px;
+  }
+
+  .language-btn,
+  .language-separator {
+    font-size: 9px;
+  }
+
+  .language-separator {
+    margin: 0 2px;
+  }
+
+  /* Second row: the only page menu on mobile/tablet */
+  .mobile-site-menu {
+    order: 10;
     width: 100%;
-    justify-content: space-between;
-    gap: 10px;
+    flex: 0 0 100%;
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
 
-  .site-footer__copy,
-  .site-footer__phone {
-    font-size: 10px;
+  .mobile-menu__link {
+    min-width: 0;
+    flex: 1 1 0;
+    padding: 0 6px;
   }
-}
 
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
 
-/* -------------------------------------------------
-   v36 — footer contacts in black
--------------------------------------------------- */
+  .pricing-card {
+    min-height: 0;
+  }
 
-.site-footer__phone {
-  color: #111 !important;
-}
+  .pricing-lines {
+    margin-top: 18px;
+    padding-top: 0;
+  }
 
-.site-footer__phone:hover {
-  color: #000 !important;
-}
+  .workflow {
+    grid-template-columns: 1fr;
+  }
 
-.site-footer .social-link {
-  color: #111 !important;
-  background: transparent !important;
-}
+  .workflow-arrow {
+    transform: rotate(90deg);
+    min-height: 12px;
+  }
 
-.site-footer .social-link:hover {
-  color: #000 !important;
-  background: rgba(0,0,0,.04) !important;
-}
-
-
-/* -------------------------------------------------
-   v37 — footer text + icon outlines darker
--------------------------------------------------- */
-
-.site-footer__copy {
-  color: #111 !important;
-}
-
-.site-footer .social-link {
-  color: #111 !important;
-  border: 1px solid #111 !important;
-  background: transparent !important;
-}
-
-.site-footer .social-link:hover {
-  color: #000 !important;
-  border-color: #000 !important;
-  background: rgba(0,0,0,.04) !important;
-}
-
-
-/* -------------------------------------------------
-   v38 — footer line + About / Contacts + header nav
--------------------------------------------------- */
-
-.site-footer__line {
-  background: #111 !important;
-}
-
-/* One shared style for all four header navigation buttons */
-.header-panel--logo-grid .header-nav a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 28px;
-  padding: 0 11px;
-  border-radius: 8px;
-  background: rgba(255,255,255,.06);
-  color: rgba(255,255,255,.72);
-  text-decoration: none;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  transition: background-color .18s ease, color .18s ease, transform .18s ease;
-}
-
-.header-panel--logo-grid .header-nav a:hover {
-  color: #fff;
-  background: rgba(255,255,255,.10);
-  transform: translateY(-1px);
-}
-
-.header-panel--logo-grid .header-nav a.is-active {
-  color: #fff;
-  background: rgba(255,255,255,.14);
-}
-
-.header-panel--logo-grid .header-nav {
-  flex-wrap: nowrap;
-}
-
-/* informational pages */
-.info-page {
-  min-height: 0;
-  padding: 34px;
-}
-
-.info-page__title {
-  margin: 0 0 22px;
-  color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: var(--type-big-size);
-  line-height: 1.35;
-  font-weight: 700;
-  letter-spacing: var(--type-big-spacing);
-  text-transform: uppercase;
-}
-
-.info-page__copy {
-  max-width: 980px;
-}
-
-.info-page__copy p,
-.contacts-page__intro {
-  margin: 0 0 16px;
-  color: rgba(255,255,255,.88);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: var(--type-small-size);
-  line-height: 1.75;
-  letter-spacing: var(--type-small-spacing);
-}
-
-.info-page__copy .info-page__lead {
-  color: #fff;
-  font-weight: 700;
-}
-
-.contacts-page__intro {
-  margin-bottom: 22px;
-}
-
-.contacts-list {
-  max-width: 760px;
-  display: grid;
-  gap: 9px;
-}
-
-.contact-row {
-  display: grid;
-  grid-template-columns: 145px minmax(0,1fr);
-  align-items: center;
-  gap: 18px;
-  min-height: 50px;
-  padding: 10px 14px;
-  border-radius: 12px;
-  background: rgba(255,255,255,.05);
-  text-decoration: none;
-  transition: background-color .18s ease, transform .18s ease;
-}
-
-a.contact-row:hover {
-  background: rgba(255,255,255,.09);
-  transform: translateY(-1px);
-}
-
-.contact-row__label,
-.contact-row__value {
-  color: rgba(255,255,255,.86);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: var(--type-small-size);
-  line-height: 1.4;
-  letter-spacing: var(--type-small-spacing);
-}
-
-.contact-row__label {
-  color: rgba(255,255,255,.58);
-  font-weight: 700;
-}
-
-.contact-row__value {
-  color: #fff;
+  .equipment-photo-grid,
+  .portfolio-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
 }
 
 @media (max-width: 760px) {
-  .header-panel--logo-grid .header-nav {
+  .site-shell {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+    gap: 16px;
+  }
+
+  .header-home-logo {
+    width: 78px;
+    height: 34px;
+    flex-basis: 78px;
+  }
+
+  .header-home-logo img {
+    height: 34px;
+    max-width: 78px;
+  }
+
+  .header-single-right {
+    gap: 6px;
+  }
+
+  .header-location {
+    font-size: 10px;
+  }
+
+  .language-btn,
+  .language-separator {
+    font-size: 8px;
+  }
+
+  .language-switcher::before {
+    width: 11px;
+    height: 11px;
+    flex-basis: 11px;
+    margin-right: 3px;
+  }
+
+  .mobile-site-menu {
     gap: 4px;
   }
 
-  .header-panel--logo-grid .header-nav a,
-  .header-panel--logo-grid .services-nav,
-  .header-panel--logo-grid .portfolio-nav {
-    min-height: 23px;
-    padding: 0 6px;
-    font-size: 8px;
-    letter-spacing: .055em;
+  .mobile-menu__link {
+    min-height: 27px;
+    padding: 0 4px;
+    border-radius: 7px;
+    font-size: 10px;
+    letter-spacing: .025em;
+  }
+
+  .content-panel {
+    padding: 20px;
+  }
+
+  .block-two {
+    padding: 12px;
+  }
+
+  .block-two__gallery,
+  .comparison-pair {
+    grid-template-columns: 1fr;
+  }
+
+  .block-four {
+    gap: 14px;
+  }
+
+  .value-block {
+    padding: 20px;
+  }
+
+  .services-block {
+    padding: 12px;
+  }
+
+  .pricing-card,
+  .included-services,
+  .services-notes {
+    padding: 20px;
+    border-radius: 14px;
+  }
+
+  .equipment-photo-grid,
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .equipment-photo-card {
+    min-height: 160px;
+    border-radius: 14px;
+  }
+
+  .equipment-photo-card img {
+    height: 160px;
   }
 
   .info-page {
@@ -2176,1610 +924,1284 @@ a.contact-row:hover {
     gap: 10px;
     padding: 9px 11px;
   }
-}
 
-@media (max-width: 430px) {
-  .header-panel--logo-grid {
-    grid-template-columns: 60px minmax(0, 1fr);
-    column-gap: 8px;
-  }
-
-  .header-logo {
-    width: 54px;
-    height: 54px;
-  }
-
-  .header-panel--logo-grid .header-nav {
-    gap: 3px;
-  }
-
-  .header-panel--logo-grid .header-nav a {
-    padding: 0 4px;
-    font-size: 7px;
-    letter-spacing: .025em;
-  }
-}
-
-
-/* -------------------------------------------------
-   v39 — шапка в одну строку, без логотипа и названия
--------------------------------------------------- */
-
-.header-panel--single-row {
-  min-height: 0;
-  padding: 12px 16px;
-  display: flex !important;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-}
-
-.header-panel--single-row .header-nav {
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: 7px;
-  min-width: 0;
-}
-
-.header-panel--single-row .header-nav a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 30px;
-  padding: 0 11px;
-  border-radius: 8px;
-  background: rgba(255,255,255,.06);
-  color: rgba(255,255,255,.72);
-  text-decoration: none;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  transition: background-color .18s ease, color .18s ease, transform .18s ease;
-}
-
-.header-panel--single-row .header-nav a:hover {
-  color: #fff;
-  background: rgba(255,255,255,.10);
-  transform: translateY(-1px);
-}
-
-.header-panel--single-row .header-nav a.is-active {
-  color: #fff;
-  background: rgba(255,255,255,.14);
-}
-
-.header-panel--single-row .header-home-btn {
-  width: 34px;
-  min-width: 34px;
-  padding: 0;
-}
-
-.header-panel--single-row .header-home-btn svg {
-  width: 15px;
-  height: 15px;
-  fill: currentColor;
-}
-
-.header-single-right {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  margin-left: auto;
-  flex: 0 0 auto;
-}
-
-.header-panel--single-row .header-location {
-  margin: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  color: rgba(255,255,255,.68);
-  white-space: nowrap;
-}
-
-.header-panel--single-row .header-location svg {
-  width: 14px;
-  height: 14px;
-  fill: currentColor;
-}
-
-.header-panel--single-row .language-switcher {
-  position: static !important;
-  right: auto !important;
-  bottom: auto !important;
-  margin: 0 !important;
-  display: flex;
-  align-items: center;
-  gap: 3px;
-}
-
-@media (max-width: 760px) {
-  .header-panel--single-row {
-    padding: 10px 12px;
-    gap: 9px;
-  }
-
-  .header-panel--single-row .header-nav {
-    gap: 4px;
-  }
-
-  .header-panel--single-row .header-nav a {
-    min-height: 25px;
-    padding: 0 6px;
-    font-size: 8px;
-    letter-spacing: .055em;
-  }
-
-  .header-panel--single-row .header-home-btn {
-    width: 28px;
-    min-width: 28px;
-    padding: 0;
-  }
-
-  .header-panel--single-row .header-home-btn svg {
-    width: 13px;
-    height: 13px;
-  }
-
-  .header-single-right {
-    gap: 7px;
-  }
-
-  .header-panel--single-row .header-location {
-    gap: 3px;
-    font-size: 9px;
-  }
-
-  .header-panel--single-row .header-location svg {
-    width: 12px;
-    height: 12px;
-  }
-}
-
-@media (max-width: 560px) {
-  .header-panel--single-row {
-    gap: 6px;
-  }
-
-  .header-panel--single-row .header-nav {
-    gap: 3px;
-  }
-
-  .header-panel--single-row .header-nav a {
-    padding: 0 4px;
-    font-size: 7px;
-    letter-spacing: .02em;
-  }
-
-  .header-panel--single-row .header-home-btn {
-    width: 26px;
-    min-width: 26px;
-    padding: 0;
-  }
-
-  .header-panel--single-row .header-location span {
-    display: none;
-  }
-
-  .header-single-right {
-    gap: 5px;
-  }
-}
-
-
-/* -------------------------------------------------
-   v40 FIXED — real transparent logo inside one-line header
--------------------------------------------------- */
-
-.header-panel--brand-center {
-  display: grid !important;
-  grid-template-columns: auto minmax(120px, 1fr) auto;
-  align-items: center;
-  gap: 16px;
-  min-height: 0;
-  padding-top: 7px;
-  padding-bottom: 7px;
-}
-
-.header-panel--brand-center .header-nav {
-  min-width: 0;
-}
-
-.header-wordmark-link {
-  min-width: 0;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  text-decoration: none;
-}
-
-.header-wordmark {
-  display: block;
-  width: auto;
-  height: 40px;
-  max-width: 100%;
-  object-fit: contain;
-}
-
-.header-panel--brand-center .header-single-right {
-  margin-left: 0;
-}
-
-@media (max-width: 1050px) {
-  .header-panel--brand-center {
-    grid-template-columns: auto minmax(95px, 1fr) auto;
+  .site-footer__content {
+    min-height: 0;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 10px;
   }
 
-  .header-wordmark-link,
-  .header-wordmark {
-    height: 34px;
+  .site-footer__right {
+    width: 100%;
+    justify-content: space-between;
   }
 }
 
-@media (max-width: 760px) {
-  .header-panel--brand-center {
-    grid-template-columns: auto minmax(72px, 1fr) auto;
-    gap: 6px;
-  }
-
-  .header-wordmark-link,
-  .header-wordmark {
-    height: 28px;
-  }
-}
-
-@media (max-width: 560px) {
-  .header-panel--brand-center {
-    grid-template-columns: auto minmax(58px, 1fr) auto;
-    gap: 4px;
-  }
-
-  .header-wordmark-link,
-  .header-wordmark {
-    height: 24px;
-  }
-}
-
-
-/* -------------------------------------------------
-   v41 — логотип вместо кнопки с домиком
--------------------------------------------------- */
-
-.header-panel--logo-home {
-  min-height: 0;
-  padding: 8px 16px;
-  display: flex !important;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-}
-
-.header-panel--logo-home .header-nav {
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: 7px;
-  min-width: 0;
-}
-
-.header-panel--logo-home .header-nav > a:not(.header-home-logo) {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 30px;
-  padding: 0 11px;
-  border-radius: 8px;
-  background: rgba(255,255,255,.06);
-  color: rgba(255,255,255,.72);
-  text-decoration: none;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-}
-
-.header-home-logo {
-  height: 40px;
-  width: 92px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex: 0 0 auto;
-  overflow: hidden;
-  text-decoration: none;
-}
-
-.header-home-logo img {
-  display: block;
-  width: auto;
-  height: 40px;
-  object-fit: contain;
-}
-
-.header-home-logo.is-active {
-  opacity: 1;
-}
-
-.header-panel--logo-home .header-single-right {
-  margin-left: auto;
-  flex: 0 0 auto;
-}
-
-@media (max-width: 900px) {
+@media (max-width: 420px) {
   .header-panel--logo-home {
-    gap: 10px;
-  }
-
-  .header-panel--logo-home .header-nav {
-    gap: 5px;
-  }
-
-  .header-panel--logo-home .header-nav > a:not(.header-home-logo) {
-    min-height: 26px;
-    padding: 0 7px;
-    font-size: 9px;
-    letter-spacing: .07em;
-  }
-
-  .header-home-logo {
-    width: 78px;
-    height: 34px;
-  }
-
-  .header-home-logo img {
-    height: 34px;
-  }
-}
-
-@media (max-width: 640px) {
-  .header-panel--logo-home {
-    padding: 8px 10px;
+    padding: 7px 9px;
     gap: 6px;
-  }
-
-  .header-panel--logo-home .header-nav {
-    gap: 3px;
-  }
-
-  .header-panel--logo-home .header-nav > a:not(.header-home-logo) {
-    min-height: 24px;
-    padding: 0 5px;
-    font-size: 7px;
-    letter-spacing: .03em;
   }
 
   .header-home-logo {
     width: 64px;
     height: 28px;
+    flex-basis: 64px;
   }
 
   .header-home-logo img {
     height: 28px;
+    max-width: 64px;
   }
 
-  .header-panel--logo-home .header-location span {
-    display: none;
+  .header-single-right {
+    gap: 4px;
+  }
+
+  .header-location {
+    font-size: 9px;
+    letter-spacing: .035em;
+  }
+
+  .header-location svg {
+    width: 10px;
+    height: 10px;
+    flex-basis: 10px;
+  }
+
+  .language-switcher::before {
+    width: 10px;
+    height: 10px;
+    flex-basis: 10px;
+    margin-right: 2px;
+  }
+
+  .language-btn,
+  .language-separator {
+    font-size: 7px;
+  }
+
+  .language-separator {
+    margin: 0 1px;
+  }
+
+  .mobile-site-menu {
+    gap: 3px;
+  }
+
+  .mobile-menu__link {
+    min-height: 26px;
+    padding: 0 3px;
+    font-size: 9px;
+    letter-spacing: .01em;
   }
 }
 
 
 /* -------------------------------------------------
-   v45 — keep Batumi text visible on small screens
+   v71 — one font / one size everywhere
+   + mobile header only at 480px and below
 -------------------------------------------------- */
 
-@media (max-width: 640px) {
-  .header-panel--logo-home .header-location span {
-    display: inline !important;
+/* Единственный шрифт и единственный размер текста на всём сайте */
+html,
+body,
+button,
+input,
+textarea,
+select,
+a,
+p,
+span,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label {
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 12px !important;
+}
+
+/* Вся типографика сайта строго 12px */
+.header-nav > a:not(.header-home-logo),
+.mobile-menu__link,
+.header-location,
+.language-btn,
+.language-separator,
+.block-two__headline,
+.value-copy > p,
+.value-points p,
+.comparison-label,
+.pricing-card h2,
+.pricing-lead,
+.pricing-lines p,
+.included-services h3,
+.included-services p,
+.services-notes p,
+.other-services h3,
+.other-services p,
+.workflow-step h3,
+.workflow-step p,
+.workflow-arrow,
+.equipment-title,
+.equipment-photo-label,
+.info-page__title,
+.info-page__copy p,
+.contacts-page__intro,
+.contact-row__label,
+.contact-row__value,
+.site-footer__copy,
+.site-footer__phone {
+  font-size: 12px !important;
+}
+
+/* Desktop / tablet: обычная шапка от 481px */
+@media (min-width: 481px) {
+  .header-panel--logo-home {
+    flex-wrap: nowrap !important;
   }
 
-  .header-panel--logo-home .header-location {
-    font-size: 8px !important;
-    gap: 2px !important;
-    white-space: nowrap !important;
+  .header-nav > a:not(.header-home-logo) {
+    display: inline-flex !important;
   }
 
-  .header-panel--logo-home .header-location svg {
-    width: 10px !important;
-    height: 10px !important;
-    flex: 0 0 auto;
+  .mobile-site-menu {
+    display: none !important;
   }
 
-  .header-panel--logo-home .header-single-right {
-    gap: 5px !important;
+  .header-location,
+  .language-btn,
+  .language-separator {
+    font-size: 12px !important;
   }
 }
 
-@media (max-width: 430px) {
-  .header-panel--logo-home .header-location {
-    font-size: 7px !important;
+/* Мобильная версия шапки только 480px и меньше */
+@media (max-width: 480px) {
+  .site-shell {
+    gap: 16px;
+    padding-left: max(10px, env(safe-area-inset-left));
+    padding-right: max(10px, env(safe-area-inset-right));
   }
 
-  .header-panel--logo-home .header-location svg {
-    width: 9px !important;
-    height: 9px !important;
-  }
-}
-
-
-/* -------------------------------------------------
-   v46 — vector logo, same header height
--------------------------------------------------- */
-
-.header-home-logo {
-  height: 40px !important;
-  width: 92px !important;
-  overflow: hidden !important;
-}
-
-.header-home-logo img {
-  height: 40px !important;
-  width: auto !important;
-  max-height: 40px !important;
-  max-width: 92px !important;
-  object-fit: contain !important;
-  display: block !important;
-}
-
-@media (max-width: 900px) {
-  .header-home-logo {
-    width: 78px !important;
-    height: 34px !important;
+  .header-panel--logo-home {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    padding: 7px 9px !important;
   }
 
-  .header-home-logo img {
-    max-width: 78px !important;
+  /* Первая строка: логотип слева, Batumi + языки справа */
+  .header-nav {
     width: auto !important;
-    height: 34px !important;
-    max-height: 34px !important;
+    flex: 1 1 auto !important;
   }
-}
 
-@media (max-width: 640px) {
+  .header-nav > a:not(.header-home-logo) {
+    display: none !important;
+  }
+
   .header-home-logo {
     width: 64px !important;
     height: 28px !important;
+    flex-basis: 64px !important;
   }
 
   .header-home-logo img {
-    max-width: 64px !important;
-    width: auto !important;
     height: 28px !important;
-    max-height: 28px !important;
+    max-width: 64px !important;
+  }
+
+  .header-single-right {
+    gap: 4px !important;
+  }
+
+  .header-location,
+  .language-btn,
+  .language-separator {
+    font-size: 12px !important;
+  }
+
+  .header-location {
+    gap: 3px !important;
+    letter-spacing: .035em !important;
+  }
+
+  .header-location svg {
+    width: 10px !important;
+    height: 10px !important;
+    flex-basis: 10px !important;
+  }
+
+  .language-switcher::before {
+    width: 10px !important;
+    height: 10px !important;
+    flex-basis: 10px !important;
+    margin-right: 2px !important;
+  }
+
+  .language-separator {
+    margin: 0 1px !important;
+  }
+
+  /* Вторая строка: 4 пункта мобильного меню */
+  .mobile-site-menu {
+    order: 10 !important;
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+  }
+
+  .mobile-menu__link {
+    min-width: 0 !important;
+    flex: 1 1 0 !important;
+    min-height: 28px !important;
+    padding: 0 3px !important;
+    border-radius: 7px !important;
+    font-size: 12px !important;
+    letter-spacing: .01em !important;
+  }
+
+  /* Контентные блоки для телефона */
+  .content-panel {
+    padding: 18px !important;
+  }
+
+  .block-two {
+    padding: 10px !important;
+  }
+
+  .block-two__gallery,
+  .comparison-pair,
+  .pricing-grid,
+  .equipment-photo-grid,
+  .portfolio-grid,
+  .workflow {
+    grid-template-columns: 1fr !important;
+  }
+
+  .workflow-arrow {
+    transform: rotate(90deg);
+    min-height: 12px;
+  }
+
+  .value-block {
+    padding: 18px !important;
+  }
+
+  .pricing-card,
+  .included-services,
+  .services-notes {
+    padding: 18px !important;
+  }
+
+  .equipment-photo-card {
+    min-height: 160px;
+  }
+
+  .equipment-photo-card img {
+    height: 160px;
+  }
+
+  .info-page {
+    padding: 20px 16px !important;
+  }
+
+  .contact-row {
+    grid-template-columns: 100px minmax(0,1fr) !important;
+    gap: 8px !important;
+    padding: 9px 10px !important;
+  }
+
+  .site-footer__content {
+    min-height: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .site-footer__right {
+    width: 100%;
+    justify-content: space-between;
   }
 }
 
 
 /* -------------------------------------------------
-   v48 — Batumi + languages снова в одну строку
-   + крупный шрифт уменьшен на 15%
+   v72 — mobile breakpoint 588px
+   + background always covers full page height
 -------------------------------------------------- */
 
-:root {
-  --type-big-size: 14.45px;
+/* Фон дублируем и на html, и на body, чтобы на коротких страницах
+   (ПРО НАС / КОНТАКТЫ) снизу не появлялся однотонный участок. */
+html,
+body {
+  min-height: 100%;
 }
 
-.header-panel--logo-home .header-single-right {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  justify-content: flex-end !important;
-  gap: 13px !important;
-  margin-left: auto !important;
-  padding-top: 0 !important;
+html {
+  background:
+    linear-gradient(rgba(0,0,0,.10), rgba(0,0,0,.10)),
+    url("images/mainfon.jpg") center center / cover fixed no-repeat !important;
 }
 
-.header-panel--logo-home .header-location {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 5px !important;
-  margin: 0 !important;
-  white-space: nowrap !important;
+body {
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  background:
+    linear-gradient(rgba(0,0,0,.10), rgba(0,0,0,.10)),
+    url("images/mainfon.jpg") center center / cover fixed no-repeat !important;
 }
 
-.header-panel--logo-home .language-switcher {
-  position: static !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 3px !important;
-  margin: 0 !important;
+/* Чтобы оболочка сайта также минимум занимала всю высоту экрана */
+.site-shell {
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+}
+
+/* До 588px — мобильная версия */
+@media (max-width: 588px) {
+  .site-shell {
+    gap: 16px !important;
+    padding-left: max(10px, env(safe-area-inset-left)) !important;
+    padding-right: max(10px, env(safe-area-inset-right)) !important;
+  }
+
+  .header-panel--logo-home {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    padding: 7px 9px !important;
+  }
+
+  .header-nav {
+    width: auto !important;
+    flex: 1 1 auto !important;
+  }
+
+  .header-nav > a:not(.header-home-logo) {
+    display: none !important;
+  }
+
+  .header-home-logo {
+    width: 64px !important;
+    height: 28px !important;
+    flex-basis: 64px !important;
+  }
+
+  .header-home-logo img {
+    height: 28px !important;
+    max-width: 64px !important;
+  }
+
+  .header-single-right {
+    gap: 4px !important;
+  }
+
+  .header-location,
+  .language-btn,
+  .language-separator {
+    font-size: 12px !important;
+  }
+
+  .header-location {
+    gap: 3px !important;
+    letter-spacing: .035em !important;
+  }
+
+  .header-location svg {
+    width: 10px !important;
+    height: 10px !important;
+    flex-basis: 10px !important;
+  }
+
+  .language-switcher::before {
+    width: 10px !important;
+    height: 10px !important;
+    flex-basis: 10px !important;
+    margin-right: 2px !important;
+  }
+
+  .language-separator {
+    margin: 0 1px !important;
+  }
+
+  .mobile-site-menu {
+    order: 10 !important;
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+  }
+
+  .mobile-menu__link {
+    min-width: 0 !important;
+    flex: 1 1 0 !important;
+    min-height: 28px !important;
+    padding: 0 3px !important;
+    border-radius: 7px !important;
+    font-size: 12px !important;
+    letter-spacing: .01em !important;
+  }
+
+  .content-panel {
+    padding: 18px !important;
+  }
+
+  .block-two {
+    padding: 10px !important;
+  }
+
+  .block-two__gallery,
+  .comparison-pair,
+  .pricing-grid,
+  .equipment-photo-grid,
+  .portfolio-grid,
+  .workflow {
+    grid-template-columns: 1fr !important;
+  }
+
+  .workflow-arrow {
+    transform: rotate(90deg) !important;
+    min-height: 12px !important;
+  }
+
+  .value-block {
+    padding: 18px !important;
+  }
+
+  .pricing-card,
+  .included-services,
+  .services-notes {
+    padding: 18px !important;
+  }
+
+  .equipment-photo-card {
+    min-height: 160px !important;
+  }
+
+  .equipment-photo-card img {
+    height: 160px !important;
+  }
+
+  .info-page {
+    padding: 20px 16px !important;
+  }
+
+  .contact-row {
+    grid-template-columns: 100px minmax(0,1fr) !important;
+    gap: 8px !important;
+    padding: 9px 10px !important;
+  }
+
+  .site-footer__content {
+    min-height: 0 !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+  }
+
+  .site-footer__right {
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+}
+
+/* От 589px возвращаем desktop/tablet шапку */
+@media (min-width: 589px) {
+  .header-panel--logo-home {
+    flex-wrap: nowrap !important;
+  }
+
+  .header-nav > a:not(.header-home-logo) {
+    display: inline-flex !important;
+  }
+
+  .mobile-site-menu {
+    display: none !important;
+  }
+}
+
+
+/* -------------------------------------------------
+   v73 — premium minimal glass active state
+   + mobile layout at 1000px and below
+-------------------------------------------------- */
+
+/* Active nav: subtle frosted capsule */
+.header-nav > a:not(.header-home-logo).is-active,
+.mobile-menu__link.is-active {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(245, 226, 202, .14),
+      rgba(232, 204, 166, .08)
+    ) !important;
+  border: 1px solid rgba(232, 204, 166, .30) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    inset 0 -1px 0 rgba(255,255,255,.02) !important;
+  color: rgba(255,255,255,.96) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(115%) !important;
+  backdrop-filter: blur(8px) saturate(115%) !important;
+}
+
+/* Keep geometry stable for inactive and active states */
+.header-nav > a:not(.header-home-logo),
+.mobile-menu__link {
+  border: 1px solid transparent !important;
+}
+
+/* No jump / no hover animation */
+.header-nav > a:not(.header-home-logo):hover,
+.mobile-menu__link:hover,
+.header-nav > a:not(.header-home-logo).is-active:hover,
+.mobile-menu__link.is-active:hover {
   transform: none !important;
 }
 
-@media (max-width: 640px) {
-  :root {
-    --type-big-size: 11.05px;
-  }
-
-  .header-panel--logo-home .header-single-right {
-    flex-direction: row !important;
-    align-items: center !important;
-    gap: 5px !important;
-  }
-
-  .header-panel--logo-home .header-location span {
-    display: inline !important;
-  }
-
-  .header-panel--logo-home .language-switcher {
-    transform: none !important;
-  }
+.header-nav > a:not(.header-home-logo).is-active:hover,
+.mobile-menu__link.is-active:hover {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(245, 226, 202, .14),
+      rgba(232, 204, 166, .08)
+    ) !important;
+  border-color: rgba(232, 204, 166, .30) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    inset 0 -1px 0 rgba(255,255,255,.02) !important;
 }
-
 
 /* -------------------------------------------------
-   v49 — only 2 text styles on the whole site
-   BIG  = like “Подготавливаем интерьер...”
-   SMALL = like “Для продажи и аренды...”
+   Mobile header breakpoint: <=1000px
 -------------------------------------------------- */
 
-:root {
-  --type-big-size: 14.45px !important;
-  --type-small-size: 14px !important;
-  --type-big-spacing: .08em !important;
-  --type-small-spacing: .06em !important;
-}
-
-/* BIG text — one unified large style */
-.header-panel--logo-home .header-nav > a:not(.header-home-logo),
-.header-location,
-.language-btn,
-.block-two__headline,
-.value-copy > p,
-.workflow-step h3,
-.pricing-card h2,
-.other-services h3,
-.included-services h3,
-.equipment-title,
-.equipment-photo-label,
-.info-page__title,
-.comparison-label {
-  font-family: Arial, Helvetica, sans-serif !important;
-  font-size: var(--type-big-size) !important;
-  line-height: 1.45 !important;
-  font-weight: 700 !important;
-  letter-spacing: var(--type-big-spacing) !important;
-}
-
-/* SMALL text — one unified small style */
-.block-two__text p,
-.value-points p,
-.pricing-lead,
-.pricing-lines p,
-.services-notes p,
-.included-services p,
-.equipment-item,
-.info-page__copy p,
-.contacts-page__intro,
-.contact-row__label,
-.contact-row__value,
-.site-footer__copy,
-.site-footer__phone {
-  font-family: Arial, Helvetica, sans-serif !important;
-  font-size: var(--type-small-size) !important;
-  line-height: 1.55 !important;
-  letter-spacing: var(--type-small-spacing) !important;
-}
-
-/* weight tuning inside the small style */
-.block-two__text p,
-.value-points p,
-.pricing-lines p,
-.services-notes p,
-.included-services p,
-.equipment-item,
-.info-page__copy p,
-.contacts-page__intro,
-.contact-row__value,
-.site-footer__copy,
-.site-footer__phone {
-  font-weight: 400 !important;
-}
-
-.pricing-lead,
-.contact-row__label {
-  font-weight: 700 !important;
-}
-
-/* keep header and image texts inside the same two-style system */
-.header-panel--logo-home .header-nav > a:not(.header-home-logo),
-.language-btn,
-.comparison-label,
-.equipment-photo-label {
-  text-transform: uppercase !important;
-}
-
-.header-location {
-  text-transform: none !important;
-}
-
-.block-two__headline,
-.value-copy > p,
-.workflow-step h3,
-.pricing-card h2,
-.other-services h3,
-.included-services h3,
-.equipment-title,
-.info-page__title {
-  text-transform: uppercase !important;
-}
-
-/* mobile: still only the same 2 sizes */
-@media (max-width: 640px) {
-  :root {
-    --type-big-size: 14.45px !important;
-    --type-small-size: 14px !important;
+@media (max-width: 739px) {
+  .site-shell {
+    gap: 16px !important;
+    padding-left: max(10px, env(safe-area-inset-left)) !important;
+    padding-right: max(10px, env(safe-area-inset-right)) !important;
   }
 
-  .header-location span {
-    display: inline !important;
-  }
-}
-
-
-/* -------------------------------------------------
-   v50 — весь текст одного размера 13px
-   + убрать жирность в шапке
--------------------------------------------------- */
-
-:root {
-  --type-big-size: 13px !important;
-  --type-small-size: 13px !important;
-  --type-big-spacing: .06em !important;
-  --type-small-spacing: .06em !important;
-}
-
-/* единый размер текста на всём сайте */
-body,
-.header-panel--logo-home .header-nav > a:not(.header-home-logo),
-.header-location,
-.language-btn,
-.block-two__headline,
-.value-copy > p,
-.workflow-step h3,
-.pricing-card h2,
-.other-services h3,
-.included-services h3,
-.equipment-title,
-.equipment-photo-label,
-.info-page__title,
-.comparison-label,
-.block-two__text p,
-.value-points p,
-.pricing-lead,
-.pricing-lines p,
-.services-notes p,
-.included-services p,
-.equipment-item,
-.info-page__copy p,
-.contacts-page__intro,
-.contact-row__label,
-.contact-row__value,
-.site-footer__copy,
-.site-footer__phone {
-  font-size: 13px !important;
-}
-
-/* единый обычный вес в шапке */
-.header-panel--logo-home .header-nav > a:not(.header-home-logo),
-.header-location,
-.language-btn {
-  font-weight: 400 !important;
-  letter-spacing: .06em !important;
-}
-
-/* сохраняем обычный вес Batumi и языков также на мобильном */
-@media (max-width: 640px) {
-  body,
-  .header-panel--logo-home .header-nav > a:not(.header-home-logo),
-  .header-location,
-  .language-btn,
-  .block-two__headline,
-  .value-copy > p,
-  .workflow-step h3,
-  .pricing-card h2,
-  .other-services h3,
-  .included-services h3,
-  .equipment-title,
-  .equipment-photo-label,
-  .info-page__title,
-  .comparison-label,
-  .block-two__text p,
-  .value-points p,
-  .pricing-lead,
-  .pricing-lines p,
-  .services-notes p,
-  .included-services p,
-  .equipment-item,
-  .info-page__copy p,
-  .contacts-page__intro,
-  .contact-row__label,
-  .contact-row__value,
-  .site-footer__copy,
-  .site-footer__phone {
-    font-size: 13px !important;
-  }
-
-  .header-location,
-  .language-btn,
-  .header-panel--logo-home .header-nav > a:not(.header-home-logo) {
-    font-weight: 400 !important;
-  }
-}
-
-
-/* -------------------------------------------------
-   v51 — remove Batumi/map from header
--------------------------------------------------- */
-
-.header-panel--logo-home .header-single-right {
-  gap: 0 !important;
-}
-
-
-/* -------------------------------------------------
-   v52 — mobile header:
-   languages smaller + half outside header,
-   navigation always stays in one row
--------------------------------------------------- */
-
-.header-panel--logo-home {
-  position: relative !important;
-  overflow: visible !important;
-}
-
-/* Language buttons: smaller and floating half above the header */
-.header-panel--logo-home .header-single-right {
-  position: absolute !important;
-  top: 0 !important;
-  right: 10px !important;
-  margin: 0 !important;
-  z-index: 20 !important;
-  transform: translateY(-50%) !important;
-}
-
-.header-panel--logo-home .language-switcher {
-  display: flex !important;
-  align-items: center !important;
-  gap: 2px !important;
-  margin: 0 !important;
-}
-
-.header-panel--logo-home .language-btn {
-  min-width: 27px !important;
-  width: 27px !important;
-  height: 22px !important;
-  padding: 0 4px !important;
-  border-radius: 6px !important;
-  font-size: 10px !important;
-  line-height: 1 !important;
-  font-weight: 400 !important;
-  letter-spacing: .04em !important;
-}
-
-/* Navigation: never wrap, never overlap */
-.header-panel--logo-home .header-nav {
-  width: 100% !important;
-  min-width: 0 !important;
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  align-items: center !important;
-  gap: 7px !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-  padding-right: 94px !important;
-  scrollbar-width: none !important;
-  -webkit-overflow-scrolling: touch;
-}
-
-.header-panel--logo-home .header-nav::-webkit-scrollbar {
-  display: none !important;
-}
-
-.header-panel--logo-home .header-nav > a {
-  flex: 0 0 auto !important;
-  white-space: nowrap !important;
-}
-
-.header-panel--logo-home .header-nav > a:not(.header-home-logo) {
-  min-width: max-content !important;
-}
-
-@media (max-width: 640px) {
   .header-panel--logo-home {
-    padding-left: 10px !important;
-    padding-right: 10px !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    padding: 7px 9px !important;
   }
 
-  .header-panel--logo-home .header-nav {
+  .header-nav {
+    width: auto !important;
+    flex: 1 1 auto !important;
+  }
+
+  /* Hide desktop page navigation */
+  .header-nav > a:not(.header-home-logo) {
+    display: none !important;
+  }
+
+  .header-home-logo {
+    width: 64px !important;
+    height: 28px !important;
+    flex-basis: 64px !important;
+  }
+
+  .header-home-logo img {
+    height: 28px !important;
+    max-width: 64px !important;
+  }
+
+  .header-single-right {
     gap: 4px !important;
-    padding-right: 84px !important;
   }
 
-  .header-panel--logo-home .header-nav > a:not(.header-home-logo) {
-    padding-left: 6px !important;
-    padding-right: 6px !important;
+  .header-location,
+  .language-btn,
+  .language-separator {
+    font-size: 12px !important;
   }
 
-  .header-panel--logo-home .header-single-right {
-    right: 7px !important;
+  .header-location {
+    gap: 3px !important;
+    letter-spacing: .035em !important;
   }
 
-  .header-panel--logo-home .language-btn {
-    min-width: 25px !important;
-    width: 25px !important;
+  .header-location svg {
+    width: 10px !important;
+    height: 10px !important;
+    flex-basis: 10px !important;
+  }
+
+  .language-switcher::before {
+    width: 10px !important;
+    height: 10px !important;
+    flex-basis: 10px !important;
+    margin-right: 2px !important;
+  }
+
+  .language-separator {
+    margin: 0 1px !important;
+  }
+
+  /* Show permanent mobile row */
+  .mobile-site-menu {
+    order: 10 !important;
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+  }
+
+  .mobile-menu__link {
+    min-width: 0 !important;
+    flex: 1 1 0 !important;
+    min-height: 28px !important;
+    padding: 0 3px !important;
+    border-radius: 7px !important;
+    font-size: 12px !important;
+    letter-spacing: .01em !important;
+  }
+
+  /* Keep mobile content layout */
+  .content-panel {
+    padding: 18px !important;
+  }
+
+  .block-two {
+    padding: 10px !important;
+  }
+
+  .block-two__gallery,
+  .comparison-pair,
+  .pricing-grid,
+  .equipment-photo-grid,
+  .portfolio-grid,
+  .workflow {
+    grid-template-columns: 1fr !important;
+  }
+
+  .workflow-arrow {
+    transform: rotate(90deg) !important;
+    min-height: 12px !important;
+  }
+
+  .value-block {
+    padding: 18px !important;
+  }
+
+  .pricing-card,
+  .included-services,
+  .services-notes {
+    padding: 18px !important;
+  }
+
+  .equipment-photo-card {
+    min-height: 160px !important;
+  }
+
+  .equipment-photo-card img {
+    height: 160px !important;
+  }
+
+  .info-page {
+    padding: 20px 16px !important;
+  }
+
+  .contact-row {
+    grid-template-columns: 100px minmax(0,1fr) !important;
+    gap: 8px !important;
+    padding: 9px 10px !important;
+  }
+
+  .site-footer__content {
+    min-height: 0 !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+  }
+
+  .site-footer__right {
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+}
+
+/* Desktop/tablet navigation from 1001px */
+@media (min-width: 740px) {
+  .header-panel--logo-home {
+    flex-wrap: nowrap !important;
+  }
+
+  .header-nav > a:not(.header-home-logo) {
+    display: inline-flex !important;
+  }
+
+  .mobile-site-menu {
+    display: none !important;
+  }
+}
+
+
+/* -------------------------------------------------
+   v75 — soft warm active state
+   translucent beige fill + subtle inner light
+-------------------------------------------------- */
+
+.header-nav > a:not(.header-home-logo).is-active,
+.mobile-menu__link.is-active {
+  background: rgba(232, 204, 166, .13) !important;
+  border: 1px solid transparent !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    inset 0 -1px 0 rgba(255,255,255,.035) !important;
+  color: rgba(255,255,255,.96) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* keep exact geometry on hover */
+.header-nav > a:not(.header-home-logo).is-active:hover,
+.mobile-menu__link.is-active:hover {
+  background: rgba(232, 204, 166, .13) !important;
+  border: 1px solid transparent !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    inset 0 -1px 0 rgba(255,255,255,.035) !important;
+  color: rgba(255,255,255,.96) !important;
+  transform: none !important;
+}
+
+
+/* -------------------------------------------------
+   v76 — keep logo size fixed at all breakpoints
+-------------------------------------------------- */
+
+.header-home-logo {
+  width: 92px !important;
+  height: 40px !important;
+  flex: 0 0 92px !important;
+  min-width: 92px !important;
+  min-height: 40px !important;
+  max-width: 92px !important;
+  max-height: 40px !important;
+}
+
+.header-home-logo img {
+  width: auto !important;
+  height: 40px !important;
+  min-height: 40px !important;
+  max-height: 40px !important;
+  max-width: 92px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Prevent older responsive rules from shrinking the logo */
+@media (max-width: 739px) {
+  .header-home-logo {
+    width: 92px !important;
+    height: 40px !important;
+    flex: 0 0 92px !important;
+    min-width: 92px !important;
+    min-height: 40px !important;
+    max-width: 92px !important;
+    max-height: 40px !important;
+  }
+
+  .header-home-logo img {
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    max-width: 92px !important;
+  }
+}
+
+
+/* -------------------------------------------------
+   v77 — premium "ghost glow" active navigation
+-------------------------------------------------- */
+
+/* Base nav buttons become quieter and cleaner */
+.header-nav > a:not(.header-home-logo),
+.mobile-menu__link {
+  position: relative !important;
+  z-index: 0 !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  color: rgba(255,255,255,.66) !important;
+  font-weight: 400 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Remove previous active capsule completely */
+.header-nav > a:not(.header-home-logo).is-active,
+.mobile-menu__link.is-active {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: rgba(255,255,255,.98) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Soft oval light behind active text */
+.header-nav > a:not(.header-home-logo).is-active::before,
+.mobile-menu__link.is-active::before {
+  content: "" !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  left: 10% !important;
+  right: 10% !important;
+  top: 18% !important;
+  bottom: 18% !important;
+  border-radius: 999px !important;
+  pointer-events: none !important;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(238,218,190,.18) 0%,
+      rgba(238,218,190,.10) 42%,
+      rgba(238,218,190,.035) 68%,
+      rgba(238,218,190,0) 100%
+    ) !important;
+
+  filter: blur(7px) !important;
+  opacity: .95 !important;
+}
+
+/* Very subtle internal highlight, almost invisible */
+.header-nav > a:not(.header-home-logo).is-active::after,
+.mobile-menu__link.is-active::after {
+  content: "" !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  left: 18% !important;
+  right: 18% !important;
+  top: 24% !important;
+  bottom: 24% !important;
+  border-radius: 999px !important;
+  pointer-events: none !important;
+
+  background: rgba(255,255,255,.018) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.045) !important;
+}
+
+/* Hover must not alter geometry or brightness */
+.header-nav > a:not(.header-home-logo):hover,
+.mobile-menu__link:hover {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: rgba(255,255,255,.66) !important;
+  transform: none !important;
+}
+
+.header-nav > a:not(.header-home-logo).is-active:hover,
+.mobile-menu__link.is-active:hover {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: rgba(255,255,255,.98) !important;
+  transform: none !important;
+}
+
+/* Keep glow compact on mobile */
+@media (max-width: 739px) {
+  .mobile-menu__link.is-active::before {
+    left: 8% !important;
+    right: 8% !important;
+    top: 16% !important;
+    bottom: 16% !important;
+    filter: blur(6px) !important;
+  }
+
+  .mobile-menu__link.is-active::after {
+    left: 16% !important;
+    right: 16% !important;
+    top: 22% !important;
+    bottom: 22% !important;
+  }
+}
+
+
+/* -------------------------------------------------
+   v78 — one typography system everywhere
+   Manrope / 12px / 400
+-------------------------------------------------- */
+
+/* Absolutely all visible site text uses one font, size and weight. */
+html,
+body,
+body *,
+button,
+input,
+textarea,
+select,
+option,
+a,
+p,
+span,
+div,
+label,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+figcaption {
+  font-family: "Manrope", Arial, Helvetica, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+}
+
+/* Keep language separators and pseudo-text in the same typography. */
+.language-btn,
+.language-separator,
+.comparison-label,
+.equipment-photo-label,
+.block-two__headline,
+.site-footer__copy,
+.site-footer__phone {
+  font-family: "Manrope", Arial, Helvetica, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+}
+
+
+/* -------------------------------------------------
+   v79 — calmer premium navigation
+   inactive = quieter
+   active = whiter + soft ghost glow
+-------------------------------------------------- */
+
+/* Base nav items: quieter, calmer, premium */
+.header-nav > a:not(.header-home-logo),
+.mobile-menu__link {
+  position: relative !important;
+  z-index: 0 !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  color: rgba(255,255,255,.58) !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  transition: color .18s ease, opacity .18s ease !important;
+}
+
+/* Hover stays restrained */
+.header-nav > a:not(.header-home-logo):hover,
+.mobile-menu__link:hover {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: rgba(255,255,255,.76) !important;
+  transform: none !important;
+}
+
+/* Active item: brighter text, but no capsule / no frame / no fill */
+.header-nav > a:not(.header-home-logo).is-active,
+.mobile-menu__link.is-active {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: rgba(255,255,255,.96) !important;
+  text-shadow: none !important;
+}
+
+/* Soft premium glow behind active item */
+.header-nav > a:not(.header-home-logo).is-active::before,
+.mobile-menu__link.is-active::before {
+  content: "" !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  left: 8% !important;
+  right: 8% !important;
+  top: 18% !important;
+  bottom: 18% !important;
+  border-radius: 999px !important;
+  pointer-events: none !important;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(236, 216, 189, .16) 0%,
+    rgba(236, 216, 189, .09) 42%,
+    rgba(236, 216, 189, .035) 70%,
+    rgba(236, 216, 189, 0) 100%
+  ) !important;
+  filter: blur(7px) !important;
+  opacity: .9 !important;
+}
+
+/* Tiny top internal sheen to make it feel richer */
+.header-nav > a:not(.header-home-logo).is-active::after,
+.mobile-menu__link.is-active::after {
+  content: "" !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  left: 16% !important;
+  right: 16% !important;
+  top: 22% !important;
+  bottom: 22% !important;
+  border-radius: 999px !important;
+  pointer-events: none !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05) !important;
+}
+
+/* Active hover remains stable */
+.header-nav > a:not(.header-home-logo).is-active:hover,
+.mobile-menu__link.is-active:hover {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: rgba(255,255,255,.96) !important;
+  transform: none !important;
+}
+
+/* Mobile row: keep glow compact and readable */
+@media (max-width: 739px) {
+  .mobile-menu__link {
+    color: rgba(255,255,255,.60) !important;
+  }
+
+  .mobile-menu__link:hover {
+    color: rgba(255,255,255,.76) !important;
+  }
+
+  .mobile-menu__link.is-active::before {
+    left: 7% !important;
+    right: 7% !important;
+    top: 17% !important;
+    bottom: 17% !important;
+    filter: blur(6px) !important;
+  }
+
+  .mobile-menu__link.is-active::after {
+    left: 14% !important;
+    right: 14% !important;
+    top: 22% !important;
+    bottom: 22% !important;
+  }
+}
+
+
+/* -------------------------------------------------
+   v80 — TRUE no-capsule premium navigation
+   active state = text only + very soft text glow
+-------------------------------------------------- */
+
+/* Remove every background shape / pseudo glow behind nav text */
+.header-nav > a:not(.header-home-logo)::before,
+.header-nav > a:not(.header-home-logo)::after,
+.mobile-menu__link::before,
+.mobile-menu__link::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* Inactive navigation */
+.header-nav > a:not(.header-home-logo),
+.mobile-menu__link {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: rgba(255,255,255,.54) !important;
+  text-shadow: none !important;
+  transform: none !important;
+  transition: color .18s ease, text-shadow .18s ease !important;
+}
+
+/* Gentle hover, no shape */
+.header-nav > a:not(.header-home-logo):hover,
+.mobile-menu__link:hover {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: rgba(255,255,255,.72) !important;
+  text-shadow: none !important;
+  transform: none !important;
+}
+
+/* Active = brighter text + tiny optical glow only around glyphs */
+.header-nav > a:not(.header-home-logo).is-active,
+.mobile-menu__link.is-active,
+.header-nav > a:not(.header-home-logo).is-active:hover,
+.mobile-menu__link.is-active:hover {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: rgba(255,255,255,.98) !important;
+  text-shadow:
+    0 0 5px rgba(238,218,190,.16),
+    0 0 12px rgba(238,218,190,.07) !important;
+  transform: none !important;
+}
+
+
+/* -------------------------------------------------
+   v81 — smaller radii + language area cleanup
+-------------------------------------------------- */
+
+/* Reduce all main radii by about 25% */
+.panel,
+.portfolio-block {
+  border-radius: 15px !important; /* from 20 */
+}
+
+.block-two__card,
+.pricing-card,
+.services-notes,
+.equipment-photo-card {
+  border-radius: 12px !important; /* from 16 */
+}
+
+.comparison-card,
+.portfolio-card,
+.workflow-step {
+  border-radius: 11px !important; /* from 14 */
+}
+
+.contact-row {
+  border-radius: 9px !important; /* from 12 */
+}
+
+.mobile-menu__link,
+.header-nav > a:not(.header-home-logo) {
+  border-radius: 6px !important; /* from 8 / 7 */
+}
+
+/* Remove globe icon before languages */
+.language-switcher::before {
+  content: none !important;
+  display: none !important;
+  margin-right: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  flex: 0 0 0 !important;
+}
+
+/* More space between Batumi and languages */
+.header-single-right {
+  gap: 18px !important;
+}
+
+.language-switcher {
+  margin-left: 2px !important;
+}
+
+
+/* -------------------------------------------------
+   v82 — максимально компактная мобильная шапка
+   breakpoint: 739px
+-------------------------------------------------- */
+
+@media (max-width: 739px) {
+  .header-panel--logo-home {
+    padding: 2px 6px !important;
+    gap: 1px !important;
+    min-height: 0 !important;
+    align-content: flex-start !important;
+  }
+
+  /* Логотип НЕ уменьшаем */
+  .header-home-logo {
+    width: 92px !important;
+    height: 40px !important;
+    flex: 0 0 92px !important;
+    min-width: 92px !important;
+    min-height: 40px !important;
+    max-width: 92px !important;
+    max-height: 40px !important;
+  }
+
+  .header-home-logo img {
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    max-width: 92px !important;
+  }
+
+  /* Верхняя строка максимально плотная */
+  .header-nav {
+    min-height: 40px !important;
+    height: 40px !important;
+    align-items: center !important;
+  }
+
+  .header-single-right {
+    min-height: 40px !important;
+    height: 40px !important;
+    gap: 14px !important;
+    align-items: center !important;
+  }
+
+  .header-location {
+    line-height: 1 !important;
+  }
+
+  .language-switcher {
+    line-height: 1 !important;
+  }
+
+  /* Нижняя строка меню — минимальная высота для текста 12px */
+  .mobile-site-menu {
+    gap: 2px !important;
+    margin: -1px 0 0 !important;
+    padding: 0 !important;
+    min-height: 20px !important;
     height: 20px !important;
-    font-size: 9px !important;
+  }
+
+  .mobile-menu__link {
+    min-height: 20px !important;
+    height: 20px !important;
+    padding: 0 2px !important;
+    line-height: 1 !important;
     border-radius: 5px !important;
   }
 }
 
-@media (max-width: 390px) {
-  .header-panel--logo-home .header-nav {
-    gap: 3px !important;
-    padding-right: 78px !important;
-  }
-
-  .header-panel--logo-home .header-nav > a:not(.header-home-logo) {
-    padding-left: 5px !important;
-    padding-right: 5px !important;
-  }
-
-  .header-panel--logo-home .language-btn {
-    min-width: 23px !important;
-    width: 23px !important;
-    height: 19px !important;
-    padding: 0 3px !important;
-    font-size: 9px !important;
-  }
-}
-
 
 /* -------------------------------------------------
-   v53 — языки меньше и полностью над шапкой;
-   без hover-реакции у меню; active = жирный
+   v83 — language cleanup
 -------------------------------------------------- */
 
-/* Языки полностью над шапкой, справа */
-.header-panel--logo-home .header-single-right {
-  position: absolute !important;
-  top: 0 !important;
-  right: 10px !important;
-  margin: 0 !important;
-  z-index: 30 !important;
-  transform: translateY(-115%) !important;
-}
-
-.header-panel--logo-home .language-switcher {
-  display: flex !important;
-  align-items: center !important;
-  gap: 2px !important;
-  margin: 0 !important;
-}
-
-/* ещё примерно на 30% меньше относительно v52 */
-.header-panel--logo-home .language-btn {
-  min-width: 19px !important;
-  width: 19px !important;
-  height: 15px !important;
-  padding: 0 2px !important;
-  border-radius: 4px !important;
-  border: 1px solid rgba(255,255,255,.22) !important;
-  background: rgba(18,16,14,.74) !important;
-  color: rgba(255,255,255,.74) !important;
-  font-size: 7px !important;
-  line-height: 1 !important;
-  font-weight: 400 !important;
-  letter-spacing: .02em !important;
-  box-shadow: none !important;
-}
-
-.header-panel--logo-home .language-btn.is-active {
-  background: rgba(18,16,14,.74) !important;
-  color: #fff !important;
-  border-color: rgba(255,255,255,.36) !important;
-  font-weight: 700 !important;
-}
-
-/* Полностью убираем реакцию на наведение со всех кнопок меню */
-.header-panel--logo-home .header-nav > a:not(.header-home-logo),
-.header-panel--logo-home .header-nav > a:not(.header-home-logo):hover,
-.services-nav,
-.services-nav:hover,
-.about-nav,
-.about-nav:hover,
-.portfolio-nav,
-.portfolio-nav:hover,
-.contacts-nav,
-.contacts-nav:hover {
-  transform: none !important;
-  transition: none !important;
-  background: rgba(255,255,255,.06) !important;
-  color: rgba(255,255,255,.72) !important;
-  font-weight: 400 !important;
-}
-
-/* Текущая страница — только жирнее, без отдельной hover-реакции */
-.header-panel--logo-home .header-nav > a.is-active:not(.header-home-logo),
-.services-nav.is-active,
-.about-nav.is-active,
-.portfolio-nav.is-active,
-.contacts-nav.is-active {
-  background: rgba(255,255,255,.06) !important;
-  color: #fff !important;
-  font-weight: 700 !important;
-}
-
-/* Лого-главная тоже без hover-эффектов */
-.header-home-logo,
-.header-home-logo:hover,
-.header-home-logo.is-active {
-  transform: none !important;
-  transition: none !important;
-}
-
-@media (max-width: 640px) {
-  .header-panel--logo-home .header-single-right {
-    right: 7px !important;
-    transform: translateY(-115%) !important;
-  }
-
-  .header-panel--logo-home .language-btn {
-    min-width: 18px !important;
-    width: 18px !important;
-    height: 14px !important;
-    padding: 0 2px !important;
-    border-radius: 4px !important;
-    font-size: 6.5px !important;
-  }
-}
-
-@media (max-width: 390px) {
-  .header-panel--logo-home .language-btn {
-    min-width: 17px !important;
-    width: 17px !important;
-    height: 13px !important;
-    font-size: 6px !important;
-  }
-}
-
-
-/* -------------------------------------------------
-   v54 — active page = subtle beige underline
--------------------------------------------------- */
-
-/* Все пункты меню обычной толщины */
-.header-panel--logo-home .header-nav > a:not(.header-home-logo),
-.header-panel--logo-home .header-nav > a.is-active:not(.header-home-logo),
-.services-nav,
-.services-nav.is-active,
-.about-nav,
-.about-nav.is-active,
-.portfolio-nav,
-.portfolio-nav.is-active,
-.contacts-nav,
-.contacts-nav.is-active {
-  position: relative !important;
-  font-weight: 400 !important;
-}
-
-/* Убираем любое старое визуальное выделение active */
-.header-panel--logo-home .header-nav > a.is-active:not(.header-home-logo),
-.services-nav.is-active,
-.about-nav.is-active,
-.portfolio-nav.is-active,
-.contacts-nav.is-active {
-  background: rgba(255,255,255,.06) !important;
-  color: #fff !important;
-}
-
-/* Тонкая акцентная линия под текущей страницей */
-.header-panel--logo-home .header-nav > a.is-active:not(.header-home-logo)::after,
-.services-nav.is-active::after,
-.about-nav.is-active::after,
-.portfolio-nav.is-active::after,
-.contacts-nav.is-active::after {
-  content: "" !important;
-  position: absolute !important;
-  left: 18% !important;
-  right: 18% !important;
-  bottom: -5px !important;
-  height: 2px !important;
-  border-radius: 999px !important;
-  background: #E8CCA6 !important;
-  pointer-events: none !important;
-}
-
-/* Не даём hover менять вид */
-.header-panel--logo-home .header-nav > a:not(.header-home-logo):hover {
-  font-weight: 400 !important;
-  transform: none !important;
-}
-
-@media (max-width: 640px) {
-  .header-panel--logo-home .header-nav > a.is-active:not(.header-home-logo)::after,
-  .services-nav.is-active::after,
-  .about-nav.is-active::after,
-  .portfolio-nav.is-active::after,
-  .contacts-nav.is-active::after {
-    left: 20% !important;
-    right: 20% !important;
-    bottom: -4px !important;
-    height: 1.5px !important;
-  }
-}
-
-
-/* -------------------------------------------------
-   v55 — active underline always visible on narrow screens
--------------------------------------------------- */
-
-/* The underline now sits INSIDE the button so horizontal nav clipping
-   can never hide it on narrow screens. */
-.header-panel--logo-home .header-nav > a.is-active:not(.header-home-logo)::after,
-.services-nav.is-active::after,
-.about-nav.is-active::after,
-.portfolio-nav.is-active::after,
-.contacts-nav.is-active::after {
-  left: 18% !important;
-  right: 18% !important;
-  bottom: 2px !important;
-  height: 2px !important;
-  z-index: 3 !important;
-}
-
-/* Keep the active item and its underline visible inside the scrolling row */
-.header-panel--logo-home .header-nav {
-  overflow-y: visible !important;
-}
-
-.header-panel--logo-home .header-nav > a {
-  overflow: visible !important;
-}
-
-@media (max-width: 640px) {
-  .header-panel--logo-home .header-nav > a.is-active:not(.header-home-logo)::after,
-  .services-nav.is-active::after,
-  .about-nav.is-active::after,
-  .portfolio-nav.is-active::after,
-  .contacts-nav.is-active::after {
-    left: 18% !important;
-    right: 18% !important;
-    bottom: 2px !important;
-    height: 2px !important;
-  }
-}
-
-@media (max-width: 390px) {
-  .header-panel--logo-home .header-nav > a.is-active:not(.header-home-logo)::after,
-  .services-nav.is-active::after,
-  .about-nav.is-active::after,
-  .portfolio-nav.is-active::after,
-  .contacts-nav.is-active::after {
-    left: 16% !important;
-    right: 16% !important;
-    bottom: 2px !important;
-    height: 2px !important;
-  }
-}
-
-
-/* -------------------------------------------------
-   v56 — iPhone safe areas + language buttons visibility
--------------------------------------------------- */
-
-/* iOS Safari may leave unpainted areas around the visual viewport when
-   using a fixed body background. Move the background to a fixed layer. */
-html,
-body {
-  min-height: 100%;
-  background-color: #bdb6ad !important;
-}
-
-body {
-  position: relative;
-  background: none !important;
-  min-height: 100dvh;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  z-index: -2;
-  inset: 0;
-  width: 100vw;
-  height: 100dvh;
-  background:
-    linear-gradient(rgba(0,0,0,.10), rgba(0,0,0,.10)),
-    url("images/mainfon.jpg") center center / cover no-repeat;
-  transform: translateZ(0);
-  pointer-events: none;
-}
-
-/* Make the fixed background extend through iPhone safe areas. */
-@supports (padding: max(0px)) {
-  body::before {
-    top: calc(-1 * env(safe-area-inset-top));
-    right: calc(-1 * env(safe-area-inset-right));
-    bottom: calc(-1 * env(safe-area-inset-bottom));
-    left: calc(-1 * env(safe-area-inset-left));
-    width: auto;
-    height: auto;
-  }
-
-  .site-shell {
-    padding-left: max(clamp(18px, 3vw, 46px), calc(env(safe-area-inset-left) + 12px)) !important;
-    padding-right: max(clamp(18px, 3vw, 46px), calc(env(safe-area-inset-right) + 12px)) !important;
-    padding-bottom: max(46px, calc(env(safe-area-inset-bottom) + 24px)) !important;
-  }
-}
-
-/* Reserve actual room above the header for the floating language buttons,
-   so they never leave the viewport on narrow phones. */
-.site-shell {
-  padding-top: 34px !important;
-}
-
-.header-panel--logo-home .header-single-right {
-  top: 0 !important;
-  right: 10px !important;
-  transform: translateY(-100%) !important;
-}
-
-@supports (right: max(0px)) {
-  .header-panel--logo-home .header-single-right {
-    right: max(10px, env(safe-area-inset-right)) !important;
-  }
-}
-
-@media (max-width: 640px) {
-  .site-shell {
-    padding-top: 32px !important;
-  }
-
-  .header-panel--logo-home .header-single-right {
-    right: 7px !important;
-    transform: translateY(-100%) !important;
-  }
-
-  @supports (right: max(0px)) {
-    .header-panel--logo-home .header-single-right {
-      right: max(7px, env(safe-area-inset-right)) !important;
-    }
-  }
-}
-
-@media (max-width: 390px) {
-  .site-shell {
-    padding-top: 31px !important;
-  }
-}
-
-
-/* -------------------------------------------------
-   v57 — iOS Safari browser UI colour matching
--------------------------------------------------- */
-
-/*
-  Safari's top status/address area and bottom toolbar are browser UI,
-  not part of the webpage, so a CSS background image cannot be drawn there.
-  The page itself still extends correctly through safe areas; html/body are
-  given a matching warm fallback so Safari's translucent UI blends better.
-*/
-html {
-  background: #b7aea3 !important;
-}
-
-body {
-  background-color: #b7aea3 !important;
-}
-
-
-/* -------------------------------------------------
-   v58 — mobile burger menu
--------------------------------------------------- */
-
-/* Desktop: keep the existing header layout unchanged */
-.mobile-menu-toggle,
-.mobile-site-menu {
-  display: none;
-}
-
-@media (max-width: 760px) {
-  .header-panel--logo-home {
-    position: relative !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    gap: 8px !important;
-    overflow: visible !important;
-  }
-
-  /* Left side: logo + menu button */
-  .header-panel--logo-home .header-nav {
-    width: auto !important;
-    flex: 1 1 auto !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    overflow: visible !important;
-    padding-right: 0 !important;
-  }
-
-  /* Hide desktop page buttons on mobile */
-  .header-panel--logo-home .header-nav > a:not(.header-home-logo) {
-    display: none !important;
-  }
-
-  /* Keep the logo as the home button */
-  .header-home-logo {
-    flex: 0 0 auto !important;
-  }
-
-  /* Menu button directly to the right of the logo */
-  .mobile-menu-toggle {
-    display: inline-flex !important;
-    width: 30px;
-    height: 30px;
-    padding: 0;
-    border: 0;
-    border-radius: 8px;
-    background: rgba(255,255,255,.06);
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 3px;
-    cursor: pointer;
-    flex: 0 0 auto;
-  }
-
-  .mobile-menu-toggle span {
-    width: 14px;
-    height: 1px;
-    border-radius: 999px;
-    background: rgba(255,255,255,.88);
-    transition: transform .18s ease, opacity .18s ease;
-  }
-
-  .mobile-menu-toggle.is-open span:nth-child(1) {
-    transform: translateY(4px) rotate(45deg);
-  }
-
-  .mobile-menu-toggle.is-open span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .mobile-menu-toggle.is-open span:nth-child(3) {
-    transform: translateY(-4px) rotate(-45deg);
-  }
-
-  /* Languages back inside the header, at the far right */
-  .header-panel--logo-home .header-single-right {
-    position: static !important;
-    transform: none !important;
-    margin-left: auto !important;
-    display: flex !important;
-    flex: 0 0 auto !important;
-    align-items: center !important;
-    z-index: auto !important;
-  }
-
-  .header-panel--logo-home .language-switcher {
-    display: flex !important;
-    align-items: center !important;
-    gap: 2px !important;
-    margin: 0 !important;
-  }
-
-  .header-panel--logo-home .language-btn {
-    min-width: 19px !important;
-    width: 19px !important;
-    height: 16px !important;
-    padding: 0 2px !important;
-    border-radius: 4px !important;
-    font-size: 7px !important;
-    line-height: 1 !important;
-    font-weight: 400 !important;
-    letter-spacing: .02em !important;
-    background: rgba(18,16,14,.74) !important;
-    border: 1px solid rgba(255,255,255,.22) !important;
-  }
-
-  /* Dropdown menu */
-  .mobile-site-menu {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 0;
-    right: 0;
-    z-index: 50;
-    display: none;
-    padding: 8px;
-    border-radius: 14px;
-    background: rgba(18,16,14,.94);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 14px 32px rgba(0,0,0,.22);
-  }
-
-  .mobile-site-menu.is-open {
-    display: grid;
-    gap: 4px;
-  }
-
-  .mobile-menu__link {
-    position: relative;
-    display: flex;
-    align-items: center;
-    min-height: 38px;
-    padding: 0 12px;
-    border-radius: 8px;
-    color: rgba(255,255,255,.84);
-    text-decoration: none;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-  }
-
-  .mobile-menu__link.is-active {
-    color: #fff;
-  }
-
-  .mobile-menu__link.is-active::after {
-    content: "";
-    position: absolute;
-    left: 12px;
-    bottom: 5px;
-    width: 42px;
-    height: 2px;
-    border-radius: 999px;
-    background: #E8CCA6;
-  }
-
-  /* No hover animation on mobile menu */
-  .mobile-menu__link:hover {
-    transform: none;
-    background: transparent;
-  }
-}
-
-@media (max-width: 390px) {
-  .mobile-menu-toggle {
-    width: 28px;
-    height: 28px;
-  }
-
-  .header-panel--logo-home .language-btn {
-    min-width: 18px !important;
-    width: 18px !important;
-    height: 15px !important;
-    font-size: 6.5px !important;
-  }
-}
-
-
-/* -------------------------------------------------
-   v59 — вернуть фон как раньше + языки внутри шапки
-   на desktop и mobile
--------------------------------------------------- */
-
-/* Возвращаем исходный фон сайта */
-html,
-body {
-  min-height: 100%;
-}
-
-html {
-  background: transparent !important;
-}
-
-body {
-  background:
-    linear-gradient(rgba(0,0,0,.10), rgba(0,0,0,.10)),
-    url("images/mainfon.jpg") center center / cover fixed no-repeat !important;
-  background-color: transparent !important;
-}
-
-/* Убираем дополнительный fixed-слой фона из iPhone-эксперимента */
-body::before {
-  content: none !important;
+/* No separators between RU EN GE */
+.language-separator {
   display: none !important;
 }
 
-/* На desktop языки также находятся ВНУТРИ шапки справа */
-.header-panel--logo-home .header-single-right {
-  position: static !important;
-  top: auto !important;
-  right: auto !important;
-  transform: none !important;
-  margin-left: auto !important;
-  z-index: auto !important;
-  display: flex !important;
-  align-items: center !important;
-  flex: 0 0 auto !important;
+/* Compact language codes with a small clean gap */
+.language-switcher {
+  gap: 6px !important;
 }
 
-.header-panel--logo-home .language-switcher {
-  position: static !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 2px !important;
-  margin: 0 !important;
+/* More distance between Batumi and languages */
+.header-single-right {
+  gap: 26px !important;
 }
 
-/* Сохраняем компактный размер языков */
-.header-panel--logo-home .language-btn {
-  min-width: 19px !important;
-  width: 19px !important;
-  height: 16px !important;
-  padding: 0 2px !important;
-  border-radius: 4px !important;
-  font-size: 7px !important;
-  line-height: 1 !important;
-  font-weight: 400 !important;
-  letter-spacing: .02em !important;
-  background: rgba(18,16,14,.74) !important;
-  border: 1px solid rgba(255,255,255,.22) !important;
-}
-
-/* Убираем лишний верхний отступ, который был нужен,
-   когда языки висели над шапкой */
-.site-shell {
-  padding-top: 22px !important;
-}
-
-@media (max-width: 760px) {
-  .site-shell {
-    padding-top: 22px !important;
+@media (max-width: 739px) {
+  .header-single-right {
+    gap: 20px !important;
   }
 
-  .header-panel--logo-home .header-single-right {
-    position: static !important;
-    transform: none !important;
-    margin-left: auto !important;
-  }
-}
-
-@media (max-width: 390px) {
-  .site-shell {
-    padding-top: 22px !important;
-  }
-}
-
-
-/* -------------------------------------------------
-   v60 — Batumi + language buttons restored to v39 look
-   for desktop and mobile
--------------------------------------------------- */
-
-.header-panel--logo-home .header-single-right {
-  position: static !important;
-  transform: none !important;
-  margin-left: auto !important;
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  justify-content: flex-end !important;
-  gap: 13px !important;
-  flex: 0 0 auto !important;
-}
-
-.header-panel--logo-home .header-location {
-  margin: 0 !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 5px !important;
-  color: rgba(255,255,255,.68) !important;
-  white-space: nowrap !important;
-  font-size: 11px !important;
-  font-weight: 500 !important;
-  letter-spacing: .05em !important;
-  line-height: 1 !important;
-}
-
-.header-panel--logo-home .header-location svg {
-  width: 14px !important;
-  height: 14px !important;
-  fill: currentColor !important;
-}
-
-.header-panel--logo-home .language-switcher {
-  position: static !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 5px !important;
-  margin: 0 !important;
-}
-
-.header-panel--logo-home .language-btn {
-  appearance: none !important;
-  min-width: 34px !important;
-  width: auto !important;
-  height: 28px !important;
-  padding: 0 8px !important;
-  border: 1px solid rgba(255,255,255,.34) !important;
-  background: rgba(255,255,255,.04) !important;
-  color: rgba(255,255,255,.66) !important;
-  border-radius: 8px !important;
-  cursor: pointer !important;
-  font-family: Arial, Helvetica, sans-serif !important;
-  font-size: 10px !important;
-  font-weight: 600 !important;
-  letter-spacing: .08em !important;
-  line-height: 1 !important;
-  transform: none !important;
-  box-shadow: none !important;
-}
-
-.header-panel--logo-home .language-btn:hover {
-  color: #fff !important;
-  border-color: rgba(255,255,255,.7) !important;
-  background: rgba(255,255,255,.04) !important;
-}
-
-.header-panel--logo-home .language-btn.is-active {
-  color: #fff !important;
-  background: rgba(255,255,255,.14) !important;
-  border-color: rgba(255,255,255,.72) !important;
-}
-
-/* Mobile: same v39 styling, just modestly scaled to fit */
-@media (max-width: 760px) {
-  .header-panel--logo-home .header-single-right {
-    gap: 8px !important;
-  }
-
-  .header-panel--logo-home .header-location {
-    gap: 3px !important;
-    font-size: 9px !important;
-  }
-
-  .header-panel--logo-home .header-location svg {
-    width: 12px !important;
-    height: 12px !important;
-  }
-
-  .header-panel--logo-home .language-switcher {
-    gap: 3px !important;
-  }
-
-  .header-panel--logo-home .language-btn {
-    min-width: 28px !important;
-    height: 24px !important;
-    padding: 0 6px !important;
-    border-radius: 7px !important;
-    font-size: 9px !important;
-    letter-spacing: .06em !important;
-  }
-}
-
-@media (max-width: 390px) {
-  .header-panel--logo-home .header-single-right {
-    gap: 6px !important;
-  }
-
-  .header-panel--logo-home .header-location {
-    font-size: 8px !important;
-  }
-
-  .header-panel--logo-home .header-location svg {
-    width: 11px !important;
-    height: 11px !important;
-  }
-
-  .header-panel--logo-home .language-btn {
-    min-width: 26px !important;
-    height: 22px !important;
-    padding: 0 5px !important;
-    font-size: 8px !important;
+  .language-switcher {
+    gap: 5px !important;
   }
 }
