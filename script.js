@@ -2,7 +2,7 @@ const translations = {
   "ru": {
     "services_btn": "УСЛУГИ",
     "about_btn": "ПРО НАС",
-    "portfolio_btn": "ПОРТФОЛИО",
+    "gallery_btn": "ГАЛЕРЕЯ",
     "contacts_btn": "КОНТАКТЫ",
     "contacts_title": "КОНТАКТЫ",
     "contacts_intro": "Свяжитесь с нами удобным способом.",
@@ -53,7 +53,7 @@ const translations = {
   "en": {
     "services_btn": "SERVICES",
     "about_btn": "ABOUT US",
-    "portfolio_btn": "PORTFOLIO",
+    "gallery_btn": "GALLERY",
     "contacts_btn": "CONTACTS",
     "contacts_title": "CONTACTS",
     "contacts_intro": "Contact us in the way that is most convenient for you.",
@@ -104,7 +104,7 @@ const translations = {
   "ka": {
     "services_btn": "სერვისები",
     "about_btn": "ჩვენ შესახებ",
-    "portfolio_btn": "პორტფოლიო",
+    "gallery_btn": "გალერეა",
     "contacts_btn": "კონტაქტები",
     "contacts_title": "კონტაქტები",
     "contacts_intro": "დაგვიკავშირდით თქვენთვის მოსახერხებელი გზით.",
