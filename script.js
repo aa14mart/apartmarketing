@@ -199,3 +199,107 @@ if (mobileMenuToggle && mobileSiteMenu) {
     if (window.innerWidth >= 740) setMobileMenuOpen(false);
   });
 }
+
+
+/* Gallery lightbox controls v118 */
+(() => {
+  const galleryImages = Array.from(document.querySelectorAll('.gallery-grid .portfolio-card img'));
+  if (!galleryImages.length) return;
+
+  let currentIndex = 0;
+
+  const lightbox = document.createElement('div');
+  lightbox.className = 'gallery-lightbox';
+  lightbox.setAttribute('role', 'dialog');
+  lightbox.setAttribute('aria-modal', 'true');
+  lightbox.setAttribute('aria-label', 'Просмотр фотографии');
+
+  const stage = document.createElement('div');
+  stage.className = 'gallery-lightbox__stage';
+
+  const fullImage = document.createElement('img');
+  fullImage.className = 'gallery-lightbox__image';
+  fullImage.alt = '';
+
+  const makeControl = (className, label) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = `gallery-lightbox__control ${className}`;
+    button.setAttribute('aria-label', label);
+    return button;
+  };
+
+  const prevButton = makeControl('gallery-lightbox__prev', 'Предыдущее фото');
+  const nextButton = makeControl('gallery-lightbox__next', 'Следующее фото');
+  const collapseButton = makeControl('gallery-lightbox__collapse', 'Свернуть фото');
+
+  stage.appendChild(fullImage);
+  stage.appendChild(prevButton);
+  stage.appendChild(nextButton);
+  stage.appendChild(collapseButton);
+  lightbox.appendChild(stage);
+  document.body.appendChild(lightbox);
+
+  const showImage = (index) => {
+    currentIndex = (index + galleryImages.length) % galleryImages.length;
+    const image = galleryImages[currentIndex];
+    fullImage.src = image.currentSrc || image.src;
+    fullImage.alt = image.alt || 'Фотография';
+  };
+
+  const openImage = (index) => {
+    showImage(index);
+    lightbox.classList.add('is-open');
+    document.body.classList.add('gallery-lightbox-open');
+    collapseButton.focus({ preventScroll: true });
+  };
+
+  const closeLightbox = () => {
+    lightbox.classList.remove('is-open');
+    document.body.classList.remove('gallery-lightbox-open');
+    fullImage.removeAttribute('src');
+    fullImage.alt = '';
+    galleryImages[currentIndex]?.focus({ preventScroll: true });
+  };
+
+  galleryImages.forEach((image, index) => {
+    image.setAttribute('tabindex', '0');
+    image.setAttribute('role', 'button');
+    image.setAttribute('aria-label', `${image.alt || 'Фотография'}. Открыть в полном размере`);
+
+    image.addEventListener('click', () => openImage(index));
+    image.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openImage(index);
+      }
+    });
+  });
+
+  prevButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    showImage(currentIndex - 1);
+  });
+
+  nextButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    showImage(currentIndex + 1);
+  });
+
+  collapseButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    closeLightbox();
+  });
+
+  stage.addEventListener('click', (event) => event.stopPropagation());
+  lightbox.addEventListener('click', closeLightbox);
+
+  document.addEventListener('keydown', (event) => {
+    if (!lightbox.classList.contains('is-open')) return;
+
+    if (event.key === 'Escape') closeLightbox();
+    if (event.key === 'ArrowLeft') showImage(currentIndex - 1);
+    if (event.key === 'ArrowRight') showImage(currentIndex + 1);
+  });
+})();
+/* End gallery lightbox controls v118 */
