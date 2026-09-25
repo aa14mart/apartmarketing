@@ -3,6 +3,13 @@ const translations = {
     "services_btn": "УСЛУГИ",
     "about_btn": "ПРО НАС",
     "gallery_btn": "ГАЛЕРЕЯ",
+    "home_help_title": "Сделаю фото, которые помогут:",
+    "home_help_1": "быстрее сдать или продать",
+    "home_help_2": "выгодно представить бизнес",
+    "home_help_3": "показать результат работы дизайнера",
+    "home_help_4": "выделить объект на Booking и Airbnb",
+    "home_rent_load_before": "Посуточная загрузка 50%",
+    "home_rent_load_after": "Загрузка 70%+",
     "contacts_btn": "КОНТАКТЫ",
     "contacts_title": "КОНТАКТЫ",
     "contacts_intro": "Свяжитесь с нами удобным способом.",
@@ -54,6 +61,13 @@ const translations = {
     "services_btn": "SERVICES",
     "about_btn": "ABOUT US",
     "gallery_btn": "GALLERY",
+    "home_help_title": "I create photos that help:",
+    "home_help_1": "rent or sell faster",
+    "home_help_2": "present your business at its best",
+    "home_help_3": "showcase a designer’s work",
+    "home_help_4": "make your listing stand out on Booking and Airbnb",
+    "home_rent_load_before": "Short-term occupancy 50%",
+    "home_rent_load_after": "Occupancy 70%+",
     "contacts_btn": "CONTACTS",
     "contacts_title": "CONTACTS",
     "contacts_intro": "Contact us in the way that is most convenient for you.",
@@ -105,6 +119,13 @@ const translations = {
     "services_btn": "სერვისები",
     "about_btn": "ჩვენ შესახებ",
     "gallery_btn": "გალერეა",
+    "home_help_title": "ვქმნი ფოტოებს, რომლებიც გეხმარებათ:",
+    "home_help_1": "უფრო სწრაფად გაქირავებაში ან გაყიდვაში",
+    "home_help_2": "ბიზნესის მომგებიანად წარმოჩენაში",
+    "home_help_3": "დიზაინერის ნამუშევრის წარმოჩენაში",
+    "home_help_4": "ობიექტის გამორჩევაში Booking-სა და Airbnb-ზე",
+    "home_rent_load_before": "დღიური დატვირთვა 50%",
+    "home_rent_load_after": "დატვირთვა 70%+",
     "contacts_btn": "კონტაქტები",
     "contacts_title": "კონტაქტები",
     "contacts_intro": "დაგვიკავშირდით თქვენთვის მოსახერხებელი გზით.",
@@ -322,3 +343,320 @@ if (mobileMenuToggle && mobileSiteMenu) {
   });
 })();
 /* End gallery lightbox controls v119 */
+
+
+
+/* v131 — random thumbnails with size/quantity priority */
+/* v130 — random thumbnails from the full gallery, 138px first */
+(() => {
+  const row = document.querySelector('.home-intro-row');
+  const photo = document.querySelector('.home-intro-row__photo');
+  const fill = document.querySelector('.home-intro-row__fill');
+  const help = document.querySelector('.home-help-panel');
+  const thumbs = Array.from(document.querySelectorAll('.home-mini-gallery__item'));
+  if (!row || !photo || !fill || !help || !thumbs.length) return;
+
+  const gallerySources = [
+    'images/gallery-p1-01.jpg',
+    'images/gallery-p1-02.jpg',
+    'images/gallery-p1-03.jpg',
+    'images/gallery-p1-04.jpg',
+    'images/gallery-p1-05.jpg',
+    'images/gallery-p1-06.jpg',
+    'images/gallery-p1-07.jpg',
+    'images/gallery-p1-08.jpg',
+    'images/gallery-p1-09.jpg',
+    'images/gallery-p1-10.jpg',
+    'images/gallery-p1-11.jpg',
+    'images/gallery-p1-12.jpg',
+    'images/gallery-p1-13.jpg',
+    'images/gallery-p1-14.jpg',
+    'images/gallery-p1-15.jpg',
+    'images/gallery-p1-16.jpg',
+    'images/gallery-p1-17.jpg',
+    'images/gallery-p1-18.jpg',
+    'images/gallery-p2-01.jpg',
+    'images/gallery-p2-02.jpg',
+    'images/gallery-p2-03.jpg',
+    'images/gallery-p2-04.jpg',
+    'images/gallery-p2-05.jpg',
+    'images/gallery-p2-06.jpg',
+    'images/gallery-p2-07.jpg',
+    'images/gallery-p2-08.jpg',
+    'images/gallery-p2-09.jpg',
+    'images/gallery-p2-10.jpg',
+    'images/gallery-p2-11.jpg',
+    'images/gallery-p2-12.jpg',
+    'images/gallery-p2-13.jpg',
+    'images/gallery-p2-14.jpg',
+    'images/gallery-p2-15.jpg',
+    'images/gallery-p2-16.jpg',
+    'images/gallery-p2-17.jpg',
+    'images/gallery-p2-18.jpg',
+    'images/gallery-p3-01.jpg',
+    'images/gallery-p3-02.jpg',
+    'images/gallery-p3-03.jpg',
+    'images/gallery-p3-04.jpg',
+    'images/gallery-p3-05.jpg',
+    'images/gallery-p3-06.jpg',
+    'images/gallery-p3-07.jpg',
+    'images/gallery-p3-08.jpg',
+    'images/gallery-p3-09.jpg',
+    'images/gallery-p3-10.jpg',
+    'images/gallery-p3-11.jpg',
+    'images/gallery-p3-12.jpg',
+    'images/gallery-p3-13.jpg',
+    'images/gallery-p3-14.jpg',
+    'images/gallery-p3-15.jpg',
+    'images/gallery-p3-16.jpg',
+    'images/gallery-p3-17.jpg',
+    'images/gallery-p3-18.jpg',
+    'images/gallery-p4-01.jpg',
+    'images/gallery-p4-02.jpg',
+    'images/gallery-p4-03.jpg',
+    'images/gallery-p4-04.jpg',
+    'images/gallery-p4-05.jpg',
+    'images/gallery-p4-06.jpg',
+    'images/gallery-p4-07.jpg',
+    'images/gallery-p4-08.jpg',
+    'images/gallery-p4-09.jpg',
+    'images/gallery-p4-10.jpg',
+    'images/gallery-p4-11.jpg',
+    'images/gallery-p4-12.jpg',
+    'images/gallery-p4-13.jpg',
+    'images/gallery-p4-14.jpg',
+    'images/gallery-p4-15.jpg',
+    'images/gallery-p4-16.jpg',
+    'images/gallery-p4-17.jpg',
+    'images/gallery-p4-18.jpg',
+    'images/gallery-p5-01.jpg',
+    'images/gallery-p5-02.jpg',
+    'images/gallery-p5-03.jpg',
+    'images/gallery-p5-04.jpg',
+    'images/gallery-p5-05.jpg',
+    'images/gallery-p5-06.jpg',
+    'images/gallery-p5-07.jpg',
+    'images/gallery-p5-08.jpg',
+    'images/gallery-p5-09.jpg',
+    'images/gallery-p5-10.jpg',
+    'images/gallery-p5-11.jpg',
+    'images/gallery-p5-12.jpg',
+    'images/gallery-p5-13.jpg',
+    'images/gallery-p5-14.jpg',
+    'images/gallery-p5-15.jpg',
+    'images/gallery-p5-16.jpg',
+    'images/gallery-p5-17.jpg',
+    'images/gallery-p5-18.jpg',
+    'images/gallery-p6-01.jpg',
+    'images/gallery-p6-02.jpg',
+    'images/gallery-p6-03.jpg',
+    'images/gallery-p6-04.jpg',
+    'images/gallery-p6-05.jpg',
+    'images/gallery-p6-06.jpg',
+    'images/gallery-p6-07.jpg',
+    'images/gallery-p6-08.jpg',
+    'images/gallery-p6-09.jpg',
+    'images/gallery-p6-10.jpg',
+    'images/gallery-p6-11.jpg',
+    'images/gallery-p6-12.jpg',
+    'images/gallery-p6-13.jpg',
+    'images/gallery-p6-14.jpg',
+    'images/gallery-p6-15.jpg',
+    'images/gallery-p6-16.jpg',
+    'images/gallery-p6-17.jpg',
+    'images/gallery-p6-18.jpg',
+    'images/gallery-p7-01.jpg',
+    'images/gallery-p7-02.jpg',
+    'images/gallery-p7-03.jpg',
+    'images/gallery-p7-04.jpg',
+    'images/gallery-p7-05.jpg',
+    'images/gallery-p7-06.jpg',
+    'images/gallery-p7-07.jpg',
+    'images/gallery-p7-08.jpg',
+    'images/gallery-p7-09.jpg',
+    'images/gallery-p7-10.jpg',
+    'images/gallery-p7-11.jpg',
+    'images/gallery-p7-12.jpg',
+    'images/gallery-p7-13.jpg',
+    'images/gallery-p7-14.jpg',
+    'images/gallery-p7-15.jpg',
+    'images/gallery-p7-16.jpg',
+    'images/gallery-p7-17.jpg',
+    'images/gallery-p7-18.jpg',
+    'images/gallery-p8-01.jpg',
+    'images/gallery-p8-02.jpg',
+    'images/gallery-p8-03.jpg',
+    'images/gallery-p8-04.jpg',
+    'images/gallery-p8-05.jpg',
+    'images/gallery-p8-06.jpg',
+    'images/gallery-p8-07.jpg',
+    'images/gallery-p8-08.jpg',
+    'images/gallery-p8-09.jpg',
+    'images/gallery-p8-10.jpg',
+    'images/gallery-p8-11.jpg',
+    'images/gallery-p8-12.jpg',
+    'images/gallery-p8-13.jpg',
+    'images/gallery-p8-14.jpg',
+    'images/gallery-p8-15.jpg',
+    'images/gallery-p8-16.jpg',
+    'images/gallery-p8-17.jpg',
+    'images/gallery-p8-18.jpg',
+    'images/gallery-p9-01.jpg',
+    'images/gallery-p9-02.jpg',
+    'images/gallery-p9-03.jpg',
+    'images/gallery-p9-04.jpg',
+    'images/gallery-p9-05.jpg',
+    'images/gallery-p9-06.jpg',
+    'images/gallery-p9-07.jpg',
+    'images/gallery-p9-08.jpg',
+    'images/gallery-p9-09.jpg',
+    'images/gallery-p9-10.jpg',
+    'images/gallery-p9-11.jpg',
+    'images/gallery-p9-12.jpg',
+    'images/gallery-p9-13.jpg',
+    'images/gallery-p9-14.jpg',
+    'images/gallery-p9-15.jpg',
+    'images/gallery-p9-16.jpg',
+    'images/gallery-p9-17.jpg',
+    'images/gallery-p9-18.jpg',
+    'images/gallery-p10-01.jpg',
+    'images/gallery-p10-02.jpg',
+    'images/gallery-p10-03.jpg',
+    'images/gallery-p10-04.jpg',
+    'images/gallery-p10-05.jpg',
+    'images/gallery-p10-06.jpg',
+    'images/gallery-p10-07.jpg',
+    'images/gallery-p10-08.jpg',
+    'images/gallery-p10-09.jpg',
+    'images/gallery-p10-10.jpg',
+    'images/gallery-p10-11.jpg',
+    'images/gallery-p10-12.jpg',
+    'images/gallery-p10-13.jpg',
+    'images/gallery-p10-14.jpg',
+    'images/gallery-p10-15.jpg',
+    'images/gallery-p10-16.jpg',
+    'images/gallery-p10-17.jpg',
+    'images/gallery-p10-18.jpg',
+    'images/gallery-p11-01.jpg',
+    'images/gallery-p11-02.jpg',
+    'images/gallery-p11-03.jpg',
+    'images/gallery-p11-04.jpg',
+    'images/gallery-p11-05.jpg',
+    'images/gallery-p11-06.jpg',
+    'images/gallery-p11-07.jpg',
+    'images/gallery-p11-08.jpg',
+    'images/gallery-p11-09.jpg',
+    'images/gallery-p11-10.jpg',
+    'images/gallery-p11-11.jpg',
+    'images/gallery-p11-12.jpg',
+    'images/gallery-p11-13.jpg',
+    'images/gallery-p11-14.jpg',
+    'images/gallery-p11-15.jpg',
+    'images/gallery-p11-16.jpg',
+    'images/gallery-p11-17.jpg',
+    'images/gallery-p11-18.jpg',
+    'images/gallery-p12-01.jpg',
+    'images/gallery-p12-02.jpg',
+    'images/gallery-p12-03.jpg',
+    'images/gallery-p12-04.jpg',
+    'images/gallery-p12-05.jpg',
+    'images/gallery-p12-06.jpg',
+    'images/gallery-p12-07.jpg',
+    'images/gallery-p12-08.jpg',
+    'images/gallery-p12-09.jpg',
+    'images/gallery-p12-10.jpg',
+    'images/gallery-p12-11.jpg',
+    'images/gallery-p12-12.jpg',
+    'images/gallery-p12-13.jpg',
+    'images/gallery-p12-14.jpg',
+    'images/gallery-p12-15.jpg',
+    'images/gallery-p12-16.jpg',
+    'images/gallery-p12-17.jpg',
+    'images/gallery-p12-18.jpg'
+  ];
+
+  // Randomize from all gallery images once per page load.
+  for (let i = gallerySources.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [gallerySources[i], gallerySources[j]] = [gallerySources[j], gallerySources[i]];
+  }
+  thumbs.forEach((thumb, i) => {
+    const img = thumb.querySelector('img');
+    if (img && gallerySources[i]) img.src = gallerySources[i];
+  });
+
+  const setThumbHeight = (thumb, height) => {
+    thumb.style.setProperty('height', `${height}px`, 'important');
+    thumb.style.setProperty('min-height', `${height}px`, 'important');
+    thumb.style.setProperty('max-height', `${height}px`, 'important');
+  };
+
+  const prepareLayout = (height) => {
+    thumbs.forEach((thumb) => {
+      thumb.hidden = false;
+      setThumbHeight(thumb, height);
+    });
+
+    fill.style.height = 'auto';
+    const photoHeight = Math.round(photo.getBoundingClientRect().height);
+    const helpHeight = Math.ceil(help.getBoundingClientRect().height);
+    const availableHeight = Math.max(photoHeight, helpHeight);
+    fill.style.height = `${availableHeight}px`;
+  };
+
+  const countThatFits = (height) => {
+    prepareLayout(height);
+    const fr = fill.getBoundingClientRect();
+    let count = 0;
+
+    for (const thumb of thumbs) {
+      const tr = thumb.getBoundingClientRect();
+      const inside = tr.left >= fr.left - 1 &&
+        tr.right <= fr.right + 1 &&
+        tr.top >= fr.top - 1 &&
+        tr.bottom <= fr.bottom + 1;
+      if (!inside) break;
+      count += 1;
+    }
+    return count;
+  };
+
+  const applyLayout = (height, visibleCount) => {
+    prepareLayout(height);
+    thumbs.forEach((thumb, index) => {
+      thumb.hidden = index >= visibleCount;
+    });
+  };
+
+  const fitThumbs = () => {
+    // Rule 1: if at least four thumbnails fit at the maximum 138px height,
+    // keep them all at 138px. Size wins over showing more thumbnails.
+    const maxSizeCount = countThatFits(138);
+    if (maxSizeCount >= 4) {
+      applyLayout(138, maxSizeCount);
+      return;
+    }
+
+    // Rule 2: if fewer than four fit at 138px, quantity wins.
+    // Search every allowed height from 138 down to 70px and choose the layout
+    // that shows the most thumbnails. On a tie, keep the larger thumbnails.
+    let bestHeight = 138;
+    let bestCount = maxSizeCount;
+
+    for (let height = 137; height >= 70; height -= 1) {
+      const count = countThatFits(height);
+      if (count > bestCount) {
+        bestCount = count;
+        bestHeight = height;
+      }
+    }
+
+    applyLayout(bestHeight, bestCount);
+  };
+
+  const scheduleFit = () => requestAnimationFrame(() => requestAnimationFrame(fitThumbs));
+  window.addEventListener('load', scheduleFit, { once: true });
+  window.addEventListener('resize', scheduleFit);
+  scheduleFit();
+})();
+/* End v131 */
