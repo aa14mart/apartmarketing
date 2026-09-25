@@ -201,7 +201,7 @@ if (mobileMenuToggle && mobileSiteMenu) {
 }
 
 
-/* Gallery lightbox controls v118 */
+/* Gallery lightbox controls v119 */
 (() => {
   const galleryImages = Array.from(document.querySelectorAll('.gallery-grid .portfolio-card img'));
   if (!galleryImages.length) return;
@@ -221,6 +221,10 @@ if (mobileMenuToggle && mobileSiteMenu) {
   fullImage.className = 'gallery-lightbox__image';
   fullImage.alt = '';
 
+  const counter = document.createElement('div');
+  counter.className = 'gallery-lightbox__counter';
+  counter.setAttribute('aria-live', 'polite');
+
   const makeControl = (className, label) => {
     const button = document.createElement('button');
     button.type = 'button';
@@ -234,17 +238,32 @@ if (mobileMenuToggle && mobileSiteMenu) {
   const collapseButton = makeControl('gallery-lightbox__collapse', 'Свернуть фото');
 
   stage.appendChild(fullImage);
+  stage.appendChild(counter);
   stage.appendChild(prevButton);
   stage.appendChild(nextButton);
   stage.appendChild(collapseButton);
   lightbox.appendChild(stage);
   document.body.appendChild(lightbox);
 
+  const updateNavigation = () => {
+    const atFirst = currentIndex === 0;
+    const atLast = currentIndex === galleryImages.length - 1;
+
+    prevButton.disabled = atFirst;
+    nextButton.disabled = atLast;
+    prevButton.setAttribute('aria-hidden', atFirst ? 'true' : 'false');
+    nextButton.setAttribute('aria-hidden', atLast ? 'true' : 'false');
+    counter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
+  };
+
   const showImage = (index) => {
-    currentIndex = (index + galleryImages.length) % galleryImages.length;
+    if (index < 0 || index >= galleryImages.length) return;
+
+    currentIndex = index;
     const image = galleryImages[currentIndex];
     fullImage.src = image.currentSrc || image.src;
     fullImage.alt = image.alt || 'Фотография';
+    updateNavigation();
   };
 
   const openImage = (index) => {
@@ -298,8 +317,8 @@ if (mobileMenuToggle && mobileSiteMenu) {
     if (!lightbox.classList.contains('is-open')) return;
 
     if (event.key === 'Escape') closeLightbox();
-    if (event.key === 'ArrowLeft') showImage(currentIndex - 1);
-    if (event.key === 'ArrowRight') showImage(currentIndex + 1);
+    if (event.key === 'ArrowLeft' && currentIndex > 0) showImage(currentIndex - 1);
+    if (event.key === 'ArrowRight' && currentIndex < galleryImages.length - 1) showImage(currentIndex + 1);
   });
 })();
-/* End gallery lightbox controls v118 */
+/* End gallery lightbox controls v119 */
