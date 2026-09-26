@@ -314,6 +314,7 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
   const MIN_HEIGHT = 70;
   const MAX_HEIGHT = 144;
   const MIN_GAP = 12;
+  const MOBILE_MIN_GAP = 2;
   const VERTICAL_GAP = 12;
   const EVEN_VERTICAL_THRESHOLD = 39;
   const SHELL_GAP = 12;
@@ -353,18 +354,18 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
     let horizontalGap = MIN_GAP;
 
     if (mobile) {
-      // Find the largest column count that fits with at least a standard 12px
-      // internal gap. The outer hero gap is independent and stays at 12px.
+      // Mobile: keep a 2px internal gap between mini photos.
+      // The outer hero -> mini-gallery gap stays at the standard 12px.
       for (let c = thumbs.length; c >= 1; c -= 1) {
-        const required = (c * thumbWidth) + ((c - 1) * MIN_GAP);
+        const required = (c * thumbWidth) + ((c - 1) * MOBILE_MIN_GAP);
         if (required <= widthForGallery + .5) {
           columns = c;
           break;
         }
       }
       horizontalGap = columns > 1
-        ? Math.max(MIN_GAP, (widthForGallery - (columns * thumbWidth)) / (columns - 1))
-        : MIN_GAP;
+        ? Math.max(MOBILE_MIN_GAP, (widthForGallery - (columns * thumbWidth)) / (columns - 1))
+        : MOBILE_MIN_GAP;
     } else {
       const available = Math.max(0, rowWidth - heroWidth);
       columns = Math.max(1, Math.floor(available / (thumbWidth + MIN_GAP)));
@@ -392,7 +393,66 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
     };
   };
 
+  const chooseMobileLayout = () => {
+    const rowWidth = row.getBoundingClientRect().width;
+    const heroWidth = hero.getBoundingClientRect().width;
+    const heroHeight = hero.getBoundingClientRect().height;
+    const widthForGallery = Math.max(0, rowWidth - heroWidth - MIN_GAP);
+    let best = null;
+    let fallback = null;
+
+    // Mobile rule: keep a 2px gap inside the mini-gallery. Once 6+
+    // photos fit, the largest possible photo size wins over showing more photos.
+    for (let columns = 1; columns <= thumbs.length; columns += 1) {
+      const widthLimitedHeight = (widthForGallery - ((columns - 1) * MOBILE_MIN_GAP)) / (columns * RATIO);
+      if (!Number.isFinite(widthLimitedHeight) || widthLimitedHeight <= 0) continue;
+
+      for (let rows = 1; rows <= thumbs.length; rows += 1) {
+        const count = Math.min(thumbs.length, columns * rows);
+        const height = Math.min(MAX_HEIGHT, widthLimitedHeight, (heroHeight - ((rows - 1) * MOBILE_MIN_GAP)) / rows);
+        if (!Number.isFinite(height) || height <= 0) continue;
+
+        const candidate = {
+          count,
+          height,
+          thumbWidth: height * RATIO,
+          columns,
+          horizontalGap: MOBILE_MIN_GAP,
+          outerGap: MIN_GAP,
+          rows,
+          heroHeight,
+          mobile: true
+        };
+
+        if (!fallback || candidate.count > fallback.count ||
+            (candidate.count === fallback.count && candidate.height > fallback.height)) {
+          fallback = candidate;
+        }
+
+        if (count < 6) continue;
+        if (!best || candidate.height > best.height + .01 ||
+            (Math.abs(candidate.height - best.height) <= .01 && candidate.count > best.count)) {
+          best = candidate;
+        }
+      }
+    }
+
+    return best || fallback || {
+      count: 0,
+      height: 1,
+      thumbWidth: RATIO,
+      columns: 1,
+      horizontalGap: MOBILE_MIN_GAP,
+      outerGap: MIN_GAP,
+      rows: 1,
+      heroHeight,
+      mobile: true
+    };
+  };
+
   const chooseLayout = () => {
+    if (isMobileLayout()) return chooseMobileLayout();
+
     const maxLayout = measureLayout(MAX_HEIGHT);
 
     // Absolute priority rule: once six or more thumbnails fit, photo size wins.
@@ -451,7 +511,9 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
   let currentColumns = 1;
   const applyLayout = () => {
     const layout = chooseLayout();
-    const vertical = getVerticalSpacing(layout);
+    const vertical = layout.mobile
+      ? { paddingTop: 0, rowGap: MOBILE_MIN_GAP, paddingBottom: 0 }
+      : getVerticalSpacing(layout);
     currentColumns = Math.max(1, layout.columns);
 
     // Main section spacing never changes. Only spacing INSIDE the mini-gallery moves.
@@ -467,6 +529,11 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
     fill.style.paddingTop = `${vertical.paddingTop.toFixed(2)}px`;
     fill.style.paddingBottom = `${vertical.paddingBottom.toFixed(2)}px`;
     fill.style.alignContent = 'start';
+
+    // On mobile the intended internal gap is 2px. Keep the gallery
+    // background equal to the header overlay so the internal gap color
+    // stays consistent and any sub-pixel seams never show through.
+    fill.classList.toggle('is-gap-filled', layout.mobile);
 
     thumbs.forEach((thumb, index) => {
       thumb.hidden = index >= layout.count;
@@ -535,45 +602,61 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
   const scheduleRandomSwap = () => {
     clearTimeout(swapTimer);
     if (!allVisibleRevealed() || swapInProgress) return;
-    swapTimer = setTimeout(swapOnePhoto, randomSwapDelay());
+    swapTimer = setTimeout(swapRandomPhotos, randomSwapDelay());
   };
 
-  const swapOnePhoto = () => {
+  const swapRandomPhotos = () => {
     if (!allVisibleRevealed() || swapInProgress) {
       scheduleRandomSwap();
       return;
     }
 
-    const candidates = thumbs
-      .map((thumb, index) => ({ thumb, index }))
-      .filter(({ thumb, index }) => !thumb.hidden && revealed.has(index) && currentSources.has(index));
+    const candidates = shuffle(
+      thumbs
+        .map((thumb, index) => ({ thumb, index }))
+        .filter(({ thumb, index }) => !thumb.hidden && revealed.has(index) && currentSources.has(index))
+    );
     if (!candidates.length) return;
 
-    const { thumb, index } = candidates[Math.floor(Math.random() * candidates.length)];
-    const nextSource = takeReplacementSource();
-    if (!nextSource) {
+    // Each cycle replaces a random batch of 2–5 visible mini photos.
+    const batchSize = Math.min(candidates.length, 2 + Math.floor(Math.random() * 4));
+    const selected = candidates.slice(0, batchSize);
+    const jobs = selected
+      .map(({ thumb, index }) => ({ thumb, index, nextSource: takeReplacementSource() }))
+      .filter(({ nextSource }) => Boolean(nextSource));
+
+    if (!jobs.length) {
       scheduleRandomSwap();
       return;
     }
 
     swapInProgress = true;
-    const img = thumb.querySelector('img');
-    const loader = new Image();
-    loader.decoding = 'async';
+    let finishedLoads = 0;
+    const loadedJobs = [];
 
-    loader.onload = () => {
-      // Phase 1: fade the old photo completely away.
-      thumb.classList.add('is-mini-swapping-out');
+    const beginBatchSwap = () => {
+      if (!loadedJobs.length) {
+        swapInProgress = false;
+        scheduleRandomSwap();
+        return;
+      }
+
+      // Phase 1: all selected photos fade out together.
+      loadedJobs.forEach(({ thumb }) => thumb.classList.add('is-mini-swapping-out'));
 
       window.setTimeout(() => {
-        // Phase 2: replace it while invisible, then reveal the new photo slowly.
-        img.src = nextSource;
-        currentSources.set(index, nextSource);
-        thumb.classList.add('is-mini-swapping-in');
+        // Phase 2: replace all invisible photos, then fade the whole batch back in.
+        loadedJobs.forEach(({ thumb, index, nextSource }) => {
+          const img = thumb.querySelector('img');
+          if (img) img.src = nextSource;
+          currentSources.set(index, nextSource);
+          thumb.classList.add('is-mini-swapping-in');
+        });
+
         requestAnimationFrame(() => requestAnimationFrame(() => {
-          thumb.classList.remove('is-mini-swapping-out');
+          loadedJobs.forEach(({ thumb }) => thumb.classList.remove('is-mini-swapping-out'));
           window.setTimeout(() => {
-            thumb.classList.remove('is-mini-swapping-in');
+            loadedJobs.forEach(({ thumb }) => thumb.classList.remove('is-mini-swapping-in'));
             swapInProgress = false;
             scheduleRandomSwap();
           }, SWAP_FADE_IN_MS);
@@ -581,11 +664,20 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
       }, SWAP_FADE_MS);
     };
 
-    loader.onerror = () => {
-      swapInProgress = false;
-      scheduleRandomSwap();
-    };
-    loader.src = nextSource;
+    jobs.forEach((job) => {
+      const loader = new Image();
+      loader.decoding = 'async';
+      loader.onload = () => {
+        loadedJobs.push(job);
+        finishedLoads += 1;
+        if (finishedLoads === jobs.length) beginBatchSwap();
+      };
+      loader.onerror = () => {
+        finishedLoads += 1;
+        if (finishedLoads === jobs.length) beginBatchSwap();
+      };
+      loader.src = job.nextSource;
+    });
   };
 
   const revealNext = () => {

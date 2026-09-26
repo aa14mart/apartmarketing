@@ -489,6 +489,10 @@ p { color: #fff; }
   overflow: hidden;
 }
 
+.home-intro-row__fill.is-gap-filled {
+  background: var(--header-bg);
+}
+
 .home-mini-gallery__item {
   overflow: hidden;
   opacity: 0;
@@ -642,6 +646,35 @@ p { color: #fff; }
 
 .home-sale-rent__apart-logo--header {
   width: 82px !important;
+}
+
+
+.home-sale-rent__cta {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  background: var(--panel-bg);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .18s ease, text-shadow .18s ease;
+}
+
+.home-sale-rent__cta:hover,
+.home-sale-rent__cta:focus-visible {
+  color: var(--logo-gold);
+  text-shadow: 0 0 5px rgba(232,204,166,.12), 0 0 10px rgba(232,204,166,.05);
+  outline: none;
 }
 
 .home-occupancy-card {
@@ -995,6 +1028,7 @@ body.gallery-lightbox-open { overflow: hidden; }
   .home-help-panel { padding: 8px 10px; }
 
   .home-occupancy-card { min-height: 24px; font-size: 10px; letter-spacing: .025em; }
+  .home-sale-rent__cta { min-height: 24px; padding: 3px 8px; font-size: 10px; letter-spacing: .025em; }
   .home-sale-rent__overlay { left: 8px; bottom: 8px; font-size: 10px; gap: 5px; }
   .home-sale-rent__overlay-icon { width: 16px; height: 24px; }
   .home-sale-rent__apart-logo { width: 46px !important; }
@@ -1009,6 +1043,7 @@ body.gallery-lightbox-open { overflow: hidden; }
   .mobile-site-menu.is-open { padding-left: 8px; padding-right: 8px; gap: 3px; }
   .mobile-menu__link { padding: 0 1px; letter-spacing: 0; }
   .home-occupancy-card { min-height: 22px; font-size: 9px; }
+  .home-sale-rent__cta { min-height: 22px; padding: 3px 7px; font-size: 9px; }
   .home-sale-rent__overlay { left: 7px; bottom: 7px; font-size: 9px; gap: 4px; }
   .home-sale-rent__overlay-icon { width: 14px; height: 21px; }
   .home-sale-rent__apart-logo { width: 40px !important; }
