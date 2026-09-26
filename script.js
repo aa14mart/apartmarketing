@@ -3,27 +3,16 @@ const translations = {
     "services_btn": "УСЛУГИ",
     "about_btn": "ПРО НАС",
     "gallery_btn": "ГАЛЕРЕЯ",
-    "home_help_title": "Сделаю фото, которые помогут:",
-    "home_help_1": "быстрее сдать или продать недвижимость",
-    "home_help_2": "выгодно представить бизнес",
-    "home_help_3": "показать результат работы дизайнера",
-    "home_help_4": "выделить объект на Booking и Airbnb",
-    "home_rent_load_before": "Посуточная загрузка 50%",
-    "home_rent_load_after": "Загрузка 70%+",
+    "home_hero_line_1": "СДЕЛАЕМ ФОТО, КОТОРЫЕ",
+    "home_hero_line_2": "ПОМОГУТ БЫСТРЕЕ СДАТЬ ИЛИ",
+    "home_hero_line_3": "ПРОДАТЬ НЕДВИЖИМОСТЬ",
+    "home_rent_load_before": "ПОСУТОЧНАЯ ЗАГРУЗКА 50%",
+    "home_rent_load_after": "ПОСУТОЧНАЯ ЗАГРУЗКА 75%+",
     "contacts_btn": "КОНТАКТЫ",
     "contacts_title": "КОНТАКТЫ",
     "contacts_intro": "Свяжитесь с нами удобным способом.",
     "contacts_phone_label": "ТЕЛЕФОН",
     "contacts_location_label": "ЛОКАЦИЯ",
-    "equipment_title": "НАШЕ ОБОРУДОВАНИЕ",
-    "equipment_camera_1": "Sony A7 III",
-    "equipment_camera_2": "Sony A7 IV",
-    "equipment_lens_1": "Sigma 14–24mm",
-    "equipment_lens_2": "Tamron 28–75mm",
-    "equipment_lens_3": "Laowa 10mm f/2.8 Zero-D FF",
-    "equipment_tripod": "Штатив",
-    "equipment_drone": "Дрон DJI",
-    "equipment_osmo": "DJI Osmo Pocket 4",
     "standard_title": "СТАНДАРТ",
     "standard_desc": "Квартиры и апартаменты для продажи и аренды",
     "standard_1": "студия до 50 м² — 150 ₾",
@@ -61,27 +50,16 @@ const translations = {
     "services_btn": "SERVICES",
     "about_btn": "ABOUT US",
     "gallery_btn": "GALLERY",
-    "home_help_title": "I create photos that help:",
-    "home_help_1": "rent or sell faster",
-    "home_help_2": "present your business at its best",
-    "home_help_3": "showcase a designer’s work",
-    "home_help_4": "make your listing stand out on Booking and Airbnb",
-    "home_rent_load_before": "Short-term occupancy 50%",
-    "home_rent_load_after": "Occupancy 70%+",
+    "home_hero_line_1": "WE CREATE PHOTOS THAT",
+    "home_hero_line_2": "HELP YOU RENT OR SELL",
+    "home_hero_line_3": "REAL ESTATE FASTER",
+    "home_rent_load_before": "SHORT-TERM OCCUPANCY 50%",
+    "home_rent_load_after": "SHORT-TERM OCCUPANCY 75%+",
     "contacts_btn": "CONTACTS",
     "contacts_title": "CONTACTS",
     "contacts_intro": "Contact us in the way that is most convenient for you.",
     "contacts_phone_label": "PHONE",
     "contacts_location_label": "LOCATION",
-    "equipment_title": "OUR EQUIPMENT",
-    "equipment_camera_1": "Sony A7 III",
-    "equipment_camera_2": "Sony A7 IV",
-    "equipment_lens_1": "Sigma 14–24mm",
-    "equipment_lens_2": "Tamron 28–75mm",
-    "equipment_lens_3": "Laowa 10mm f/2.8 Zero-D FF",
-    "equipment_tripod": "Tripod",
-    "equipment_drone": "DJI drone",
-    "equipment_osmo": "DJI Osmo Pocket 4",
     "standard_title": "STANDARD",
     "standard_desc": "Apartments and flats for sale and rent",
     "standard_1": "studio up to 50 m² — 150 ₾",
@@ -119,27 +97,16 @@ const translations = {
     "services_btn": "სერვისები",
     "about_btn": "ჩვენ შესახებ",
     "gallery_btn": "გალერეა",
-    "home_help_title": "ვქმნი ფოტოებს, რომლებიც გეხმარებათ:",
-    "home_help_1": "უფრო სწრაფად გაქირავებაში ან გაყიდვაში",
-    "home_help_2": "ბიზნესის მომგებიანად წარმოჩენაში",
-    "home_help_3": "დიზაინერის ნამუშევრის წარმოჩენაში",
-    "home_help_4": "ობიექტის გამორჩევაში Booking-სა და Airbnb-ზე",
+    "home_hero_line_1": "ვქმნით ფოტოებს, რომლებიც",
+    "home_hero_line_2": "დაგეხმარებათ უფრო სწრაფად",
+    "home_hero_line_3": "გააქირავოთ ან გაყიდოთ",
     "home_rent_load_before": "დღიური დატვირთვა 50%",
-    "home_rent_load_after": "დატვირთვა 70%+",
+    "home_rent_load_after": "დღიური დატვირთვა 75%+",
     "contacts_btn": "კონტაქტები",
     "contacts_title": "კონტაქტები",
     "contacts_intro": "დაგვიკავშირდით თქვენთვის მოსახერხებელი გზით.",
     "contacts_phone_label": "ტელეფონი",
     "contacts_location_label": "ლოკაცია",
-    "equipment_title": "ჩვენი აღჭურვილობა",
-    "equipment_camera_1": "Sony A7 III",
-    "equipment_camera_2": "Sony A7 IV",
-    "equipment_lens_1": "Sigma 14–24mm",
-    "equipment_lens_2": "Tamron 28–75mm",
-    "equipment_lens_3": "Laowa 10mm f/2.8 Zero-D FF",
-    "equipment_tripod": "შტატივი",
-    "equipment_drone": "DJI დრონი",
-    "equipment_osmo": "DJI Osmo Pocket 4",
     "standard_title": "სტანდარტი",
     "standard_desc": "ბინები და აპარტამენტები გასაყიდად და გასაქირავებლად",
     "standard_1": "სტუდიო 50 მ²-მდე — 150 ₾",
@@ -180,55 +147,46 @@ function setLanguage(lang) {
   if (!dictionary) return;
 
   document.documentElement.lang = lang;
-
-  document.querySelectorAll("[data-i18n]").forEach((element) => {
-    const key = element.dataset.i18n;
-    if (dictionary[key]) element.textContent = dictionary[key];
+  document.querySelectorAll('[data-i18n]').forEach((element) => {
+    const value = dictionary[element.dataset.i18n];
+    if (value !== undefined) element.textContent = value;
   });
-
-  document.querySelectorAll(".language-btn").forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.lang === lang);
+  document.querySelectorAll('.language-btn').forEach((button) => {
+    button.classList.toggle('is-active', button.dataset.lang === lang);
   });
-
-  localStorage.setItem("apartmarketing-language", lang);
+  localStorage.setItem('apartmarketing-language', lang);
 }
 
-document.querySelectorAll(".language-btn").forEach((button) => {
-  button.addEventListener("click", () => setLanguage(button.dataset.lang));
+document.querySelectorAll('.language-btn').forEach((button) => {
+  button.addEventListener('click', () => setLanguage(button.dataset.lang));
 });
+setLanguage(localStorage.getItem('apartmarketing-language') || 'ru');
 
-setLanguage(localStorage.getItem("apartmarketing-language") || "ru");
+(() => {
+  const toggle = document.querySelector('.mobile-menu-toggle');
+  const menu = document.querySelector('.mobile-site-menu');
+  if (!toggle || !menu) return;
 
-const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
-const mobileSiteMenu = document.querySelector(".mobile-site-menu");
-
-if (mobileMenuToggle && mobileSiteMenu) {
-  const setMobileMenuOpen = (open) => {
-    mobileSiteMenu.classList.toggle("is-open", open);
-    mobileMenuToggle.setAttribute("aria-expanded", String(open));
+  const setOpen = (open) => {
+    menu.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
   };
 
-  mobileMenuToggle.addEventListener("click", () => {
-    setMobileMenuOpen(!mobileSiteMenu.classList.contains("is-open"));
+  toggle.addEventListener('click', () => setOpen(!menu.classList.contains('is-open')));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setOpen(false);
   });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") setMobileMenuOpen(false);
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 740) setOpen(false);
   });
+})();
 
-  window.addEventListener("resize", () => {
-    if (window.innerWidth >= 740) setMobileMenuOpen(false);
-  });
-}
-
-
-/* Gallery lightbox controls v119 */
+/* Gallery lightbox */
 (() => {
-  const galleryImages = Array.from(document.querySelectorAll('.gallery-grid .portfolio-card img'));
-  if (!galleryImages.length) return;
+  const images = Array.from(document.querySelectorAll('.gallery-grid .portfolio-card img'));
+  if (!images.length) return;
 
   let currentIndex = 0;
-
   const lightbox = document.createElement('div');
   lightbox.className = 'gallery-lightbox';
   lightbox.setAttribute('role', 'dialog');
@@ -237,426 +195,257 @@ if (mobileMenuToggle && mobileSiteMenu) {
 
   const stage = document.createElement('div');
   stage.className = 'gallery-lightbox__stage';
-
   const fullImage = document.createElement('img');
   fullImage.className = 'gallery-lightbox__image';
   fullImage.alt = '';
-
   const counter = document.createElement('div');
   counter.className = 'gallery-lightbox__counter';
   counter.setAttribute('aria-live', 'polite');
 
-  const makeControl = (className, label) => {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = `gallery-lightbox__control ${className}`;
-    button.setAttribute('aria-label', label);
-    return button;
+  const button = (className, label) => {
+    const el = document.createElement('button');
+    el.type = 'button';
+    el.className = `gallery-lightbox__control ${className}`;
+    el.setAttribute('aria-label', label);
+    return el;
   };
 
-  const prevButton = makeControl('gallery-lightbox__prev', 'Предыдущее фото');
-  const nextButton = makeControl('gallery-lightbox__next', 'Следующее фото');
-  const collapseButton = makeControl('gallery-lightbox__collapse', 'Свернуть фото');
+  const prev = button('gallery-lightbox__prev', 'Предыдущее фото');
+  const next = button('gallery-lightbox__next', 'Следующее фото');
+  const close = button('gallery-lightbox__collapse', 'Свернуть фото');
+  stage.append(fullImage, counter, prev, next, close);
+  lightbox.append(stage);
+  document.body.append(lightbox);
 
-  stage.appendChild(fullImage);
-  stage.appendChild(counter);
-  stage.appendChild(prevButton);
-  stage.appendChild(nextButton);
-  stage.appendChild(collapseButton);
-  lightbox.appendChild(stage);
-  document.body.appendChild(lightbox);
-
-  const updateNavigation = () => {
-    const atFirst = currentIndex === 0;
-    const atLast = currentIndex === galleryImages.length - 1;
-
-    prevButton.disabled = atFirst;
-    nextButton.disabled = atLast;
-    prevButton.setAttribute('aria-hidden', atFirst ? 'true' : 'false');
-    nextButton.setAttribute('aria-hidden', atLast ? 'true' : 'false');
-    counter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
-  };
-
-  const showImage = (index) => {
-    if (index < 0 || index >= galleryImages.length) return;
-
+  const update = (index) => {
+    if (index < 0 || index >= images.length) return;
     currentIndex = index;
-    const image = galleryImages[currentIndex];
-    fullImage.src = image.currentSrc || image.src;
-    fullImage.alt = image.alt || 'Фотография';
-    updateNavigation();
+    const source = images[index];
+    fullImage.src = source.currentSrc || source.src;
+    fullImage.alt = source.alt || 'Фотография';
+    counter.textContent = `${index + 1} / ${images.length}`;
+    prev.disabled = index === 0;
+    next.disabled = index === images.length - 1;
   };
 
-  const openImage = (index) => {
-    showImage(index);
+  const open = (index) => {
+    update(index);
     lightbox.classList.add('is-open');
     document.body.classList.add('gallery-lightbox-open');
-    collapseButton.focus({ preventScroll: true });
+    close.focus({ preventScroll: true });
   };
 
-  const closeLightbox = () => {
+  const dismiss = () => {
     lightbox.classList.remove('is-open');
     document.body.classList.remove('gallery-lightbox-open');
     fullImage.removeAttribute('src');
     fullImage.alt = '';
-    galleryImages[currentIndex]?.focus({ preventScroll: true });
+    images[currentIndex]?.focus({ preventScroll: true });
   };
 
-  galleryImages.forEach((image, index) => {
-    image.setAttribute('tabindex', '0');
+  images.forEach((image, index) => {
+    image.tabIndex = 0;
     image.setAttribute('role', 'button');
     image.setAttribute('aria-label', `${image.alt || 'Фотография'}. Открыть в полном размере`);
-
-    image.addEventListener('click', () => openImage(index));
+    image.addEventListener('click', () => open(index));
     image.addEventListener('keydown', (event) => {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
-        openImage(index);
+        open(index);
       }
     });
   });
 
-  prevButton.addEventListener('click', (event) => {
-    event.stopPropagation();
-    showImage(currentIndex - 1);
-  });
-
-  nextButton.addEventListener('click', (event) => {
-    event.stopPropagation();
-    showImage(currentIndex + 1);
-  });
-
-  collapseButton.addEventListener('click', (event) => {
-    event.stopPropagation();
-    closeLightbox();
-  });
-
+  prev.addEventListener('click', (event) => { event.stopPropagation(); update(currentIndex - 1); });
+  next.addEventListener('click', (event) => { event.stopPropagation(); update(currentIndex + 1); });
+  close.addEventListener('click', (event) => { event.stopPropagation(); dismiss(); });
   stage.addEventListener('click', (event) => event.stopPropagation());
-  lightbox.addEventListener('click', closeLightbox);
-
+  lightbox.addEventListener('click', dismiss);
   document.addEventListener('keydown', (event) => {
     if (!lightbox.classList.contains('is-open')) return;
-
-    if (event.key === 'Escape') closeLightbox();
-    if (event.key === 'ArrowLeft' && currentIndex > 0) showImage(currentIndex - 1);
-    if (event.key === 'ArrowRight' && currentIndex < galleryImages.length - 1) showImage(currentIndex + 1);
+    if (event.key === 'Escape') dismiss();
+    if (event.key === 'ArrowLeft' && currentIndex > 0) update(currentIndex - 1);
+    if (event.key === 'ArrowRight' && currentIndex < images.length - 1) update(currentIndex + 1);
   });
 })();
-/* End gallery lightbox controls v119 */
 
-
-
-/* v131 — random thumbnails with size/quantity priority */
-/* v130 — random thumbnails from the full gallery, 138px first */
+/* Homepage mini gallery */
 (() => {
   const row = document.querySelector('.home-intro-row');
-  const photo = document.querySelector('.home-intro-row__photo');
+  const hero = document.querySelector('.home-intro-row__photo');
   const fill = document.querySelector('.home-intro-row__fill');
-  const help = document.querySelector('.home-help-panel');
   const thumbs = Array.from(document.querySelectorAll('.home-mini-gallery__item'));
-  if (!row || !photo || !fill || !help || !thumbs.length) return;
+  if (!row || !hero || !fill || !thumbs.length) return;
 
-  const gallerySources = [
-    'images/gallery-p1-01.jpg',
-    'images/gallery-p1-02.jpg',
-    'images/gallery-p1-03.jpg',
-    'images/gallery-p1-04.jpg',
-    'images/gallery-p1-05.jpg',
-    'images/gallery-p1-06.jpg',
-    'images/gallery-p1-07.jpg',
-    'images/gallery-p1-08.jpg',
-    'images/gallery-p1-09.jpg',
-    'images/gallery-p1-10.jpg',
-    'images/gallery-p1-11.jpg',
-    'images/gallery-p1-12.jpg',
-    'images/gallery-p1-13.jpg',
-    'images/gallery-p1-14.jpg',
-    'images/gallery-p1-15.jpg',
-    'images/gallery-p1-16.jpg',
-    'images/gallery-p1-17.jpg',
-    'images/gallery-p1-18.jpg',
-    'images/gallery-p2-01.jpg',
-    'images/gallery-p2-02.jpg',
-    'images/gallery-p2-03.jpg',
-    'images/gallery-p2-04.jpg',
-    'images/gallery-p2-05.jpg',
-    'images/gallery-p2-06.jpg',
-    'images/gallery-p2-07.jpg',
-    'images/gallery-p2-08.jpg',
-    'images/gallery-p2-09.jpg',
-    'images/gallery-p2-10.jpg',
-    'images/gallery-p2-11.jpg',
-    'images/gallery-p2-12.jpg',
-    'images/gallery-p2-13.jpg',
-    'images/gallery-p2-14.jpg',
-    'images/gallery-p2-15.jpg',
-    'images/gallery-p2-16.jpg',
-    'images/gallery-p2-17.jpg',
-    'images/gallery-p2-18.jpg',
-    'images/gallery-p3-01.jpg',
-    'images/gallery-p3-02.jpg',
-    'images/gallery-p3-03.jpg',
-    'images/gallery-p3-04.jpg',
-    'images/gallery-p3-05.jpg',
-    'images/gallery-p3-06.jpg',
-    'images/gallery-p3-07.jpg',
-    'images/gallery-p3-08.jpg',
-    'images/gallery-p3-09.jpg',
-    'images/gallery-p3-10.jpg',
-    'images/gallery-p3-11.jpg',
-    'images/gallery-p3-12.jpg',
-    'images/gallery-p3-13.jpg',
-    'images/gallery-p3-14.jpg',
-    'images/gallery-p3-15.jpg',
-    'images/gallery-p3-16.jpg',
-    'images/gallery-p3-17.jpg',
-    'images/gallery-p3-18.jpg',
-    'images/gallery-p4-01.jpg',
-    'images/gallery-p4-02.jpg',
-    'images/gallery-p4-03.jpg',
-    'images/gallery-p4-04.jpg',
-    'images/gallery-p4-05.jpg',
-    'images/gallery-p4-06.jpg',
-    'images/gallery-p4-07.jpg',
-    'images/gallery-p4-08.jpg',
-    'images/gallery-p4-09.jpg',
-    'images/gallery-p4-10.jpg',
-    'images/gallery-p4-11.jpg',
-    'images/gallery-p4-12.jpg',
-    'images/gallery-p4-13.jpg',
-    'images/gallery-p4-14.jpg',
-    'images/gallery-p4-15.jpg',
-    'images/gallery-p4-16.jpg',
-    'images/gallery-p4-17.jpg',
-    'images/gallery-p4-18.jpg',
-    'images/gallery-p5-01.jpg',
-    'images/gallery-p5-02.jpg',
-    'images/gallery-p5-03.jpg',
-    'images/gallery-p5-04.jpg',
-    'images/gallery-p5-05.jpg',
-    'images/gallery-p5-06.jpg',
-    'images/gallery-p5-07.jpg',
-    'images/gallery-p5-08.jpg',
-    'images/gallery-p5-09.jpg',
-    'images/gallery-p5-10.jpg',
-    'images/gallery-p5-11.jpg',
-    'images/gallery-p5-12.jpg',
-    'images/gallery-p5-13.jpg',
-    'images/gallery-p5-14.jpg',
-    'images/gallery-p5-15.jpg',
-    'images/gallery-p5-16.jpg',
-    'images/gallery-p5-17.jpg',
-    'images/gallery-p5-18.jpg',
-    'images/gallery-p6-01.jpg',
-    'images/gallery-p6-02.jpg',
-    'images/gallery-p6-03.jpg',
-    'images/gallery-p6-04.jpg',
-    'images/gallery-p6-05.jpg',
-    'images/gallery-p6-06.jpg',
-    'images/gallery-p6-07.jpg',
-    'images/gallery-p6-08.jpg',
-    'images/gallery-p6-09.jpg',
-    'images/gallery-p6-10.jpg',
-    'images/gallery-p6-11.jpg',
-    'images/gallery-p6-12.jpg',
-    'images/gallery-p6-13.jpg',
-    'images/gallery-p6-14.jpg',
-    'images/gallery-p6-15.jpg',
-    'images/gallery-p6-16.jpg',
-    'images/gallery-p6-17.jpg',
-    'images/gallery-p6-18.jpg',
-    'images/gallery-p7-01.jpg',
-    'images/gallery-p7-02.jpg',
-    'images/gallery-p7-03.jpg',
-    'images/gallery-p7-04.jpg',
-    'images/gallery-p7-05.jpg',
-    'images/gallery-p7-06.jpg',
-    'images/gallery-p7-07.jpg',
-    'images/gallery-p7-08.jpg',
-    'images/gallery-p7-09.jpg',
-    'images/gallery-p7-10.jpg',
-    'images/gallery-p7-11.jpg',
-    'images/gallery-p7-12.jpg',
-    'images/gallery-p7-13.jpg',
-    'images/gallery-p7-14.jpg',
-    'images/gallery-p7-15.jpg',
-    'images/gallery-p7-16.jpg',
-    'images/gallery-p7-17.jpg',
-    'images/gallery-p7-18.jpg',
-    'images/gallery-p8-01.jpg',
-    'images/gallery-p8-02.jpg',
-    'images/gallery-p8-03.jpg',
-    'images/gallery-p8-04.jpg',
-    'images/gallery-p8-05.jpg',
-    'images/gallery-p8-06.jpg',
-    'images/gallery-p8-07.jpg',
-    'images/gallery-p8-08.jpg',
-    'images/gallery-p8-09.jpg',
-    'images/gallery-p8-10.jpg',
-    'images/gallery-p8-11.jpg',
-    'images/gallery-p8-12.jpg',
-    'images/gallery-p8-13.jpg',
-    'images/gallery-p8-14.jpg',
-    'images/gallery-p8-15.jpg',
-    'images/gallery-p8-16.jpg',
-    'images/gallery-p8-17.jpg',
-    'images/gallery-p8-18.jpg',
-    'images/gallery-p9-01.jpg',
-    'images/gallery-p9-02.jpg',
-    'images/gallery-p9-03.jpg',
-    'images/gallery-p9-04.jpg',
-    'images/gallery-p9-05.jpg',
-    'images/gallery-p9-06.jpg',
-    'images/gallery-p9-07.jpg',
-    'images/gallery-p9-08.jpg',
-    'images/gallery-p9-09.jpg',
-    'images/gallery-p9-10.jpg',
-    'images/gallery-p9-11.jpg',
-    'images/gallery-p9-12.jpg',
-    'images/gallery-p9-13.jpg',
-    'images/gallery-p9-14.jpg',
-    'images/gallery-p9-15.jpg',
-    'images/gallery-p9-16.jpg',
-    'images/gallery-p9-17.jpg',
-    'images/gallery-p9-18.jpg',
-    'images/gallery-p10-01.jpg',
-    'images/gallery-p10-02.jpg',
-    'images/gallery-p10-03.jpg',
-    'images/gallery-p10-04.jpg',
-    'images/gallery-p10-05.jpg',
-    'images/gallery-p10-06.jpg',
-    'images/gallery-p10-07.jpg',
-    'images/gallery-p10-08.jpg',
-    'images/gallery-p10-09.jpg',
-    'images/gallery-p10-10.jpg',
-    'images/gallery-p10-11.jpg',
-    'images/gallery-p10-12.jpg',
-    'images/gallery-p10-13.jpg',
-    'images/gallery-p10-14.jpg',
-    'images/gallery-p10-15.jpg',
-    'images/gallery-p10-16.jpg',
-    'images/gallery-p10-17.jpg',
-    'images/gallery-p10-18.jpg',
-    'images/gallery-p11-01.jpg',
-    'images/gallery-p11-02.jpg',
-    'images/gallery-p11-03.jpg',
-    'images/gallery-p11-04.jpg',
-    'images/gallery-p11-05.jpg',
-    'images/gallery-p11-06.jpg',
-    'images/gallery-p11-07.jpg',
-    'images/gallery-p11-08.jpg',
-    'images/gallery-p11-09.jpg',
-    'images/gallery-p11-10.jpg',
-    'images/gallery-p11-11.jpg',
-    'images/gallery-p11-12.jpg',
-    'images/gallery-p11-13.jpg',
-    'images/gallery-p11-14.jpg',
-    'images/gallery-p11-15.jpg',
-    'images/gallery-p11-16.jpg',
-    'images/gallery-p11-17.jpg',
-    'images/gallery-p11-18.jpg',
-    'images/gallery-p12-01.jpg',
-    'images/gallery-p12-02.jpg',
-    'images/gallery-p12-03.jpg',
-    'images/gallery-p12-04.jpg',
-    'images/gallery-p12-05.jpg',
-    'images/gallery-p12-06.jpg',
-    'images/gallery-p12-07.jpg',
-    'images/gallery-p12-08.jpg',
-    'images/gallery-p12-09.jpg',
-    'images/gallery-p12-10.jpg',
-    'images/gallery-p12-11.jpg',
-    'images/gallery-p12-12.jpg',
-    'images/gallery-p12-13.jpg',
-    'images/gallery-p12-14.jpg',
-    'images/gallery-p12-15.jpg',
-    'images/gallery-p12-16.jpg',
-    'images/gallery-p12-17.jpg',
-    'images/gallery-p12-18.jpg'
-  ];
-
-  // Randomize from all gallery images once per page load.
-  for (let i = gallerySources.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [gallerySources[i], gallerySources[j]] = [gallerySources[j], gallerySources[i]];
-  }
-  thumbs.forEach((thumb, i) => {
-    const img = thumb.querySelector('img');
-    if (img && gallerySources[i]) img.src = gallerySources[i];
+  const MIN_HEIGHT = 70;
+  const MAX_HEIGHT = 144;
+  const MIN_GAP = 12;
+  const VERTICAL_GAP = 12;
+  const RATIO = 3 / 2;
+  const gallerySources = Array.from({ length: 216 }, (_, index) => {
+    const page = Math.floor(index / 18) + 1;
+    const photo = String((index % 18) + 1).padStart(2, '0');
+    return `images/gallery-p${page}-${photo}.jpg`;
   });
 
-  const setThumbHeight = (thumb, height) => {
-    thumb.style.setProperty('height', `${height}px`, 'important');
-    thumb.style.setProperty('min-height', `${height}px`, 'important');
-    thumb.style.setProperty('max-height', `${height}px`, 'important');
-  };
-
-  const prepareLayout = (height) => {
-    thumbs.forEach((thumb) => {
-      thumb.hidden = false;
-      setThumbHeight(thumb, height);
-    });
-
-    fill.style.height = 'auto';
-    const photoHeight = Math.round(photo.getBoundingClientRect().height);
-    const helpHeight = Math.ceil(help.getBoundingClientRect().height);
-    const availableHeight = Math.max(photoHeight, helpHeight);
-    fill.style.height = `${availableHeight}px`;
-  };
-
-  const countThatFits = (height) => {
-    prepareLayout(height);
-    const fr = fill.getBoundingClientRect();
-    let count = 0;
-
-    for (const thumb of thumbs) {
-      const tr = thumb.getBoundingClientRect();
-      const inside = tr.left >= fr.left - 1 &&
-        tr.right <= fr.right + 1 &&
-        tr.top >= fr.top - 1 &&
-        tr.bottom <= fr.bottom + 1;
-      if (!inside) break;
-      count += 1;
+  const shuffle = (items) => {
+    for (let i = items.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [items[i], items[j]] = [items[j], items[i]];
     }
-    return count;
+    return items;
   };
 
-  const applyLayout = (height, visibleCount) => {
-    prepareLayout(height);
+  const measureLayout = (height) => {
+    const rowWidth = row.getBoundingClientRect().width;
+    const heroWidth = hero.getBoundingClientRect().width;
+    const heroHeight = hero.getBoundingClientRect().height;
+    const availableWithoutGap = Math.max(0, rowWidth - heroWidth);
+    const thumbWidth = height * RATIO;
+    let columns = Math.floor(availableWithoutGap / (thumbWidth + MIN_GAP));
+    columns = Math.max(1, columns);
+
+    while (columns > 1 && availableWithoutGap / columns - thumbWidth < MIN_GAP) columns -= 1;
+    let horizontalGap = columns > 1 ? availableWithoutGap / columns - thumbWidth : MIN_GAP;
+    horizontalGap = Math.max(MIN_GAP, horizontalGap);
+
+    const fillWidth = availableWithoutGap - horizontalGap;
+    if (fillWidth < thumbWidth - .5) return { count: 0, height, thumbWidth, columns: 1, horizontalGap: MIN_GAP, rows: 0, heroHeight };
+
+    const rows = Math.max(0, Math.floor((heroHeight + VERTICAL_GAP) / (height + VERTICAL_GAP)));
+    const count = Math.min(thumbs.length, columns * rows);
+    return { count, height, thumbWidth, columns, horizontalGap, rows, heroHeight };
+  };
+
+  const chooseLayout = () => {
+    const maxLayout = measureLayout(MAX_HEIGHT);
+
+    // Old rule stays in force once 4+ thumbnails fit at the maximum size:
+    // keep the largest 144px thumbnails instead of shrinking just to add more.
+    if (maxLayout.count >= 4) return maxLayout;
+
+    // Within the normal 70–144px range, quantity has priority until 4+ fit.
+    // On equal counts, the first (larger) height is retained.
+    let best = maxLayout;
+    for (let height = MAX_HEIGHT - 1; height >= MIN_HEIGHT; height -= 1) {
+      const candidate = measureLayout(height);
+      if (candidate.count > best.count) best = candidate;
+      if (candidate.count >= 4) return candidate;
+    }
+
+    // If even 70px is not enough for four thumbnails, there is deliberately
+    // no minimum size: continue shrinking only until exactly the first layout
+    // that can hold at least four.
+    for (let height = MIN_HEIGHT - 1; height >= 1; height -= 1) {
+      const candidate = measureLayout(height);
+      if (candidate.count >= 4) return candidate;
+      if (candidate.count > best.count) best = candidate;
+    }
+
+    return best;
+  };
+
+  let currentColumns = 1;
+  const applyLayout = () => {
+    const layout = chooseLayout();
+    currentColumns = Math.max(1, layout.columns);
+    row.style.setProperty('--mini-horizontal-gap', `${layout.horizontalGap.toFixed(2)}px`);
+    fill.style.height = `${Math.round(layout.heroHeight)}px`;
+    fill.style.gridTemplateColumns = `repeat(${layout.columns}, ${layout.thumbWidth.toFixed(2)}px)`;
+    fill.style.gridAutoRows = `${layout.height}px`;
+    fill.style.columnGap = `${layout.horizontalGap.toFixed(2)}px`;
+    fill.style.rowGap = `${VERTICAL_GAP}px`;
+
     thumbs.forEach((thumb, index) => {
-      thumb.hidden = index >= visibleCount;
+      thumb.hidden = index >= layout.count;
     });
+    return layout;
   };
 
-  const fitThumbs = () => {
-    // Rule 1: if at least four thumbnails fit at the maximum 138px height,
-    // keep them all at 138px. Size wins over showing more thumbnails.
-    const maxSizeCount = countThatFits(138);
-    if (maxSizeCount >= 4) {
-      applyLayout(138, maxSizeCount);
+  const chosenSources = shuffle([...gallerySources]).slice(0, thumbs.length);
+  const ready = new Map();
+  const revealed = new Set();
+  let timer = null;
+  let started = false;
+
+  const isAdjacentToRevealed = (index) => {
+    const rowIndex = Math.floor(index / currentColumns);
+    const colIndex = index % currentColumns;
+    for (const shown of revealed) {
+      const shownRow = Math.floor(shown / currentColumns);
+      const shownCol = shown % currentColumns;
+      if ((shownRow === rowIndex && Math.abs(shownCol - colIndex) === 1) ||
+          (shownCol === colIndex && Math.abs(shownRow - rowIndex) === 1)) return true;
+    }
+    return false;
+  };
+
+  const randomDelay = () => 500 + Math.floor(Math.random() * 301);
+
+  const scheduleReveal = () => {
+    clearTimeout(timer);
+    timer = setTimeout(revealNext, randomDelay());
+  };
+
+  const revealNext = () => {
+    const candidates = Array.from(ready.keys()).filter((index) => !thumbs[index].hidden && !revealed.has(index));
+    if (!candidates.length) {
+      if (Array.from(thumbs).some((thumb, index) => !thumb.hidden && !revealed.has(index))) timer = setTimeout(revealNext, 80);
       return;
     }
 
-    // Rule 2: if fewer than four fit at 138px, quantity wins.
-    // Search every allowed height from 138 down to 70px and choose the layout
-    // that shows the most thumbnails. On a tie, keep the larger thumbnails.
-    let bestHeight = 138;
-    let bestCount = maxSizeCount;
+    const separated = candidates.filter((index) => !isAdjacentToRevealed(index));
+    const pool = separated.length ? separated : candidates;
+    const index = pool[Math.floor(Math.random() * pool.length)];
+    const thumb = thumbs[index];
+    const img = thumb.querySelector('img');
+    img.src = ready.get(index);
+    ready.delete(index);
+    revealed.add(index);
+    requestAnimationFrame(() => requestAnimationFrame(() => thumb.classList.add('is-mini-visible')));
 
-    for (let height = 137; height >= 70; height -= 1) {
-      const count = countThatFits(height);
-      if (count > bestCount) {
-        bestCount = count;
-        bestHeight = height;
-      }
-    }
-
-    applyLayout(bestHeight, bestCount);
+    if (Array.from(thumbs).some((item, i) => !item.hidden && !revealed.has(i))) scheduleReveal();
   };
 
-  const scheduleFit = () => requestAnimationFrame(() => requestAnimationFrame(fitThumbs));
-  window.addEventListener('load', scheduleFit, { once: true });
-  window.addEventListener('resize', scheduleFit);
-  scheduleFit();
+  const preload = () => {
+    thumbs.forEach((thumb, index) => {
+      thumb.classList.remove('is-mini-visible');
+      const img = thumb.querySelector('img');
+      img.removeAttribute('src');
+      const loader = new Image();
+      loader.decoding = 'async';
+      loader.onload = () => {
+        ready.set(index, chosenSources[index]);
+        if (!timer && !revealed.size) revealNext();
+      };
+      loader.onerror = () => { thumb.hidden = true; };
+      loader.src = chosenSources[index];
+    });
+  };
+
+  const start = () => {
+    if (started) return;
+    started = true;
+    applyLayout();
+    preload();
+  };
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      applyLayout();
+      thumbs.forEach((thumb, index) => {
+        if (!thumb.hidden && !revealed.has(index) && !ready.has(index)) {
+          const loader = new Image();
+          loader.onload = () => { ready.set(index, chosenSources[index]); scheduleReveal(); };
+          loader.src = chosenSources[index];
+        }
+      });
+      if (Array.from(ready.keys()).some((index) => !thumbs[index].hidden && !revealed.has(index))) scheduleReveal();
+    }, 80);
+  });
+
+  window.addEventListener('load', () => setTimeout(start, 120), { once: true });
+  applyLayout();
 })();
-/* End v131 */
