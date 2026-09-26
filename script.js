@@ -7,7 +7,7 @@ const translations = {
     "home_hero_line_2": "ПОМОГУТ БЫСТРО СДАТЬ ИЛИ",
     "home_hero_line_3": "ПРОДАТЬ НЕДВИЖИМОСТЬ",
     "home_rent_load_before": "ПОСУТОЧНАЯ ЗАГРУЗКА 50%",
-    "home_rent_load_after": "ПОСУТОЧНАЯ ЗАГРУЗКА 75%",
+    "home_rent_load_after": "ПОСУТОЧНАЯ ЗАГРУЗКА 80%",
     "contacts_btn": "КОНТАКТЫ",
     "contacts_title": "КОНТАКТЫ",
     "contacts_intro": "Свяжитесь с нами удобным способом.",
@@ -54,7 +54,7 @@ const translations = {
     "home_hero_line_2": "HELP YOU RENT OR SELL",
     "home_hero_line_3": "REAL ESTATE FASTER",
     "home_rent_load_before": "SHORT-TERM OCCUPANCY 50%",
-    "home_rent_load_after": "SHORT-TERM OCCUPANCY 75%",
+    "home_rent_load_after": "SHORT-TERM OCCUPANCY 80%",
     "contacts_btn": "CONTACTS",
     "contacts_title": "CONTACTS",
     "contacts_intro": "Contact us in the way that is most convenient for you.",
@@ -101,7 +101,7 @@ const translations = {
     "home_hero_line_2": "დაგეხმარებათ უფრო სწრაფად",
     "home_hero_line_3": "გააქირავოთ ან გაყიდოთ",
     "home_rent_load_before": "დღიური დატვირთვა 50%",
-    "home_rent_load_after": "დღიური დატვირთვა 75%",
+    "home_rent_load_after": "დღიური დატვირთვა 80%",
     "contacts_btn": "კონტაქტები",
     "contacts_title": "კონტაქტები",
     "contacts_intro": "დაგვიკავშირდით თქვენთვის მოსახერხებელი გზით.",
@@ -150,7 +150,8 @@ function equalizeHeroHeadlineLines() {
   const lines = Array.from(title.querySelectorAll(':scope > span'));
   if (lines.length !== 3) return;
 
-  lines.forEach((line) => { line.style.letterSpacing = '0px'; });
+  lines.forEach((line) => { line.style.letterSpacing = ''; });
+  if (window.matchMedia('(max-width: 739px)').matches) return;
 
   requestAnimationFrame(() => {
     const available = title.getBoundingClientRect().width;
@@ -326,6 +327,7 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
     const photo = String((index % 18) + 1).padStart(2, '0');
     return `images/gallery-p${page}-${photo}.jpg`;
   });
+  const getThumbSource = (fullSource) => `images/thumbs/${fullSource.split('/').pop()}`;
 
   const shuffle = (items) => {
     for (let i = items.length - 1; i > 0; i -= 1) {
@@ -394,58 +396,20 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
   };
 
   const chooseMobileLayout = () => {
-    const rowWidth = row.getBoundingClientRect().width;
-    const heroWidth = hero.getBoundingClientRect().width;
-    const heroHeight = hero.getBoundingClientRect().height;
-    const widthForGallery = Math.max(0, rowWidth - heroWidth - MIN_GAP);
-    let best = null;
-    let fallback = null;
-
-    // Mobile rule: keep a 2px gap inside the mini-gallery. Once 6+
-    // photos fit, the largest possible photo size wins over showing more photos.
-    for (let columns = 1; columns <= thumbs.length; columns += 1) {
-      const widthLimitedHeight = (widthForGallery - ((columns - 1) * MOBILE_MIN_GAP)) / (columns * RATIO);
-      if (!Number.isFinite(widthLimitedHeight) || widthLimitedHeight <= 0) continue;
-
-      for (let rows = 1; rows <= thumbs.length; rows += 1) {
-        const count = Math.min(thumbs.length, columns * rows);
-        const height = Math.min(MAX_HEIGHT, widthLimitedHeight, (heroHeight - ((rows - 1) * MOBILE_MIN_GAP)) / rows);
-        if (!Number.isFinite(height) || height <= 0) continue;
-
-        const candidate = {
-          count,
-          height,
-          thumbWidth: height * RATIO,
-          columns,
-          horizontalGap: MOBILE_MIN_GAP,
-          outerGap: MIN_GAP,
-          rows,
-          heroHeight,
-          mobile: true
-        };
-
-        if (!fallback || candidate.count > fallback.count ||
-            (candidate.count === fallback.count && candidate.height > fallback.height)) {
-          fallback = candidate;
-        }
-
-        if (count < 6) continue;
-        if (!best || candidate.height > best.height + .01 ||
-            (Math.abs(candidate.height - best.height) <= .01 && candidate.count > best.count)) {
-          best = candidate;
-        }
-      }
-    }
-
-    return best || fallback || {
-      count: 0,
-      height: 1,
-      thumbWidth: RATIO,
-      columns: 1,
+    const width = fill.getBoundingClientRect().width;
+    const columns = width < 480 ? 3 : 4;
+    const rows = 2;
+    const thumbWidth = (width - (columns - 1) * MOBILE_MIN_GAP) / columns;
+    const height = thumbWidth / RATIO;
+    return {
+      count: columns * rows,
+      height,
+      thumbWidth,
+      columns,
       horizontalGap: MOBILE_MIN_GAP,
       outerGap: MIN_GAP,
-      rows: 1,
-      heroHeight,
+      rows,
+      heroHeight: rows * height + (rows - 1) * MOBILE_MIN_GAP,
       mobile: true
     };
   };
@@ -648,7 +612,10 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
         // Phase 2: replace all invisible photos, then fade the whole batch back in.
         loadedJobs.forEach(({ thumb, index, nextSource }) => {
           const img = thumb.querySelector('img');
-          if (img) img.src = nextSource;
+          if (img) {
+            img.src = getThumbSource(nextSource);
+            img.dataset.fullSource = nextSource;
+          }
           currentSources.set(index, nextSource);
           thumb.classList.add('is-mini-swapping-in');
         });
@@ -676,7 +643,7 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
         finishedLoads += 1;
         if (finishedLoads === jobs.length) beginBatchSwap();
       };
-      loader.src = job.nextSource;
+      loader.src = getThumbSource(job.nextSource);
     });
   };
 
@@ -698,7 +665,8 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
     const thumb = thumbs[index];
     const img = thumb.querySelector('img');
     const source = ready.get(index);
-    img.src = source;
+    img.src = getThumbSource(source);
+    img.dataset.fullSource = source;
     currentSources.set(index, source);
     ready.delete(index);
     revealed.add(index);
@@ -721,7 +689,7 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
       if (!timer && !revealed.size) revealNext();
     };
     loader.onerror = () => { thumb.hidden = true; };
-    loader.src = source;
+    loader.src = getThumbSource(source);
   };
 
   const preload = () => {
@@ -729,10 +697,80 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
       thumb.classList.remove('is-mini-visible', 'is-mini-swapping-out', 'is-mini-swapping-in');
       const img = thumb.querySelector('img');
       img.removeAttribute('src');
+      delete img.dataset.fullSource;
       currentSources.delete(index);
       loadSlotSource(index, chosenSources[index]);
     });
   };
+
+  // Homepage mini-gallery full-size preview. Thumbnails stay lightweight;
+  // the original gallery file is requested only after the user clicks a mini photo.
+  const preview = document.createElement('div');
+  preview.className = 'home-mini-lightbox';
+  preview.setAttribute('role', 'dialog');
+  preview.setAttribute('aria-modal', 'true');
+  preview.setAttribute('aria-label', 'Увеличенное фото');
+
+  const previewImage = document.createElement('img');
+  previewImage.className = 'home-mini-lightbox__image';
+  previewImage.alt = '';
+
+  const previewClose = document.createElement('button');
+  previewClose.type = 'button';
+  previewClose.className = 'home-mini-lightbox__close gallery-lightbox__control gallery-lightbox__collapse';
+  previewClose.setAttribute('aria-label', 'Закрыть фото');
+
+  const previewStage = document.createElement('div');
+  previewStage.className = 'home-mini-lightbox__stage';
+  previewStage.append(previewImage, previewClose);
+  preview.append(previewStage);
+  document.body.append(preview);
+
+  let previewSourceIndex = null;
+  const closePreview = () => {
+    preview.classList.remove('is-open');
+    document.body.classList.remove('gallery-lightbox-open');
+    previewImage.removeAttribute('src');
+    previewImage.alt = '';
+    if (previewSourceIndex !== null) {
+      thumbs[previewSourceIndex]?.focus({ preventScroll: true });
+    }
+    previewSourceIndex = null;
+  };
+
+  const openPreview = (index) => {
+    const fullSource = currentSources.get(index);
+    if (!fullSource) return;
+    previewSourceIndex = index;
+    previewImage.src = fullSource;
+    previewImage.alt = 'Фотография в полном размере';
+    preview.classList.add('is-open');
+    document.body.classList.add('gallery-lightbox-open');
+    previewClose.focus({ preventScroll: true });
+  };
+
+  thumbs.forEach((thumb, index) => {
+    thumb.tabIndex = 0;
+    thumb.setAttribute('role', 'button');
+    thumb.setAttribute('aria-label', 'Открыть фото в полном размере');
+    thumb.addEventListener('click', () => openPreview(index));
+    thumb.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openPreview(index);
+      }
+    });
+  });
+
+  previewClose.addEventListener('click', (event) => {
+    event.stopPropagation();
+    closePreview();
+  });
+  previewImage.addEventListener('click', (event) => event.stopPropagation());
+  preview.addEventListener('click', closePreview);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && preview.classList.contains('is-open')) closePreview();
+  });
 
   const start = () => {
     if (started) return;

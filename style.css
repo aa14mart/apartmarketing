@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&display=swap");
 
 :root {
-  --logo-gold: #E8CCA6;
+  --logo-gold: #F0E3CE;
   --nav-inactive: rgba(255,255,255,.54);
   --nav-hover: #C7B59D;
   --header-bg: rgba(18,16,14,.59);
@@ -155,7 +155,7 @@ svg { display: block; }
 .mobile-menu__link.is-active,
 .language-btn.is-active {
   color: var(--logo-gold);
-  text-shadow: 0 0 5px rgba(232,204,166,.12), 0 0 10px rgba(232,204,166,.05);
+  text-shadow: 0 0 5px rgba(240,227,206,.12), 0 0 10px rgba(240,227,206,.05);
 }
 
 .header-single-right {
@@ -423,7 +423,9 @@ p { color: #fff; }
   overflow: hidden;
 }
 
-.home-intro-row__photo > img {
+.home-intro-row__photo > picture { display: block; width: 100%; height: 100%; }
+
+.home-intro-row__photo > picture > img {
   display: block;
   width: 100%;
   height: 100%;
@@ -588,7 +590,7 @@ p { color: #fff; }
   align-items: center;
   gap: 6px;
   color: var(--logo-gold);
-  font-size: 12px;
+  font-size: 24px;
   line-height: 1;
   letter-spacing: .03em;
   text-transform: uppercase;
@@ -601,8 +603,8 @@ p { color: #fff; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
-  height: 27px;
+  width: 36px;
+  height: 54px;
   color: var(--logo-gold);
 }
 
@@ -622,7 +624,7 @@ p { color: #fff; }
 }
 
 .home-sale-rent__overlay-icon .iphone17-vector__body {
-  fill: rgba(232,204,166,.10);
+  fill: rgba(240,227,206,.10);
   stroke-width: 1.8;
 }
 
@@ -637,7 +639,7 @@ p { color: #fff; }
 }
 
 .home-sale-rent__apart-logo {
-  width: 54px !important;
+  width: 108px !important;
   height: auto !important;
   object-fit: contain !important;
   object-position: left center;
@@ -645,7 +647,7 @@ p { color: #fff; }
 }
 
 .home-sale-rent__apart-logo--header {
-  width: 82px !important;
+  width: 164px !important;
 }
 
 
@@ -673,7 +675,7 @@ p { color: #fff; }
 .home-sale-rent__cta:hover,
 .home-sale-rent__cta:focus-visible {
   color: var(--logo-gold);
-  text-shadow: 0 0 5px rgba(232,204,166,.12), 0 0 10px rgba(232,204,166,.05);
+  text-shadow: 0 0 5px rgba(240,227,206,.12), 0 0 10px rgba(240,227,206,.05);
   outline: none;
 }
 
@@ -719,7 +721,7 @@ p { color: #fff; }
   display: block;
   width: 100%;
   height: auto;
-  cursor: zoom-in;
+  cursor: pointer;
 }
 
 .portfolio-card::after {
@@ -983,9 +985,9 @@ body.gallery-lightbox-open { overflow: hidden; }
 }
 
 @media (max-width: 430px) {
-  body { font-size: 9px; }
+  body { font-size: 10px; }
   .header-panel--logo-home,
-  .mobile-site-menu { font-size: 9px; }
+  .mobile-site-menu { font-size: 10px; }
 
   .pricing-card h2,
   .included-services h3,
@@ -993,7 +995,7 @@ body.gallery-lightbox-open { overflow: hidden; }
   .workflow-step h3,
   .info-page__title,
   .home-help-panel__title--hero {
-    font-size: 9px;
+    font-size: 10px;
   }
 }
 
@@ -1017,9 +1019,10 @@ body.gallery-lightbox-open { overflow: hidden; }
   }
   .mobile-menu__link { min-width: 0; height: 30px; padding: 0 4px; text-align: center; }
 
-  /* Hero width exactly matches one sale/rent photo: (100% - 12px) / 2. */
+  /* Mobile: full-width hero followed by a separate full-width mini-gallery. */
   .home-intro-row {
-    grid-template-columns: calc((100% - 12px) / 2) minmax(0,1fr);
+    grid-template-columns: minmax(0,1fr);
+    row-gap: 12px;
     column-gap: 12px !important;
   }
   .home-photo-card,
@@ -1029,10 +1032,10 @@ body.gallery-lightbox-open { overflow: hidden; }
 
   .home-occupancy-card { min-height: 24px; font-size: 10px; letter-spacing: .025em; }
   .home-sale-rent__cta { min-height: 24px; padding: 3px 8px; font-size: 10px; letter-spacing: .025em; }
-  .home-sale-rent__overlay { left: 8px; bottom: 8px; font-size: 10px; gap: 5px; }
-  .home-sale-rent__overlay-icon { width: 16px; height: 24px; }
-  .home-sale-rent__apart-logo { width: 46px !important; }
-  .home-sale-rent__apart-logo--header { width: 70px !important; }
+  .home-sale-rent__overlay { left: 8px; bottom: 8px; font-size: 20px; gap: 5px; }
+  .home-sale-rent__overlay-icon { width: 32px; height: 48px; }
+  .home-sale-rent__apart-logo { width: 92px !important; }
+  .home-sale-rent__apart-logo--header { width: 140px !important; }
 }
 
 @media (max-width: 430px) {
@@ -1042,10 +1045,242 @@ body.gallery-lightbox-open { overflow: hidden; }
   .language-switcher { gap: 4px; }
   .mobile-site-menu.is-open { padding-left: 8px; padding-right: 8px; gap: 3px; }
   .mobile-menu__link { padding: 0 1px; letter-spacing: 0; }
-  .home-occupancy-card { min-height: 22px; font-size: 9px; }
-  .home-sale-rent__cta { min-height: 22px; padding: 3px 7px; font-size: 9px; }
-  .home-sale-rent__overlay { left: 7px; bottom: 7px; font-size: 9px; gap: 4px; }
-  .home-sale-rent__overlay-icon { width: 14px; height: 21px; }
-  .home-sale-rent__apart-logo { width: 40px !important; }
-  .home-sale-rent__apart-logo--header { width: 62px !important; }
+  .home-occupancy-card { min-height: 22px; font-size: 10px; }
+  .home-sale-rent__cta { min-height: 22px; padding: 3px 7px; font-size: 10px; }
+  .home-sale-rent__overlay { left: 7px; bottom: 7px; font-size: 18px; gap: 4px; }
+  .home-sale-rent__overlay-icon { width: 28px; height: 42px; }
+  .home-sale-rent__apart-logo { width: 80px !important; }
+  .home-sale-rent__apart-logo--header { width: 124px !important; }
+}
+
+/* Homepage mini-gallery full-size preview */
+.home-mini-gallery__item {
+  cursor: pointer;
+}
+
+.home-mini-gallery__item:focus-visible {
+  outline: 1px solid var(--nav-inactive);
+  outline-offset: -1px;
+}
+
+.home-mini-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0,0,0,.88);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .16s ease, visibility .16s ease;
+}
+
+.home-mini-lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.home-mini-lightbox__image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: calc(100vw - 48px);
+  max-height: calc(100vh - 48px);
+  object-fit: contain;
+}
+
+/* The stage follows the image dimensions, so collapse stays on the photo. */
+.home-mini-lightbox__stage {
+  position: relative;
+  display: inline-flex;
+}
+
+.home-booking-cta {
+  display: flex;
+  width: 100%;
+  min-height: 54px;
+  margin-top: 12px;
+  padding: 16px;
+  align-items: center;
+  justify-content: center;
+  background: var(--logo-gold);
+  color: #241d16;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-align: center;
+  text-decoration: none;
+}
+.home-booking-cta:hover { background: #f4dbba; }
+.home-booking-cta:focus-visible { outline: 2px solid #241d16; outline-offset: 3px; }
+
+@media (max-width: 739px) {
+  .home-sale-rent__cta { display: none; }
+  .home-sale-rent__overlay--after { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 739px) {
+  .home-mini-lightbox { padding: 12px; }
+  .home-mini-lightbox__image {
+    max-width: calc(100vw - 24px);
+    max-height: calc(100vh - 24px);
+  }
+}
+
+/* v164: proportional photo marks, consistent type, and rounded booking CTA. */
+.home-sale-rent__overlay {
+  width: 33.333%;
+  height: 33.333%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 3px;
+  font-size: 12px;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+.home-sale-rent__overlay-icon {
+  width: 100%;
+  height: auto;
+  flex: 1;
+  min-height: 0;
+  justify-content: flex-start;
+}
+.home-sale-rent__overlay-icon svg { width: auto; height: 100%; max-width: 100%; }
+.home-sale-rent__card .home-sale-rent__apart-logo {
+  width: 100% !important;
+  height: auto !important;
+  max-height: calc(100% - 16px);
+  object-position: left bottom;
+}
+.home-occupancy-card { color: var(--nav-inactive); white-space: normal; }
+.home-booking-cta {
+  width: fit-content;
+  height: 40px;
+  min-height: 40px;
+  margin: 12px auto 0;
+  padding: 0 24px;
+  border-radius: 999px !important;
+  background: var(--header-bg);
+  color: var(--logo-gold);
+  font-size: 12px;
+  font-weight: 600;
+}
+.home-booking-cta:hover { background: var(--panel-bg); }
+.home-booking-cta:focus-visible { outline-color: var(--logo-gold); }
+@media (max-width: 739px) {
+  .home-intro-row__photo { aspect-ratio: auto; }
+  .home-intro-row__photo > picture { height: auto; }
+  .home-intro-row__photo > picture > img { height: auto; }
+  .home-help-panel { position: relative; padding: 10px; }
+  .home-help-panel__title--hero {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: normal;
+  }
+  .home-help-panel__title--hero > span {
+    display: inline;
+    width: auto;
+    white-space: normal;
+    letter-spacing: normal !important;
+  }
+  .home-sale-rent__overlay { font-size: 10px; }
+  .home-booking-cta { width: 100%; font-size: 10px; }
+}
+
+/* v165: photo marks use identical viewboxes and scale; CTA follows its text. */
+.home-sale-rent__overlay { height: auto; aspect-ratio: 440 / 192; display: block; }
+.home-iphone-mark { display: block; width: 100%; height: 100%; }
+.home-sale-rent__card .home-sale-rent__apart-logo { max-height: none; }
+.home-booking-cta { width: max-content; max-width: 100%; font-size: 24px; letter-spacing: 0; }
+.home-booking-cta--desktop { position: absolute; top: 10px; right: 10px; z-index: 3; margin: 0; }
+.home-booking-cta--mobile { display: none; }
+@media (max-width: 739px) {
+  .home-booking-cta { font-size: 20px; width: max-content; }
+  .home-booking-cta--desktop { display: none; }
+  .home-booking-cta--mobile { display: flex; }
+}
+
+/* v166: revised photo label, booking text and hero typography. */
+.home-help-panel__title--hero { font-size: 14px; }
+.home-booking-cta--desktop { top: 90px; font-size: 20px; }
+@media (max-width: 739px) {
+  .home-help-panel__title--hero { font-size: 12px; }
+}
+
+/* v167: matching brand lettering and dimensional bronze booking button. */
+.home-help-panel__title--hero { color: var(--logo-gold); }
+.home-sale-rent__overlay--before { width: 50%; aspect-ratio: 660 / 192; }
+.home-booking-cta {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid #aa9070;
+  background: linear-gradient(165deg, #8a7560 0%, #675443 46%, #493a2e 100%);
+  color: #f4dcb6;
+  text-shadow: 0 1px 2px #241a14;
+  box-shadow: inset 0 1px 1px #e9d3ae80, inset 0 -2px 3px #241a1470, 0 4px 0 #382b22, 0 7px 12px #241a1440;
+  transition: background .2s ease, box-shadow .2s ease, translate .2s ease;
+}
+.home-booking-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 10%, #fff0d41f 38%, transparent 62%);
+  pointer-events: none;
+}
+.home-booking-cta:hover {
+  background: linear-gradient(165deg, #9b836a 0%, #75604b 46%, #544233 100%);
+}
+.home-booking-cta:active {
+  translate: 0 2px;
+  box-shadow: inset 0 1px 2px #e9d3ae50, 0 2px 0 #382b22, 0 4px 7px #241a1440;
+}
+.home-booking-cta--desktop {
+  position: absolute;
+  top: auto;
+  bottom: calc(10px + (100% * 0.33333 * 1.5 * 192 / 440 - 40px) / 2);
+  right: 10px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-booking-cta { transition: none; }
+}
+
+/* v168: compact photo label and flat gold consultation CTA. */
+.home-sale-rent__overlay--before { width: 33.333%; aspect-ratio: 440 / 192; }
+.home-booking-cta,
+.home-booking-cta:hover,
+.home-booking-cta:active {
+  border: 1px solid #000;
+  border-radius: 0 !important;
+  background: var(--logo-gold);
+  color: #000;
+  font-size: 16px;
+  text-shadow: none;
+  box-shadow: none;
+  translate: none;
+}
+.home-booking-cta::before { content: none; }
+
+/* v169: pale champagne accents and centered consultation CTA. */
+.home-booking-cta,
+.home-booking-cta:hover,
+.home-booking-cta:active {
+  border: 2px solid var(--header-bg);
+  color: var(--header-bg);
+}
+@media (min-width: 740px) {
+  .home-booking-cta--desktop {
+    left: calc(66.6665% + 5px);
+    right: auto;
+    transform: translateX(-50%);
+  }
 }
