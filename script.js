@@ -4,10 +4,10 @@ const translations = {
     "about_btn": "ПРО НАС",
     "gallery_btn": "ГАЛЕРЕЯ",
     "home_hero_line_1": "СДЕЛАЕМ ФОТО, КОТОРЫЕ",
-    "home_hero_line_2": "ПОМОГУТ БЫСТРЕЕ СДАТЬ ИЛИ",
+    "home_hero_line_2": "ПОМОГУТ БЫСТРО СДАТЬ ИЛИ",
     "home_hero_line_3": "ПРОДАТЬ НЕДВИЖИМОСТЬ",
     "home_rent_load_before": "ПОСУТОЧНАЯ ЗАГРУЗКА 50%",
-    "home_rent_load_after": "ПОСУТОЧНАЯ ЗАГРУЗКА 75%+",
+    "home_rent_load_after": "ПОСУТОЧНАЯ ЗАГРУЗКА 75%",
     "contacts_btn": "КОНТАКТЫ",
     "contacts_title": "КОНТАКТЫ",
     "contacts_intro": "Свяжитесь с нами удобным способом.",
@@ -54,7 +54,7 @@ const translations = {
     "home_hero_line_2": "HELP YOU RENT OR SELL",
     "home_hero_line_3": "REAL ESTATE FASTER",
     "home_rent_load_before": "SHORT-TERM OCCUPANCY 50%",
-    "home_rent_load_after": "SHORT-TERM OCCUPANCY 75%+",
+    "home_rent_load_after": "SHORT-TERM OCCUPANCY 75%",
     "contacts_btn": "CONTACTS",
     "contacts_title": "CONTACTS",
     "contacts_intro": "Contact us in the way that is most convenient for you.",
@@ -101,7 +101,7 @@ const translations = {
     "home_hero_line_2": "დაგეხმარებათ უფრო სწრაფად",
     "home_hero_line_3": "გააქირავოთ ან გაყიდოთ",
     "home_rent_load_before": "დღიური დატვირთვა 50%",
-    "home_rent_load_after": "დღიური დატვირთვა 75%+",
+    "home_rent_load_after": "დღიური დატვირთვა 75%",
     "contacts_btn": "კონტაქტები",
     "contacts_title": "კონტაქტები",
     "contacts_intro": "დაგვიკავშირდით თქვენთვის მოსახერხებელი გზით.",
@@ -142,6 +142,37 @@ const translations = {
   }
 };
 
+
+/* Keep the three hero headline lines visually equal in width without changing font size. */
+function equalizeHeroHeadlineLines() {
+  const title = document.querySelector('.home-help-panel__title--hero');
+  if (!title) return;
+  const lines = Array.from(title.querySelectorAll(':scope > span'));
+  if (lines.length !== 3) return;
+
+  lines.forEach((line) => { line.style.letterSpacing = '0px'; });
+
+  requestAnimationFrame(() => {
+    const available = title.getBoundingClientRect().width;
+    if (!available) return;
+
+    const naturalWidths = lines.map((line) => {
+      const range = document.createRange();
+      range.selectNodeContents(line);
+      const width = range.getBoundingClientRect().width;
+      range.detach?.();
+      return width;
+    });
+
+    const target = Math.min(Math.max(...naturalWidths), available);
+    lines.forEach((line, index) => {
+      const characters = Math.max(1, line.textContent.trim().length - 1);
+      const spacing = (target - naturalWidths[index]) / characters;
+      line.style.letterSpacing = `${spacing.toFixed(3)}px`;
+    });
+  });
+}
+
 function setLanguage(lang) {
   const dictionary = translations[lang];
   if (!dictionary) return;
@@ -155,12 +186,15 @@ function setLanguage(lang) {
     button.classList.toggle('is-active', button.dataset.lang === lang);
   });
   localStorage.setItem('apartmarketing-language', lang);
+  equalizeHeroHeadlineLines();
 }
 
 document.querySelectorAll('.language-btn').forEach((button) => {
   button.addEventListener('click', () => setLanguage(button.dataset.lang));
 });
 setLanguage(localStorage.getItem('apartmarketing-language') || 'ru');
+if (document.fonts?.ready) document.fonts.ready.then(equalizeHeroHeadlineLines);
+window.addEventListener('resize', equalizeHeroHeadlineLines);
 
 (() => {
   const toggle = document.querySelector('.mobile-menu-toggle');
@@ -281,6 +315,10 @@ setLanguage(localStorage.getItem('apartmarketing-language') || 'ru');
   const MAX_HEIGHT = 144;
   const MIN_GAP = 12;
   const VERTICAL_GAP = 12;
+  const EVEN_VERTICAL_THRESHOLD = 39;
+  const SHELL_GAP = 12;
+  const SWAP_FADE_MS = 2400;
+  const SWAP_FADE_IN_MS = 2400;
   const RATIO = 3 / 2;
   const gallerySources = Array.from({ length: 216 }, (_, index) => {
     const page = Math.floor(index / 18) + 1;
@@ -296,65 +334,139 @@ setLanguage(localStorage.getItem('apartmarketing-language') || 'ru');
     return items;
   };
 
+  const isMobileLayout = () => window.matchMedia('(max-width: 739px)').matches;
+
   const measureLayout = (height) => {
     const rowWidth = row.getBoundingClientRect().width;
     const heroWidth = hero.getBoundingClientRect().width;
     const heroHeight = hero.getBoundingClientRect().height;
-    const availableWithoutGap = Math.max(0, rowWidth - heroWidth);
     const thumbWidth = height * RATIO;
-    let columns = Math.floor(availableWithoutGap / (thumbWidth + MIN_GAP));
-    columns = Math.max(1, columns);
+    const mobile = isMobileLayout();
 
-    while (columns > 1 && availableWithoutGap / columns - thumbWidth < MIN_GAP) columns -= 1;
-    let horizontalGap = columns > 1 ? availableWithoutGap / columns - thumbWidth : MIN_GAP;
-    horizontalGap = Math.max(MIN_GAP, horizontalGap);
+    // Desktop: the gap from the hero to the mini-gallery is the same as the
+    // horizontal gap between mini photos.
+    // Mobile: the hero -> mini-gallery gap is always the standard 12px.
+    const outerGap = mobile ? MIN_GAP : null;
+    const widthForGallery = Math.max(0, rowWidth - heroWidth - (mobile ? MIN_GAP : 0));
 
-    const fillWidth = availableWithoutGap - horizontalGap;
-    if (fillWidth < thumbWidth - .5) return { count: 0, height, thumbWidth, columns: 1, horizontalGap: MIN_GAP, rows: 0, heroHeight };
+    let columns = 1;
+    let horizontalGap = MIN_GAP;
 
-    const rows = Math.max(0, Math.floor((heroHeight + VERTICAL_GAP) / (height + VERTICAL_GAP)));
+    if (mobile) {
+      // Find the largest column count that fits with at least a standard 12px
+      // internal gap. The outer hero gap is independent and stays at 12px.
+      for (let c = thumbs.length; c >= 1; c -= 1) {
+        const required = (c * thumbWidth) + ((c - 1) * MIN_GAP);
+        if (required <= widthForGallery + .5) {
+          columns = c;
+          break;
+        }
+      }
+      horizontalGap = columns > 1
+        ? Math.max(MIN_GAP, (widthForGallery - (columns * thumbWidth)) / (columns - 1))
+        : MIN_GAP;
+    } else {
+      const available = Math.max(0, rowWidth - heroWidth);
+      columns = Math.max(1, Math.floor(available / (thumbWidth + MIN_GAP)));
+      while (columns > 1 && ((available - (columns * thumbWidth)) / columns) < MIN_GAP) {
+        columns -= 1;
+      }
+      horizontalGap = Math.max(MIN_GAP, (available - (columns * thumbWidth)) / columns);
+    }
+
+    // Rows are still determined with the standard minimum vertical gap.
+    // Once six photos fit, chooseLayout() keeps the largest possible photo size.
+    const rows = Math.max(1, Math.floor((heroHeight + VERTICAL_GAP) / (height + VERTICAL_GAP)));
     const count = Math.min(thumbs.length, columns * rows);
-    return { count, height, thumbWidth, columns, horizontalGap, rows, heroHeight };
+
+    return {
+      count,
+      height,
+      thumbWidth,
+      columns,
+      horizontalGap,
+      outerGap: mobile ? MIN_GAP : horizontalGap,
+      rows,
+      heroHeight,
+      mobile
+    };
   };
 
   const chooseLayout = () => {
     const maxLayout = measureLayout(MAX_HEIGHT);
 
-    // Old rule stays in force once 4+ thumbnails fit at the maximum size:
-    // keep the largest 144px thumbnails instead of shrinking just to add more.
-    if (maxLayout.count >= 4) return maxLayout;
+    // Absolute priority rule: once six or more thumbnails fit, photo size wins.
+    // If six fit at 144px, keep 144px even if shrinking would show more photos.
+    if (maxLayout.count >= 6) return maxLayout;
 
-    // Within the normal 70–144px range, quantity has priority until 4+ fit.
-    // On equal counts, the first (larger) height is retained.
+    // Otherwise shrink only until the first/largest size that can fit six.
     let best = maxLayout;
     for (let height = MAX_HEIGHT - 1; height >= MIN_HEIGHT; height -= 1) {
       const candidate = measureLayout(height);
       if (candidate.count > best.count) best = candidate;
-      if (candidate.count >= 4) return candidate;
+      if (candidate.count >= 6) return candidate;
     }
 
-    // If even 70px is not enough for four thumbnails, there is deliberately
-    // no minimum size: continue shrinking only until exactly the first layout
-    // that can hold at least four.
+    // Below 70px there is no minimum only when six still do not fit.
     for (let height = MIN_HEIGHT - 1; height >= 1; height -= 1) {
       const candidate = measureLayout(height);
-      if (candidate.count >= 4) return candidate;
+      if (candidate.count >= 6) return candidate;
       if (candidate.count > best.count) best = candidate;
     }
 
     return best;
   };
 
+  const getVerticalSpacing = (layout) => {
+    const actualRows = Math.max(1, Math.ceil(layout.count / Math.max(1, layout.columns)));
+    const freeSpace = Math.max(0, layout.heroHeight - (actualRows * layout.height));
+
+    if (actualRows === 2) {
+      // User rule: if the old gap between the two rows would be 39px or more,
+      // split that SAME free distance into three equal parts:
+      // 1/3 above the top row, 1/3 between rows, 1/3 below the bottom row.
+      if (freeSpace >= EVEN_VERTICAL_THRESHOLD) {
+        const third = freeSpace / 3;
+        return { paddingTop: third, rowGap: third, paddingBottom: third };
+      }
+
+      // Below the threshold keep the classic layout: all free space sits
+      // between the two rows, with no added top/bottom padding.
+      return { paddingTop: 0, rowGap: freeSpace, paddingBottom: 0 };
+    }
+
+    if (actualRows > 2) {
+      // Preserve the existing behavior for 3+ rows while consuming the full
+      // fixed hero height and never creating external section spacing.
+      return {
+        paddingTop: 0,
+        rowGap: freeSpace / (actualRows - 1),
+        paddingBottom: 0
+      };
+    }
+
+    return { paddingTop: 0, rowGap: 0, paddingBottom: freeSpace };
+  };
+
   let currentColumns = 1;
   const applyLayout = () => {
     const layout = chooseLayout();
+    const vertical = getVerticalSpacing(layout);
     currentColumns = Math.max(1, layout.columns);
-    row.style.setProperty('--mini-horizontal-gap', `${layout.horizontalGap.toFixed(2)}px`);
-    fill.style.height = `${Math.round(layout.heroHeight)}px`;
+
+    // Main section spacing never changes. Only spacing INSIDE the mini-gallery moves.
+    row.style.marginTop = '0px';
+    row.style.marginBottom = '0px';
+    row.style.setProperty('--mini-horizontal-gap', `${layout.outerGap.toFixed(2)}px`);
+
+    fill.style.height = `${layout.heroHeight.toFixed(2)}px`;
     fill.style.gridTemplateColumns = `repeat(${layout.columns}, ${layout.thumbWidth.toFixed(2)}px)`;
-    fill.style.gridAutoRows = `${layout.height}px`;
+    fill.style.gridAutoRows = `${layout.height.toFixed(2)}px`;
     fill.style.columnGap = `${layout.horizontalGap.toFixed(2)}px`;
-    fill.style.rowGap = `${VERTICAL_GAP}px`;
+    fill.style.rowGap = `${vertical.rowGap.toFixed(2)}px`;
+    fill.style.paddingTop = `${vertical.paddingTop.toFixed(2)}px`;
+    fill.style.paddingBottom = `${vertical.paddingBottom.toFixed(2)}px`;
+    fill.style.alignContent = 'start';
 
     thumbs.forEach((thumb, index) => {
       thumb.hidden = index >= layout.count;
@@ -365,7 +477,11 @@ setLanguage(localStorage.getItem('apartmarketing-language') || 'ru');
   const chosenSources = shuffle([...gallerySources]).slice(0, thumbs.length);
   const ready = new Map();
   const revealed = new Set();
+  const currentSources = new Map();
+  let replacementDeck = shuffle(gallerySources.filter((source) => !chosenSources.includes(source)));
   let timer = null;
+  let swapTimer = null;
+  let swapInProgress = false;
   let started = false;
 
   const isAdjacentToRevealed = (index) => {
@@ -381,16 +497,106 @@ setLanguage(localStorage.getItem('apartmarketing-language') || 'ru');
   };
 
   const randomDelay = () => 500 + Math.floor(Math.random() * 301);
+  const randomSwapDelay = () => 3000 + Math.floor(Math.random() * 1001);
+
+  const allVisibleRevealed = () => thumbs.every((thumb, index) => thumb.hidden || revealed.has(index));
 
   const scheduleReveal = () => {
     clearTimeout(timer);
     timer = setTimeout(revealNext, randomDelay());
   };
 
+  const refillReplacementDeck = () => {
+    const active = new Set(
+      thumbs
+        .map((thumb, index) => (!thumb.hidden ? currentSources.get(index) : null))
+        .filter(Boolean)
+    );
+    replacementDeck = shuffle(gallerySources.filter((source) => !active.has(source)));
+  };
+
+  const takeReplacementSource = () => {
+    if (!replacementDeck.length) refillReplacementDeck();
+    const active = new Set(
+      thumbs
+        .map((thumb, index) => (!thumb.hidden ? currentSources.get(index) : null))
+        .filter(Boolean)
+    );
+
+    while (replacementDeck.length) {
+      const source = replacementDeck.pop();
+      if (!active.has(source)) return source;
+    }
+
+    refillReplacementDeck();
+    return replacementDeck.pop() || null;
+  };
+
+  const scheduleRandomSwap = () => {
+    clearTimeout(swapTimer);
+    if (!allVisibleRevealed() || swapInProgress) return;
+    swapTimer = setTimeout(swapOnePhoto, randomSwapDelay());
+  };
+
+  const swapOnePhoto = () => {
+    if (!allVisibleRevealed() || swapInProgress) {
+      scheduleRandomSwap();
+      return;
+    }
+
+    const candidates = thumbs
+      .map((thumb, index) => ({ thumb, index }))
+      .filter(({ thumb, index }) => !thumb.hidden && revealed.has(index) && currentSources.has(index));
+    if (!candidates.length) return;
+
+    const { thumb, index } = candidates[Math.floor(Math.random() * candidates.length)];
+    const nextSource = takeReplacementSource();
+    if (!nextSource) {
+      scheduleRandomSwap();
+      return;
+    }
+
+    swapInProgress = true;
+    const img = thumb.querySelector('img');
+    const loader = new Image();
+    loader.decoding = 'async';
+
+    loader.onload = () => {
+      // Phase 1: fade the old photo completely away.
+      thumb.classList.add('is-mini-swapping-out');
+
+      window.setTimeout(() => {
+        // Phase 2: replace it while invisible, then reveal the new photo slowly.
+        img.src = nextSource;
+        currentSources.set(index, nextSource);
+        thumb.classList.add('is-mini-swapping-in');
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          thumb.classList.remove('is-mini-swapping-out');
+          window.setTimeout(() => {
+            thumb.classList.remove('is-mini-swapping-in');
+            swapInProgress = false;
+            scheduleRandomSwap();
+          }, SWAP_FADE_IN_MS);
+        }));
+      }, SWAP_FADE_MS);
+    };
+
+    loader.onerror = () => {
+      swapInProgress = false;
+      scheduleRandomSwap();
+    };
+    loader.src = nextSource;
+  };
+
   const revealNext = () => {
+    timer = null;
     const candidates = Array.from(ready.keys()).filter((index) => !thumbs[index].hidden && !revealed.has(index));
     if (!candidates.length) {
-      if (Array.from(thumbs).some((thumb, index) => !thumb.hidden && !revealed.has(index))) timer = setTimeout(revealNext, 80);
+      if (Array.from(thumbs).some((thumb, index) => !thumb.hidden && !revealed.has(index))) {
+        timer = setTimeout(revealNext, 80);
+      } else {
+        scheduleRandomSwap();
+      }
       return;
     }
 
@@ -399,27 +605,40 @@ setLanguage(localStorage.getItem('apartmarketing-language') || 'ru');
     const index = pool[Math.floor(Math.random() * pool.length)];
     const thumb = thumbs[index];
     const img = thumb.querySelector('img');
-    img.src = ready.get(index);
+    const source = ready.get(index);
+    img.src = source;
+    currentSources.set(index, source);
     ready.delete(index);
     revealed.add(index);
     requestAnimationFrame(() => requestAnimationFrame(() => thumb.classList.add('is-mini-visible')));
 
-    if (Array.from(thumbs).some((item, i) => !item.hidden && !revealed.has(i))) scheduleReveal();
+    if (Array.from(thumbs).some((item, i) => !item.hidden && !revealed.has(i))) {
+      scheduleReveal();
+    } else {
+      scheduleRandomSwap();
+    }
+  };
+
+  const loadSlotSource = (index, source) => {
+    const thumb = thumbs[index];
+    if (!thumb || !source) return;
+    const loader = new Image();
+    loader.decoding = 'async';
+    loader.onload = () => {
+      ready.set(index, source);
+      if (!timer && !revealed.size) revealNext();
+    };
+    loader.onerror = () => { thumb.hidden = true; };
+    loader.src = source;
   };
 
   const preload = () => {
     thumbs.forEach((thumb, index) => {
-      thumb.classList.remove('is-mini-visible');
+      thumb.classList.remove('is-mini-visible', 'is-mini-swapping-out', 'is-mini-swapping-in');
       const img = thumb.querySelector('img');
       img.removeAttribute('src');
-      const loader = new Image();
-      loader.decoding = 'async';
-      loader.onload = () => {
-        ready.set(index, chosenSources[index]);
-        if (!timer && !revealed.size) revealNext();
-      };
-      loader.onerror = () => { thumb.hidden = true; };
-      loader.src = chosenSources[index];
+      currentSources.delete(index);
+      loadSlotSource(index, chosenSources[index]);
     });
   };
 
@@ -434,15 +653,18 @@ setLanguage(localStorage.getItem('apartmarketing-language') || 'ru');
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
+      clearTimeout(swapTimer);
       applyLayout();
       thumbs.forEach((thumb, index) => {
         if (!thumb.hidden && !revealed.has(index) && !ready.has(index)) {
-          const loader = new Image();
-          loader.onload = () => { ready.set(index, chosenSources[index]); scheduleReveal(); };
-          loader.src = chosenSources[index];
+          loadSlotSource(index, chosenSources[index]);
         }
       });
-      if (Array.from(ready.keys()).some((index) => !thumbs[index].hidden && !revealed.has(index))) scheduleReveal();
+      if (Array.from(ready.keys()).some((index) => !thumbs[index].hidden && !revealed.has(index))) {
+        scheduleReveal();
+      } else if (allVisibleRevealed()) {
+        scheduleRandomSwap();
+      }
     }, 80);
   });
 
