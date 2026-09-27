@@ -1,5 +1,5 @@
 (() => {
-  const methods = { call: 'Позвоните мне', whatsapp: 'WhatsApp', telegram: 'Telegram', instagram: 'Instagram', messenger: 'Facebook Messenger', viber: 'Viber' };
+  const methods = { call: 'Позвоните мне', whatsapp: 'WhatsApp', telegram: 'Telegram', instagram: 'Instagram', messenger: 'Facebook Messenger', viber: 'Viber', email: 'E-mail' };
   const extensions = new Set('jpg jpeg jpe jfif png heic heif hif avif webp gif bmp dib tif tiff dng raw cr2 cr3 nef nrw arw srf sr2 raf rw2 rwl orf ori pef ptx srw x3f 3fr fff iiq kdc dcr erf mos mef mrw tga jp2 j2k jpf jpx jpm mj2 jxl jxr wdp hdp mpo mov mp4 m4v'.split(' '));
   function social(value, method) {
     let text = value.trim();
@@ -17,7 +17,8 @@
   }
   function messenger(value) {
     try {
-      const input = value.trim();
+      let input = value.trim();
+      if (/^@?[a-zA-Z0-9.]+$/.test(input) || /^profile\.php\?id=\d+$/.test(input)) input = 'https://facebook.com/' + input.replace(/^@/, '');
       const url = new URL(/^https?:\/\//i.test(input) ? input : 'https://' + input);
       if (!['https:', 'http:'].includes(url.protocol) || url.username || url.password || url.port) return '';
       if (!['facebook.com','www.facebook.com','m.facebook.com','m.me','messenger.com','www.messenger.com'].includes(url.hostname.toLowerCase())) return '';
@@ -55,6 +56,16 @@
     } catch { return null; }
   }
   function contact(method, value, country) {
+    if (method === 'email') {
+      const address = value.trim();
+      const parts = address.split('@');
+      if (address.length > 254 || parts.length !== 2 || parts[0].length > 64) return null;
+      const [local, domain] = parts;
+      if (!/^[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+$/.test(local) || local.startsWith('.') || local.endsWith('.') || local.includes('..')) return null;
+      if (!domain.includes('.') || !domain.split('.').every(label => /^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$/.test(label))) return null;
+      const canonical = local + '@' + domain.toLowerCase();
+      return {contact: canonical, national: canonical, country: ''};
+    }
     if (method === 'call' || method === 'whatsapp' || method === 'viber') return phone(value, country, method === 'call');
     if (method === 'telegram' || method === 'instagram') {
       const user = social(value, method);

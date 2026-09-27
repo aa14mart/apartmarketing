@@ -1458,3 +1458,16 @@ body { font-size: 14px; }
   .site-footer__right .social-link { color: var(--footer-dark); }
   .site-footer__right .social-link { border-color: var(--footer-dark); }
 }
+
+/* v182: compact pill CTA on phones. */
+@media (max-width: 739px) {
+  .home-booking-cta--mobile,
+  .home-booking-cta--mobile:hover,
+  .home-booking-cta--mobile:active {
+    width: fit-content;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 999px !important;
+  }
+}

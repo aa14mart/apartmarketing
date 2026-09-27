@@ -111,3 +111,6 @@
  .contact-form__upload { flex-wrap: wrap; }
  .contact-form__upload > span { flex-basis: 100%; text-align: right; }
 }
+
+/* v182: equal primary form button typography. */
+.contact-form .contact-form__upload-button, .contact-form button[type=submit] { font-size: 14px; font-weight: 600; font-family: inherit; }
