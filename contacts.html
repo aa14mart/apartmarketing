@@ -8,8 +8,8 @@
   <title>APART MARKETING — Контакты</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
-  <link rel="stylesheet" href="contact-form.css?v=170">
-  <script src="contact-form.js?v=170" defer></script>
+  <link rel="stylesheet" href="contact-form.css?v=171">
+  <script src="contact-form.js?v=171" defer></script>
 </head>
 <body>
 
@@ -102,6 +102,11 @@
         <label><span data-form-text="message">Расскажите об объекте и желаемой дате (необязательно)</span>
           <textarea name="message" rows="4" maxlength="2000"></textarea>
         </label>
+        <label class="contact-form__upload"><span data-form-text="photos">Фото объекта (необязательно)</span>
+          <input type="file" name="photos" multiple accept=".jpg,.jpeg,.jpe,.jfif,.png,.heic,.heif,.hif,.avif,.webp,.gif,.bmp,.dib,.tif,.tiff,.dng,.raw,.cr2,.cr3,.nef,.nrw,.arw,.srf,.sr2,.raf,.rw2,.rwl,.orf,.ori,.pef,.ptx,.srw,.x3f,.3fr,.fff,.iiq,.kdc,.dcr,.erf,.mos,.mef,.mrw,.tga,.jp2,.j2k,.jpf,.jpx,.jpm,.mj2,.jxl,.jxr,.wdp,.hdp,.mpo,.mov,.mp4,.m4v" aria-describedby="photo-hint">
+        </label>
+        <p id="photo-hint" class="contact-form__hint" data-form-text="photoHint"></p>
+        <ul class="contact-form__files" aria-live="polite"></ul>
         <div class="contact-form__trap" aria-hidden="true">
           <label>Website<input name="website" tabindex="-1" autocomplete="off"></label>
         </div>

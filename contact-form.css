@@ -17,3 +17,10 @@
   .contact-form h2 { font-size: 10px; }
   .contact-form__fields { grid-template-columns: 1fr; }
 }
+
+.contact-form__upload { margin-top: 18px; }
+.contact-form input[type=file] { padding: 10px; }
+.contact-form__files { list-style: none; padding: 0; margin: 0 0 16px; }
+.contact-form__files li { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; }
+.contact-form__files li span { overflow-wrap: anywhere; min-width: 0; }
+.contact-form__files button { flex: 0 0 auto; padding: 4px 10px; font-size: 12px; }
