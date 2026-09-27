@@ -1,26 +1,39 @@
+/* Contact form v172 */
 .contact-form { max-width: 780px; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--nav-inactive); }
+.contact-form [hidden] { display: none !important; }
 .contact-form h2 { margin: 0 0 20px; color: var(--logo-gold); font-size: 12px; font-weight: 600; letter-spacing: .06em; }
-.contact-form__fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.contact-form__body { border: 0; padding: 0; margin: 0; min-width: 0; }
 .contact-form label { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-.contact-form input, .contact-form textarea { display: block; width: 100%; min-height: 44px; padding: 12px; border: 1px solid var(--nav-inactive); background: var(--header-bg); color: var(--logo-gold); font: inherit; }
-.contact-form textarea { resize: vertical; }
-.contact-form input:focus-visible, .contact-form textarea:focus-visible { outline: 2px solid var(--logo-gold); outline-offset: 2px; }
+.contact-form input, .contact-form textarea, .contact-form select { width: 100%; min-width: 0; min-height: 44px; padding: 12px; border: 1px solid var(--nav-inactive); background: var(--header-bg); color: var(--logo-gold); font: inherit; }
+.contact-form input::placeholder { color: #bab4ab; opacity: 1; }
+.contact-form select option { background: #403a33; color: #f0e3ce; }
+.contact-form #lead-method { margin-top: 16px; }
+.contact-form textarea { display: block; resize: vertical; }
+.contact-form :is(input,textarea,select):focus-visible { outline: 2px solid var(--logo-gold); outline-offset: 2px; }
+.contact-form [aria-invalid=true] { border-color: #ffb6a2; }
+.contact-form__contact { margin-top: 16px; }
+.contact-form__contact-label { margin-bottom: 8px; }
+.contact-form__contact-row { display: flex; align-items: stretch; }
+.contact-form__prefix { display: flex; align-items: center; padding: 0 12px; border: 1px solid var(--nav-inactive); border-right: 0; color: var(--logo-gold); background: var(--header-bg); }
+.contact-form #lead-country { flex: 0 1 44%; border-right: 0; }
+.contact-form #lead-contact { flex: 1 1 56%; }
+.contact-form__message-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin: 20px 0 8px; line-height: 1.5; }
+.contact-form #message-count { white-space: nowrap; color: var(--nav-inactive); font-variant-numeric: tabular-nums; }
 .contact-form__hint { color: rgba(255,255,255,.75); line-height: 1.6; margin: 10px 0 18px; }
-.contact-form button { min-height: 40px; padding: 8px 22px; border: 2px solid var(--header-bg); background: var(--logo-gold); color: var(--header-bg); font-size: 16px; font-weight: 600; cursor: pointer; }
+.contact-form button { min-height: 40px; max-width: 100%; padding: 8px 22px; border: 2px solid var(--header-bg); background: var(--logo-gold); color: var(--header-bg); font-size: 16px; font-weight: 600; cursor: pointer; }
 .contact-form button:focus-visible { outline: 2px solid var(--logo-gold); outline-offset: 3px; }
 .contact-form button:disabled { opacity: .6; cursor: wait; }
 .contact-form__status { min-height: 1.6em; margin: 12px 0 0; line-height: 1.6; color: var(--logo-gold); }
-.contact-form__status[data-state="error"] { color: #ffd4c6; }
-.contact-form__trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
-@media (max-width: 739px) {
-  .contact-form { margin-top: 24px; padding-top: 20px; }
-  .contact-form h2 { font-size: 10px; }
-  .contact-form__fields { grid-template-columns: 1fr; }
-}
-
+.contact-form__status[data-state=error], .contact-form .field-error { color: #ffd4c6; }
+.contact-form .field-error { margin: 8px 0; line-height: 1.5; white-space: pre-line; overflow-wrap: anywhere; }
+.contact-form__trap, .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 .contact-form__upload { margin-top: 18px; }
 .contact-form input[type=file] { padding: 10px; }
 .contact-form__files { list-style: none; padding: 0; margin: 0 0 16px; }
 .contact-form__files li { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; }
 .contact-form__files li span { overflow-wrap: anywhere; min-width: 0; }
 .contact-form__files button { flex: 0 0 auto; padding: 4px 10px; font-size: 12px; }
+@media (max-width: 739px) {
+ .contact-form { margin-top: 24px; padding-top: 20px; }
+ .contact-form h2 { font-size: 10px; }
+}

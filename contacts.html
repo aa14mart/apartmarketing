@@ -8,8 +8,10 @@
   <title>APART MARKETING — Контакты</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
-  <link rel="stylesheet" href="contact-form.css?v=171">
-  <script src="contact-form.js?v=171" defer></script>
+  <link rel="stylesheet" href="contact-form.css?v=172">
+  <script src="vendor/libphonenumber-min.js" defer></script>
+  <script src="contact-rules.js?v=172" defer></script>
+  <script src="contact-form.js?v=172" defer></script>
 </head>
 <body>
 
@@ -88,29 +90,43 @@
         </div>
       </div>
 
-      <form class="contact-form" id="contact-form">
+      <form class="contact-form" id="contact-form" novalidate>
         <h2 data-form-text="title">ОБСУДИТЬ СЪЕМКУ</h2>
-        <div class="contact-form__fields">
-          <label><span data-form-text="name">Ваше имя</span>
-            <input name="name" autocomplete="name" required maxlength="100">
+        <fieldset class="contact-form__body">
+          <label class="contact-form__name"><span class="visually-hidden" data-form-text="name">Ваше имя</span>
+            <input id="lead-name" name="name" autocomplete="name" required maxlength="100" placeholder="Ваше имя" aria-describedby="name-error">
           </label>
-          <label><span data-form-text="contact">Телефон или Telegram</span>
-            <input name="contact" required minlength="3" maxlength="200" aria-describedby="contact-hint">
+          <p id="name-error" class="field-error" hidden></p>
+          <label><span class="visually-hidden" data-form-text="method">Где вам удобно ответить?</span>
+            <select name="method" id="lead-method" required aria-describedby="method-error">
+              <option value="" data-form-text="method">Где вам удобно ответить?</option>
+              <option value="call" data-form-text="call">Позвоните мне</option>
+              <option value="whatsapp">WhatsApp</option><option value="telegram">Telegram</option>
+              <option value="instagram">Instagram</option><option value="messenger">Facebook Messenger</option><option value="viber">Viber</option>
+            </select>
           </label>
-        </div>
-        <p id="contact-hint" class="contact-form__hint" data-form-text="hint">Укажите номер с кодом страны или @имя в Telegram.</p>
-        <label><span data-form-text="message">Расскажите об объекте и желаемой дате (необязательно)</span>
-          <textarea name="message" rows="4" maxlength="2000"></textarea>
-        </label>
-        <label class="contact-form__upload"><span data-form-text="photos">Фото объекта (необязательно)</span>
-          <input type="file" name="photos" multiple accept=".jpg,.jpeg,.jpe,.jfif,.png,.heic,.heif,.hif,.avif,.webp,.gif,.bmp,.dib,.tif,.tiff,.dng,.raw,.cr2,.cr3,.nef,.nrw,.arw,.srf,.sr2,.raf,.rw2,.rwl,.orf,.ori,.pef,.ptx,.srw,.x3f,.3fr,.fff,.iiq,.kdc,.dcr,.erf,.mos,.mef,.mrw,.tga,.jp2,.j2k,.jpf,.jpx,.jpm,.mj2,.jxl,.jxr,.wdp,.hdp,.mpo,.mov,.mp4,.m4v" aria-describedby="photo-hint">
-        </label>
-        <p id="photo-hint" class="contact-form__hint" data-form-text="photoHint"></p>
-        <ul class="contact-form__files" aria-live="polite"></ul>
-        <div class="contact-form__trap" aria-hidden="true">
-          <label>Website<input name="website" tabindex="-1" autocomplete="off"></label>
-        </div>
-        <p class="contact-form__hint" data-form-text="note">Заявка будет передана команде APART MARKETING в Telegram, чтобы мы могли связаться с вами.</p>
+          <p id="method-error" class="field-error" hidden></p>
+          <div class="contact-form__contact" hidden>
+            <label for="lead-contact" class="contact-form__contact-label"></label>
+            <div class="contact-form__contact-row">
+              <span class="contact-form__prefix" aria-hidden="true"></span>
+              <select name="country" id="lead-country" hidden></select>
+              <input name="contact" id="lead-contact" disabled aria-describedby="contact-hint contact-error" maxlength="250">
+            </div>
+            <p id="contact-hint" class="contact-form__hint"></p>
+            <p id="contact-error" class="field-error" hidden></p>
+          </div>
+          <div class="contact-form__message-heading"><label for="lead-message" data-form-text="message"></label><span id="message-count">0/500</span></div>
+          <textarea id="lead-message" name="message" rows="4" maxlength="500" aria-describedby="message-count"></textarea>
+          <label class="contact-form__upload"><span data-form-text="photos"></span>
+            <input type="file" name="photos" multiple aria-describedby="photo-hint">
+          </label>
+          <p id="photo-hint" class="contact-form__hint" data-form-text="photoHint"></p>
+          <p class="contact-form__file-errors field-error" role="status" hidden></p>
+          <ul class="contact-form__files" aria-live="polite"></ul>
+          <div class="contact-form__trap" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+          <p class="contact-form__hint" data-form-text="note"></p>
+        </fieldset>
         <button type="submit" data-form-text="submit">ОТПРАВИТЬ ЗАЯВКУ</button>
         <p class="contact-form__status" role="status" aria-live="polite" aria-atomic="true"></p>
         <noscript>Для отправки формы включите JavaScript или свяжитесь с нами по контактам выше.</noscript>
