@@ -114,3 +114,6 @@
 
 /* v182: equal primary form button typography. */
 .contact-form .contact-form__upload-button, .contact-form button[type=submit] { font-size: 14px; font-weight: 600; font-family: inherit; }
+
+/* v187: successful request confirmation. */
+.contact-form__status[data-state=success] { color: #8BD5A0; }
