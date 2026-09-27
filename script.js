@@ -6,7 +6,7 @@ const translations = {
     "home_hero_line_1": "СДЕЛАЕМ ФОТО, КОТОРЫЕ",
     "home_hero_line_2": "ПОМОГУТ БЫСТРО СДАТЬ ИЛИ",
     "home_hero_line_3": "ПРОДАТЬ НЕДВИЖИМОСТЬ",
-    "home_rent_load_before": "ПОСУТОЧНАЯ ЗАГРУЗКА 50%",
+    "home_comparison_before": "ДО", "home_comparison_after": "ПОСЛЕ", "home_rent_load_before": "ПОСУТОЧНАЯ ЗАГРУЗКА 50%",
     "home_rent_load_after": "ПОСУТОЧНАЯ ЗАГРУЗКА 80%",
     "contacts_btn": "КОНТАКТЫ",
     "contacts_title": "КОНТАКТЫ",
@@ -53,7 +53,7 @@ const translations = {
     "home_hero_line_1": "WE CREATE PHOTOS THAT",
     "home_hero_line_2": "HELP YOU RENT OR SELL",
     "home_hero_line_3": "REAL ESTATE FASTER",
-    "home_rent_load_before": "SHORT-TERM OCCUPANCY 50%",
+    "home_comparison_before": "BEFORE", "home_comparison_after": "AFTER", "home_rent_load_before": "SHORT-TERM OCCUPANCY 50%",
     "home_rent_load_after": "SHORT-TERM OCCUPANCY 80%",
     "contacts_btn": "CONTACTS",
     "contacts_title": "CONTACTS",
@@ -100,7 +100,7 @@ const translations = {
     "home_hero_line_1": "ვქმნით ფოტოებს, რომლებიც",
     "home_hero_line_2": "დაგეხმარებათ უფრო სწრაფად",
     "home_hero_line_3": "გააქირავოთ ან გაყიდოთ",
-    "home_rent_load_before": "დღიური დატვირთვა 50%",
+    "home_comparison_before": "მანამდე", "home_comparison_after": "შემდეგ", "home_rent_load_before": "დღიური დატვირთვა 50%",
     "home_rent_load_after": "დღიური დატვირთვა 80%",
     "contacts_btn": "კონტაქტები",
     "contacts_title": "კონტაქტები",
@@ -143,35 +143,9 @@ const translations = {
 };
 
 
-/* Keep the three hero headline lines visually equal in width without changing font size. */
+/* Natural headline wrapping at every viewport width. */
 function equalizeHeroHeadlineLines() {
-  const title = document.querySelector('.home-help-panel__title--hero');
-  if (!title) return;
-  const lines = Array.from(title.querySelectorAll(':scope > span'));
-  if (lines.length !== 3) return;
-
-  lines.forEach((line) => { line.style.letterSpacing = ''; });
-  if (window.matchMedia('(max-width: 739px)').matches) return;
-
-  requestAnimationFrame(() => {
-    const available = title.getBoundingClientRect().width;
-    if (!available) return;
-
-    const naturalWidths = lines.map((line) => {
-      const range = document.createRange();
-      range.selectNodeContents(line);
-      const width = range.getBoundingClientRect().width;
-      range.detach?.();
-      return width;
-    });
-
-    const target = Math.min(Math.max(...naturalWidths), available);
-    lines.forEach((line, index) => {
-      const characters = Math.max(1, line.textContent.trim().length - 1);
-      const spacing = (target - naturalWidths[index]) / characters;
-      line.style.letterSpacing = `${spacing.toFixed(3)}px`;
-    });
-  });
+  document.querySelectorAll(".home-help-panel__title--hero > span").forEach(line => line.style.letterSpacing = "");
 }
 
 function setLanguage(lang) {
@@ -185,6 +159,11 @@ function setLanguage(lang) {
   });
   document.querySelectorAll('.language-btn').forEach((button) => {
     button.classList.toggle('is-active', button.dataset.lang === lang);
+  });
+  document.querySelectorAll('.home-occupancy-card').forEach(element => {
+    const line = document.createElement('span');
+    line.className = 'occupancy-line'; line.textContent = element.textContent;
+    element.replaceChildren(line);
   });
   localStorage.setItem('apartmarketing-language', lang);
   equalizeHeroHeadlineLines();
@@ -800,4 +779,36 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
 
   window.addEventListener('load', () => setTimeout(start, 120), { once: true });
   applyLayout();
+})();
+
+// Keep footer navigation in sync with the current section.
+(() => {
+  const file = location.pathname.split('/').pop() || 'index.html';
+  const section = /^gallery(?:-\d+)?\.html$/.test(file) ? 'gallery.html' : file;
+  document.querySelectorAll('.site-footer__nav a').forEach(link => {
+    if (link.getAttribute('href') === section) link.setAttribute('aria-current', 'page');
+  });
+})();
+// Preserve each complete occupancy caption on one line, including narrow phones.
+(() => {
+  const cards = [...document.querySelectorAll('.home-occupancy-card')];
+  if (!cards.length) return;
+  let frame;
+  const fit = () => {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => cards.forEach(card => {
+      const line = card.querySelector('.occupancy-line');
+      if (!line) return;
+      line.style.fontSize = '12px';
+      const style = getComputedStyle(card);
+      const available = card.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+      const natural = line.getBoundingClientRect().width;
+      if (natural > available) line.style.fontSize = (Math.floor(12 * available / natural * 10) / 10) + 'px';
+    }));
+  };
+  const sizes = new ResizeObserver(fit);
+  const changes = new MutationObserver(fit);
+  cards.forEach(card => { sizes.observe(card); changes.observe(card, {childList:true,subtree:true,characterData:true}); });
+  document.fonts?.ready.then(fit);
+  fit();
 })();

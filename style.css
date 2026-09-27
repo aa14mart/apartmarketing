@@ -10,7 +10,10 @@
   --content-bg: rgba(255,255,255,.045);
   --gap: 12px;
   --mobile-gallery-gap: 8px;
+  --text-secondary: #C2BCB3;
+  --reading-bg: rgba(18,16,14,.88);
 }
+
 
 * {
   box-sizing: border-box;
@@ -1285,8 +1288,59 @@ body.gallery-lightbox-open { overflow: hidden; }
   }
 }
 
-/* v177: mobile consultation button matches the contact form submit control. */
+/* v178: mirrored comparison labels and a double-layer consultation button. */
+.home-comparison-label {
+  position: absolute;
+  bottom: 26%;
+  width: 41%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--header-bg);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  pointer-events: none;
+}
+.home-comparison-label--before {
+  right: 0;
+  padding-right: 12%;
+  clip-path: polygon(0 0, 62% 0, 100% 50%, 62% 100%, 0 100%);
+}
+.home-comparison-label--after {
+  left: 0;
+  padding-left: 12%;
+  clip-path: polygon(38% 0, 100% 0, 100% 100%, 38% 100%, 0 50%);
+}
+.home-booking-cta,
+.home-booking-cta:hover,
+.home-booking-cta:active {
+  border: 1px solid var(--nav-inactive);
+  background: linear-gradient(var(--header-bg), var(--header-bg)), linear-gradient(var(--header-bg), var(--header-bg));
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: normal;
+  padding: 8px 22px;
+  height: 40px;
+  min-height: 40px;
+  text-decoration: none;
+}
+.home-booking-cta:focus-visible { outline: none; }
+@media (min-width: 740px) {
+  .home-booking-cta--desktop {
+    top: 10px;
+    right: 10px;
+    bottom: auto;
+    left: auto;
+    transform: none;
+  }
+}
+
+/* Mobile consultation button spans the same width as the header. */
 @media (max-width: 739px) {
+  .home-comparison-label { font-size: 10px; }
   .home-booking-cta--mobile,
   .home-booking-cta--mobile:hover,
   .home-booking-cta--mobile:active {
@@ -1296,7 +1350,7 @@ body.gallery-lightbox-open { overflow: hidden; }
     min-height: 40px;
     padding: 8px 22px;
     border: 1px solid var(--nav-inactive);
-    background: var(--header-bg);
+    background: linear-gradient(var(--header-bg), var(--header-bg)), linear-gradient(var(--header-bg), var(--header-bg));
     color: #fff;
     font-size: 12px;
     font-weight: 600;
@@ -1305,4 +1359,102 @@ body.gallery-lightbox-open { overflow: hidden; }
     box-shadow: none;
   }
   .home-booking-cta--mobile:focus-visible { outline: none; }
+}
+
+/* v179: shared 12 / 14 / 16 px typography, three text colors. */
+body { font-size: 14px; }
+.header-panel--logo-home { font-size: 12px; }
+.header-nav > a:not(.header-home-logo), .mobile-menu__link,
+.header-location, .language-btn { color: var(--text-secondary); }
+.header-nav > a:not(.header-home-logo):hover, .mobile-menu__link:hover,
+.language-btn:hover, .gallery-pagination__arrow:not(.is-disabled):hover { color: var(--logo-gold); }
+.header-nav > a:not(.header-home-logo).is-active, .mobile-menu__link.is-active,
+.language-btn.is-active { color: var(--logo-gold); }
+.mobile-site-menu { font-size: 14px; font-weight: 600; }
+.content-panel { background: var(--reading-bg); }
+.pricing-card h2, .included-services h3, .other-services h3,
+.workflow-step h3, .info-page__title { font-size: 16px; font-weight: 600; line-height: 1.35; }
+.pricing-lead, .pricing-lines p, .included-services p, .services-notes p,
+.workflow-step p, .info-page__copy p, .contacts-page__intro {
+  font-size: 14px; line-height: 1.57; letter-spacing: normal;
+}
+.info-page__copy { max-width: 70ch; }
+.contact-row__label, .contact-row__value { font-size: 14px; letter-spacing: normal; overflow-wrap: anywhere; }
+.home-help-panel__title--hero { display: block; font-size: 16px; font-weight: 600; line-height: 1.35; }
+.home-help-panel__title--hero > span { display: inline; width: auto; white-space: normal; letter-spacing: normal !important; }
+.home-occupancy-card { font-size: 12px; color: var(--text-secondary); line-height: 1.4; padding: 7px 5px; gap: 4px; }
+.home-comparison-label { width: 35%; height: 17%; bottom: 21%; font-size: 12px; color: var(--logo-gold); }
+.home-comparison-label--before { padding-right: 10%; }
+.home-comparison-label--after { padding-left: 10%; }
+.home-booking-cta, .home-booking-cta:hover, .home-booking-cta:active { font-size: 14px; }
+.gallery-pagination__page, .gallery-pagination__arrow { font-size: 12px; color: var(--text-secondary); }
+.gallery-pagination__page.is-active { color: var(--logo-gold); }
+.gallery-lightbox__counter { font-size: 12px; }
+.gallery-lightbox__control { color: var(--text-secondary); }
+.site-footer__copy, .site-footer__phone { font-size: 12px; color: var(--text-secondary); }
+.site-footer__content { background: var(--reading-bg); padding: 12px; }
+.site-footer__socials .social-link { color: var(--text-secondary); border-color: var(--nav-inactive); }
+@media (max-width: 739px) {
+  .header-panel--logo-home { padding-left: 8px; padding-right: 8px; gap: 4px; }
+  .header-nav { gap: 4px; }
+  .header-single-right { gap: 8px; }
+  .header-location { gap: 3px; letter-spacing: normal; }
+  .language-switcher { gap: 4px; }
+  .language-btn { letter-spacing: normal; }
+  .home-occupancy-card { min-height: 66px; flex-direction: column; text-align: center; gap: 0; }
+  .home-occupancy-card .occupancy-value { display: block; }
+  .contact-row { grid-template-columns: 90px minmax(0,1fr); }
+  .contact-row__label { font-size: 12px; }
+}
+
+/* v180: footer navigation, quiet CTA, and secondary comparison labels. */
+.home-comparison-label { color: var(--text-secondary); }
+.home-booking-cta, .home-booking-cta:hover, .home-booking-cta:active { border: 0; }
+.site-footer__content { background: var(--header-bg); flex-wrap: wrap; }
+.site-footer__nav { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 16px; min-width: 0; }
+.site-footer__nav a { display: inline-flex; align-items: center; min-height: 40px; font-size: 12px; font-weight: 400; color: var(--text-secondary); text-decoration: none; white-space: nowrap; }
+.site-footer__nav a:hover, .site-footer__nav a[aria-current=page] { color: var(--logo-gold); }
+.site-footer__nav .site-footer__home { color: var(--logo-gold); }
+.site-footer__home svg { width: 24px; height: 24px; }
+@media (max-width: 739px) {
+  .site-footer__nav { width: 100%; gap: 2px 12px; }
+  .site-footer__nav .site-footer__home { flex: 0 0 24px; }
+}
+.home-occupancy-card { flex-direction: row; min-height: 30px; white-space: nowrap; letter-spacing: normal; gap: 0; }
+.home-occupancy-card .occupancy-line { display: inline-block; flex: 0 0 auto; white-space: nowrap; line-height: 1.4; }
+
+.home-sale-rent__column { grid-template-columns: minmax(0, 1fr); }
+.home-occupancy-card { min-width: 0; overflow: hidden; }
+
+/* v181: compact lower header and lower, legible comparison arrows. */
+.home-comparison-label {
+  width: 24.5%;
+  min-width: calc(10ch + 12px);
+  height: 11.9%;
+  min-height: 28px;
+  bottom: 12%;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--text-secondary);
+}
+.home-comparison-label--before { padding: 0 20px 0 0; clip-path: polygon(0 0, 75% 0, 100% 50%, 75% 100%, 0 100%); }
+.home-comparison-label--after { padding: 0 0 0 20px; clip-path: polygon(25% 0, 100% 0, 100% 100%, 25% 100%, 0 50%); }
+.site-footer { padding-left: 0; padding-right: 0; }
+.site-footer__content { min-height: 50px; height: 50px; padding: 5px 16px; flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 12px; }
+.site-footer__nav { flex-wrap: nowrap; gap: 10px; width: auto; }
+@media (min-width: 740px) {
+  .home-booking-cta--desktop { top: 0; right: 0; }
+}
+@media (max-width: 1000px) {
+  .site-footer__content { display: grid; grid-template-columns: minmax(0,1fr); height: auto; padding: 0; gap: 12px; background: transparent; }
+  .site-footer__nav { box-sizing: border-box; height: 50px; padding: 5px 8px; width: 100%; background: var(--header-bg); flex-wrap: wrap; align-content: center; gap: 0 10px; }
+  .site-footer__nav a { min-height: 20px; }
+  .site-footer__right { width: 100%; justify-content: space-between; padding: 0 8px; }
+}
+@media (max-width: 1000px) {
+  .site-footer__right .site-footer__phone,
+  .site-footer__right .social-link { color: var(--footer-dark); }
+  .site-footer__right .social-link { border-color: var(--footer-dark); }
 }
