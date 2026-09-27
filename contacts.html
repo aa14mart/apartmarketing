@@ -8,6 +8,8 @@
   <title>APART MARKETING — Контакты</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
+  <link rel="stylesheet" href="contact-form.css?v=170">
+  <script src="contact-form.js?v=170" defer></script>
 </head>
 <body>
 
@@ -85,6 +87,29 @@
           <span class="contact-row__value">Batumi, Georgia</span>
         </div>
       </div>
+
+      <form class="contact-form" id="contact-form">
+        <h2 data-form-text="title">ОБСУДИТЬ СЪЕМКУ</h2>
+        <div class="contact-form__fields">
+          <label><span data-form-text="name">Ваше имя</span>
+            <input name="name" autocomplete="name" required maxlength="100">
+          </label>
+          <label><span data-form-text="contact">Телефон или Telegram</span>
+            <input name="contact" required minlength="3" maxlength="200" aria-describedby="contact-hint">
+          </label>
+        </div>
+        <p id="contact-hint" class="contact-form__hint" data-form-text="hint">Укажите номер с кодом страны или @имя в Telegram.</p>
+        <label><span data-form-text="message">Расскажите об объекте и желаемой дате (необязательно)</span>
+          <textarea name="message" rows="4" maxlength="2000"></textarea>
+        </label>
+        <div class="contact-form__trap" aria-hidden="true">
+          <label>Website<input name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
+        <p class="contact-form__hint" data-form-text="note">Заявка будет передана команде APART MARKETING в Telegram, чтобы мы могли связаться с вами.</p>
+        <button type="submit" data-form-text="submit">ОТПРАВИТЬ ЗАЯВКУ</button>
+        <p class="contact-form__status" role="status" aria-live="polite" aria-atomic="true"></p>
+        <noscript>Для отправки формы включите JavaScript или свяжитесь с нами по контактам выше.</noscript>
+      </form>
     </section>
 
     <footer class="site-footer">
