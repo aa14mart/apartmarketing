@@ -8,10 +8,10 @@
   <title>APART MARKETING — Контакты</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
-  <link rel="stylesheet" href="contact-form.css?v=172">
+  <link rel="stylesheet" href="contact-form.css?v=173">
   <script src="vendor/libphonenumber-min.js" defer></script>
   <script src="contact-rules.js?v=172" defer></script>
-  <script src="contact-form.js?v=172" defer></script>
+  <script src="contact-form.js?v=173" defer></script>
 </head>
 <body>
 
@@ -91,15 +91,14 @@
       </div>
 
       <form class="contact-form" id="contact-form" novalidate>
-        <h2 data-form-text="title">ОБСУДИТЬ СЪЕМКУ</h2>
         <fieldset class="contact-form__body">
           <label class="contact-form__name"><span class="visually-hidden" data-form-text="name">Ваше имя</span>
-            <input id="lead-name" name="name" autocomplete="name" required maxlength="100" placeholder="Ваше имя" aria-describedby="name-error">
+            <input id="lead-name" name="name" autocomplete="name" required maxlength="100" placeholder="Ваше имя (обязательно)" aria-describedby="name-error">
           </label>
           <p id="name-error" class="field-error" hidden></p>
-          <label><span class="visually-hidden" data-form-text="method">Где вам удобно ответить?</span>
+          <label><span class="visually-hidden" data-form-text="method">Способ связи (обязательно)</span>
             <select name="method" id="lead-method" required aria-describedby="method-error">
-              <option value="" data-form-text="method">Где вам удобно ответить?</option>
+              <option value="" selected disabled hidden data-form-text="method">Способ связи (обязательно)</option>
               <option value="call" data-form-text="call">Позвоните мне</option>
               <option value="whatsapp">WhatsApp</option><option value="telegram">Telegram</option>
               <option value="instagram">Instagram</option><option value="messenger">Facebook Messenger</option><option value="viber">Viber</option>
@@ -107,25 +106,33 @@
           </label>
           <p id="method-error" class="field-error" hidden></p>
           <div class="contact-form__contact" hidden>
-            <label for="lead-contact" class="contact-form__contact-label"></label>
+            <label for="lead-contact" class="contact-form__contact-label visually-hidden"></label>
             <div class="contact-form__contact-row">
               <span class="contact-form__prefix" aria-hidden="true"></span>
               <select name="country" id="lead-country" hidden></select>
-              <input name="contact" id="lead-contact" disabled aria-describedby="contact-hint contact-error" maxlength="250">
+              <input name="contact" id="lead-contact" disabled aria-describedby="contact-error" maxlength="250">
             </div>
-            <p id="contact-hint" class="contact-form__hint"></p>
+            
             <p id="contact-error" class="field-error" hidden></p>
           </div>
-          <div class="contact-form__message-heading"><label for="lead-message" data-form-text="message"></label><span id="message-count">0/500</span></div>
-          <textarea id="lead-message" name="message" rows="4" maxlength="500" aria-describedby="message-count"></textarea>
-          <label class="contact-form__upload"><span data-form-text="photos"></span>
-            <input type="file" name="photos" multiple aria-describedby="photo-hint">
-          </label>
-          <p id="photo-hint" class="contact-form__hint" data-form-text="photoHint"></p>
-          <p class="contact-form__file-errors field-error" role="status" hidden></p>
-          <ul class="contact-form__files" aria-live="polite"></ul>
+          <div class="contact-form__message-block">
+            <div class="contact-form__message-input">
+              <label for="lead-message" class="visually-hidden" data-form-text="message"></label>
+              <span id="message-count">0/500</span>
+              <textarea id="lead-message" name="message" rows="5" maxlength="500" aria-describedby="message-count" placeholder="Опишите задачу или задайте вопрос. (необязательно)"></textarea>
+            </div>
+            <div class="contact-form__upload">
+              <span data-form-text="photos"></span>
+              <label class="contact-form__upload-button">
+                <span data-form-text="uploadButton">Загрузить фото</span>
+                <input type="file" name="photos" multiple aria-describedby="photo-hint" aria-label="Загрузить фото">
+              </label>
+              <p id="photo-hint" class="contact-form__hint" data-form-text="photoHint"></p>
+            </div>
+            <p class="contact-form__file-errors field-error" role="status" hidden></p>
+            <ul class="contact-form__files" aria-live="polite"></ul>
+          </div>
           <div class="contact-form__trap" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
-          <p class="contact-form__hint" data-form-text="note"></p>
         </fieldset>
         <button type="submit" data-form-text="submit">ОТПРАВИТЬ ЗАЯВКУ</button>
         <p class="contact-form__status" role="status" aria-live="polite" aria-atomic="true"></p>
