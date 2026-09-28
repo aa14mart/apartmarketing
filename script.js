@@ -4,11 +4,11 @@ const translations = {
     "services_btn": "УСЛУГИ",
     "about_btn": "ПРО НАС",
     "gallery_btn": "ГАЛЕРЕЯ",
-    "home_mobile_tagline": "Сделаем фото, которые помогут быстро сдать или продать недвижимость", "home_hero_line_1": "СДЕЛАЕМ ФОТО, КОТОРЫЕ",
+    "home_mobile_tagline": "Фото, которые помогут быстро сдать или продать недвижимость", "home_hero_line_1": "ФОТО, КОТОРЫЕ",
     "home_hero_line_2": "ПОМОГУТ БЫСТРО СДАТЬ ИЛИ",
     "home_hero_line_3": "ПРОДАТЬ НЕДВИЖИМОСТЬ",
-    "home_comparison_before": "ДО", "home_comparison_after": "ПОСЛЕ", "home_rent_load_before": "Посуточная загрузка 50%",
-    "home_rent_load_after": "Посуточная загрузка 80%",
+    "home_comparison_before": "ДО", "home_comparison_after": "ПОСЛЕ", "home_rent_load_before": "посуточная загрузка 50%",
+    "home_rent_load_after": "посуточная загрузка 80%",
     "contacts_btn": "КОНТАКТЫ",
     "contacts_title": "КОНТАКТЫ",
     "contacts_intro": "Свяжитесь с нами удобным способом.",
@@ -381,7 +381,7 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
     const width = fill.getBoundingClientRect().width;
     const columns = 2;
     const rows = 2;
-    const thumbWidth = (width - (columns - 1) * MOBILE_MIN_GAP) / columns;
+    const thumbWidth = Math.min(MAX_HEIGHT * RATIO, (width - (columns - 1) * MOBILE_MIN_GAP) / columns);
     const height = thumbWidth / RATIO;
     return {
       count: columns * rows,
