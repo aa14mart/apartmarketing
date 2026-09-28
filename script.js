@@ -1,13 +1,14 @@
 const translations = {
   "ru": {
+    "home_gallery_heading": "Профессиональная интерьерная съёмка",
     "services_btn": "УСЛУГИ",
     "about_btn": "ПРО НАС",
     "gallery_btn": "ГАЛЕРЕЯ",
-    "home_hero_line_1": "СДЕЛАЕМ ФОТО, КОТОРЫЕ",
+    "home_mobile_tagline": "Сделаем фото, которые помогут быстро сдать или продать недвижимость", "home_hero_line_1": "СДЕЛАЕМ ФОТО, КОТОРЫЕ",
     "home_hero_line_2": "ПОМОГУТ БЫСТРО СДАТЬ ИЛИ",
     "home_hero_line_3": "ПРОДАТЬ НЕДВИЖИМОСТЬ",
-    "home_comparison_before": "ДО", "home_comparison_after": "ПОСЛЕ", "home_rent_load_before": "ПОСУТОЧНАЯ ЗАГРУЗКА 50%",
-    "home_rent_load_after": "ПОСУТОЧНАЯ ЗАГРУЗКА 80%",
+    "home_comparison_before": "ДО", "home_comparison_after": "ПОСЛЕ", "home_rent_load_before": "Посуточная загрузка 50%",
+    "home_rent_load_after": "Посуточная загрузка 80%",
     "contacts_btn": "КОНТАКТЫ",
     "contacts_title": "КОНТАКТЫ",
     "contacts_intro": "Свяжитесь с нами удобным способом.",
@@ -47,14 +48,15 @@ const translations = {
     "about_text_2": "Перед съёмкой помогаем подготовить интерьер, подобрать ракурсы и выстроить визуальную подачу, а затем создаём готовый комплект профессионально обработанных фотографий."
   },
   "en": {
+    "home_gallery_heading": "Professional interior photography",
     "services_btn": "SERVICES",
     "about_btn": "ABOUT US",
     "gallery_btn": "GALLERY",
-    "home_hero_line_1": "WE CREATE PHOTOS THAT",
+    "home_mobile_tagline": "We create photos that help you rent or sell your property faster", "home_hero_line_1": "WE CREATE PHOTOS THAT",
     "home_hero_line_2": "HELP YOU RENT OR SELL",
     "home_hero_line_3": "REAL ESTATE FASTER",
-    "home_comparison_before": "BEFORE", "home_comparison_after": "AFTER", "home_rent_load_before": "SHORT-TERM OCCUPANCY 50%",
-    "home_rent_load_after": "SHORT-TERM OCCUPANCY 80%",
+    "home_comparison_before": "BEFORE", "home_comparison_after": "AFTER", "home_rent_load_before": "Short-term occupancy 50%",
+    "home_rent_load_after": "Short-term occupancy 80%",
     "contacts_btn": "CONTACTS",
     "contacts_title": "CONTACTS",
     "contacts_intro": "Contact us in the way that is most convenient for you.",
@@ -94,10 +96,11 @@ const translations = {
     "about_text_2": "Before the shoot, we help prepare the interior, choose the best angles and shape the visual presentation, then deliver a complete set of professionally edited photographs."
   },
   "ka": {
+    "home_gallery_heading": "ინტერიერის პროფესიონალური გადაღება",
     "services_btn": "სერვისები",
     "about_btn": "ჩვენ შესახებ",
     "gallery_btn": "გალერეა",
-    "home_hero_line_1": "ვქმნით ფოტოებს, რომლებიც",
+    "home_mobile_tagline": "ვქმნით ფოტოებს, რომლებიც დაგეხმარებათ უფრო სწრაფად გააქირაოთ ან გაყიდოთ უძრავი ქონება", "home_hero_line_1": "ვქმნით ფოტოებს, რომლებიც",
     "home_hero_line_2": "დაგეხმარებათ უფრო სწრაფად",
     "home_hero_line_3": "გააქირავოთ ან გაყიდოთ",
     "home_comparison_before": "მანამდე", "home_comparison_after": "შემდეგ", "home_rent_load_before": "დღიური დატვირთვა 50%",
@@ -294,7 +297,7 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
   const MIN_HEIGHT = 70;
   const MAX_HEIGHT = 144;
   const MIN_GAP = 12;
-  const MOBILE_MIN_GAP = 2;
+  const MOBILE_MIN_GAP = 12;
   const VERTICAL_GAP = 12;
   const EVEN_VERTICAL_THRESHOLD = 39;
   const SHELL_GAP = 12;
@@ -376,7 +379,7 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
 
   const chooseMobileLayout = () => {
     const width = fill.getBoundingClientRect().width;
-    const columns = width < 480 ? 3 : 4;
+    const columns = 2;
     const rows = 2;
     const thumbWidth = (width - (columns - 1) * MOBILE_MIN_GAP) / columns;
     const height = thumbWidth / RATIO;
@@ -561,8 +564,10 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
     );
     if (!candidates.length) return;
 
-    // Each cycle replaces a random batch of 2–5 visible mini photos.
-    const batchSize = Math.min(candidates.length, 2 + Math.floor(Math.random() * 4));
+    // Phones replace 1–2 photos; desktop keeps the existing 2–5 photo cycle.
+    const batchSize = Math.min(candidates.length, isMobileLayout()
+      ? 1 + Math.floor(Math.random() * 2)
+      : 2 + Math.floor(Math.random() * 4));
     const selected = candidates.slice(0, batchSize);
     const jobs = selected
       .map(({ thumb, index }) => ({ thumb, index, nextSource: takeReplacementSource() }))

@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&display=swap");
 
 :root {
-  --logo-gold: #F0E3CE;
+  --logo-gold: #C7B59D;
   --nav-inactive: rgba(255,255,255,.54);
   --nav-hover: #C7B59D;
   --header-bg: rgba(18,16,14,.59);
@@ -45,9 +45,9 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -2;
-  background: url("images/mainfon.jpg") center / cover no-repeat;
-  filter: blur(2px) brightness(.95) saturate(.94);
-  transform: scale(1.01);
+  background: url("images/mainfon_desktop.jpg") center / cover no-repeat;
+  filter: none;
+  transform: none;
 }
 
 body::after {
@@ -55,7 +55,7 @@ body::after {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: rgba(20,17,14,.05);
+  background: rgba(0,0,0,.12);
   pointer-events: none;
 }
 
@@ -1414,7 +1414,7 @@ body { font-size: 14px; }
 .site-footer__nav { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 16px; min-width: 0; }
 .site-footer__nav a { display: inline-flex; align-items: center; min-height: 40px; font-size: 12px; font-weight: 400; color: var(--text-secondary); text-decoration: none; white-space: nowrap; }
 .site-footer__nav a:hover, .site-footer__nav a[aria-current=page] { color: var(--logo-gold); }
-.site-footer__nav .site-footer__home { color: var(--logo-gold); }
+.site-footer__nav .site-footer__home { color: var(--text-secondary); }
 .site-footer__home svg { width: 24px; height: 24px; }
 @media (max-width: 739px) {
   .site-footer__nav { width: 100%; gap: 2px 12px; }
@@ -1439,7 +1439,7 @@ body { font-size: 14px; }
   white-space: nowrap;
   color: var(--text-secondary);
 }
-.home-comparison-label--before { padding: 0 20px 0 0; clip-path: polygon(0 0, 75% 0, 100% 50%, 75% 100%, 0 100%); }
+.home-comparison-label--before { left: 0; right: auto; padding: 0 0 0 20px; clip-path: polygon(25% 0, 100% 0, 100% 100%, 25% 100%, 0 50%); }
 .home-comparison-label--after { padding: 0 0 0 20px; clip-path: polygon(25% 0, 100% 0, 100% 100%, 25% 100%, 0 50%); }
 .site-footer { padding-left: 0; padding-right: 0; }
 .site-footer__content { min-height: 50px; height: 50px; padding: 5px 16px; flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 12px; }
@@ -1471,3 +1471,149 @@ body { font-size: 14px; }
     border-radius: 999px !important;
   }
 }
+
+/* v188: separate desktop and mobile background photographs. */
+@media (max-width: 739px) {
+  body::before { background-image: url("images/mainfon_mobile.jpg"); }
+}
+
+/* v189: mobile gallery fades directly into the page photograph. */
+@media (max-width: 739px) {
+  .home-intro-row__fill,
+  .home-intro-row__fill.is-gap-filled { background: transparent; }
+}
+
+/* v193: four mobile photos, standalone tagline and a single-layer CTA. */
+.home-mobile-tagline { display: none; }
+.home-comparison-label { color: #fff; }
+.home-booking-cta, .home-booking-cta:hover, .home-booking-cta:active {
+  background: var(--header-bg);
+  border: 1px solid #fff;
+  border-radius: 0 !important;
+}
+@media (max-width: 739px) {
+  .home-intro-row__photo .home-help-panel { display: none; }
+  .home-mobile-tagline {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: var(--header-bg);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-transform: none;
+    text-align: center;
+  }
+}
+
+/* v194: compact navigation-only footer with the standard section spacing. */
+.site-footer { margin: 0; padding: 0; border: 0; }
+.site-footer__content {
+  display: flex;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  gap: 0;
+  background: transparent;
+}
+.site-footer__nav {
+  width: 100%;
+  height: auto;
+  min-height: 32px;
+  padding: 2px 8px;
+  gap: 0 10px;
+  flex-wrap: wrap;
+  background: var(--header-bg);
+}
+.site-footer__nav a { min-height: 28px; }
+.site-footer__nav .site-footer__home { flex: 0 0 18px; }
+.site-footer__home svg { width: 18px; height: 18px; }
+
+/* v195: unboxed mobile tagline and full-width footer navigation. */
+@media (max-width: 739px) {
+  .home-mobile-tagline {
+    padding: 0;
+    background: transparent;
+    font-size: clamp(12px, 3.5vw, 16px);
+    text-wrap: balance;
+  }
+  .site-footer__nav { justify-content: space-between; column-gap: 4px; }
+}
+
+/* v196: soft local contrast behind both mobile text blocks. */
+@media (max-width: 739px) {
+  .home-mobile-tagline {
+    position: relative;
+    isolation: isolate;
+    text-shadow: 0 1px 3px rgba(0,0,0,.55);
+  }
+  .home-mobile-tagline::before {
+    content: "";
+    position: absolute;
+    inset: -10px 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,.6) 0%, rgba(0,0,0,.35) 45%, rgba(0,0,0,0) 75%);
+  }
+}
+
+/* v197: soft comparison captions and equal outer/inner navigation spacing. */
+.home-comparison-label {
+  left: 12px;
+  right: auto;
+  bottom: 12px;
+  width: auto;
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  clip-path: none;
+  background: transparent;
+  isolation: isolate;
+  text-shadow: 0 1px 3px rgba(0,0,0,.55);
+}
+.home-comparison-label::before {
+  content: "";
+  position: absolute;
+  inset: -10px -12px;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,.6) 0%, rgba(0,0,0,.35) 45%, rgba(0,0,0,0) 75%);
+}
+.site-footer__nav { justify-content: space-evenly; column-gap: 0; padding: 2px 0; }
+
+/* v198: occupancy captions inside each comparison photograph. */
+.home-occupancy-card {
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  width: 100%;
+  min-height: 0;
+  padding: 0 6px;
+  overflow: visible;
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  text-transform: none;
+  isolation: isolate;
+  text-shadow: 0 1px 3px rgba(0,0,0,.55);
+  pointer-events: none;
+}
+.home-occupancy-card::before {
+  content: "";
+  position: absolute;
+  inset: -10px 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,.6) 0%, rgba(0,0,0,.35) 45%, rgba(0,0,0,0) 75%);
+}
+.home-comparison-label {
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%);
+}
+
+/* v199: left-aligned comparison labels and tighter bottom spacing. */
+.home-comparison-label { left: 12px; bottom: 26px; transform: none; }
+.home-occupancy-card { bottom: 4px; }
