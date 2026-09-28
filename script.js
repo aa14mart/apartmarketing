@@ -168,14 +168,16 @@ function setLanguage(lang) {
     line.className = 'occupancy-line'; line.textContent = element.textContent;
     element.replaceChildren(line);
   });
-  localStorage.setItem('apartmarketing-language', lang);
+  try { localStorage.setItem('apartmarketing-language', lang); } catch {}
   equalizeHeroHeadlineLines();
 }
 
 document.querySelectorAll('.language-btn').forEach((button) => {
   button.addEventListener('click', () => setLanguage(button.dataset.lang));
 });
-setLanguage(localStorage.getItem('apartmarketing-language') || 'ru');
+let savedLanguage = 'ru';
+try { savedLanguage = localStorage.getItem('apartmarketing-language') || 'ru'; } catch {}
+setLanguage(translations[savedLanguage] ? savedLanguage : 'ru');
 if (document.fonts?.ready) document.fonts.ready.then(equalizeHeroHeadlineLines);
 window.addEventListener('resize', equalizeHeroHeadlineLines);
 
@@ -476,9 +478,7 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
     fill.style.paddingBottom = `${vertical.paddingBottom.toFixed(2)}px`;
     fill.style.alignContent = 'start';
 
-    // On mobile the intended internal gap is 2px. Keep the gallery
-    // background equal to the header overlay so the internal gap color
-    // stays consistent and any sub-pixel seams never show through.
+    // Preserve the transparent mobile grid while photographs fade.
     fill.classList.toggle('is-gap-filled', layout.mobile);
 
     thumbs.forEach((thumb, index) => {
@@ -489,6 +489,7 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
 
   const chosenSources = shuffle([...gallerySources]).slice(0, thumbs.length);
   const ready = new Map();
+  const loadingSlots = new Set();
   const revealed = new Set();
   const currentSources = new Map();
   let replacementDeck = shuffle(gallerySources.filter((source) => !chosenSources.includes(source)));
@@ -547,7 +548,7 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
 
   const scheduleRandomSwap = () => {
     clearTimeout(swapTimer);
-    if (!allVisibleRevealed() || swapInProgress) return;
+    if (document.hidden || !allVisibleRevealed() || swapInProgress) return;
     swapTimer = setTimeout(swapRandomPhotos, randomSwapDelay());
   };
 
@@ -665,14 +666,16 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
 
   const loadSlotSource = (index, source) => {
     const thumb = thumbs[index];
-    if (!thumb || !source) return;
+    if (!thumb || !source || thumb.hidden || loadingSlots.has(index)) return;
+    loadingSlots.add(index);
     const loader = new Image();
     loader.decoding = 'async';
     loader.onload = () => {
+      loadingSlots.delete(index);
       ready.set(index, source);
       if (!timer && !revealed.size) revealNext();
     };
-    loader.onerror = () => { thumb.hidden = true; };
+    loader.onerror = () => { loadingSlots.delete(index); thumb.hidden = true; };
     loader.src = getThumbSource(source);
   };
 

@@ -6,8 +6,11 @@
   <meta name="theme-color" content="#b7aea3">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>APART MARKETING</title>
-  <link rel="stylesheet" href="style.css?v=203">
-  <script src="script.js?v=204" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&amp;display=swap">
+  <link rel="stylesheet" href="style.css?v=205">
+  <script src="script.js?v=205" defer></script>
 </head>
 <body>
 
@@ -59,7 +62,7 @@
       <div class="home-photo-card home-intro-row__photo">
         <picture>
           <source media="(max-width: 739px)" srcset="images/fotograf_mobile.jpg">
-          <img src="images/home-01-doorway.jpg" alt="Интерьерный фотограф за работой">
+          <img fetchpriority="high" decoding="async" width="900" height="900" src="images/home-01-doorway.jpg" alt="Интерьерный фотограф за работой">
         </picture>
         <div class="home-help-panel">
           <div class="home-help-panel__title home-help-panel__title--hero" aria-label="ФОТО, КОТОРЫЕ ПОМОГУТ БЫСТРО СДАТЬ ИЛИ ПРОДАТЬ НЕДВИЖИМОСТЬ">
@@ -92,7 +95,7 @@
       <div class="home-sale-rent__grid">
         <div class="home-sale-rent__column">
           <figure class="home-sale-rent__card">
-            <img src="images/home-sale-rent-before.jpg" alt="Фото интерьера для продажи или аренды — до профессиональной съёмки">
+            <img decoding="async" width="900" height="600" src="images/home-sale-rent-before.jpg" alt="Фото интерьера для продажи или аренды — до профессиональной съёмки">
             <div class="home-comparison-label home-comparison-label--before" data-i18n="home_comparison_before">ДО</div>
           <div class="home-occupancy-card" data-i18n="home_rent_load_before">посуточная загрузка 50%</div>
           </figure>
@@ -100,7 +103,7 @@
 
         <div class="home-sale-rent__column">
           <figure class="home-sale-rent__card">
-            <img src="images/home-sale-rent-after.jpg" alt="Профессиональное фото интерьера для продажи или аренды">
+            <img decoding="async" width="900" height="600" src="images/home-sale-rent-after.jpg" alt="Профессиональное фото интерьера для продажи или аренды">
             <a class="home-booking-cta home-booking-cta--desktop" href="contacts.html">ОБСУДИТЬ СЪЕМКУ</a>
             <div class="home-comparison-label home-comparison-label--after" data-i18n="home_comparison_after">ПОСЛЕ</div>
           <div class="home-occupancy-card" data-i18n="home_rent_load_after">посуточная загрузка 80%</div>
