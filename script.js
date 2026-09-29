@@ -200,93 +200,60 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
   });
 })();
 
-/* Gallery lightbox */
-(() => {
-  const images = Array.from(document.querySelectorAll('.gallery-grid .portfolio-card img'));
-  if (!images.length) return;
-
-  let currentIndex = 0;
-  const lightbox = document.createElement('div');
-  lightbox.className = 'gallery-lightbox';
-  lightbox.setAttribute('role', 'dialog');
-  lightbox.setAttribute('aria-modal', 'true');
-  lightbox.setAttribute('aria-label', 'Просмотр фотографии');
-
-  const stage = document.createElement('div');
-  stage.className = 'gallery-lightbox__stage';
-  const fullImage = document.createElement('img');
-  fullImage.className = 'gallery-lightbox__image';
-  fullImage.alt = '';
-  const counter = document.createElement('div');
-  counter.className = 'gallery-lightbox__counter';
-  counter.setAttribute('aria-live', 'polite');
-
-  const button = (className, label) => {
-    const el = document.createElement('button');
-    el.type = 'button';
-    el.className = `gallery-lightbox__control ${className}`;
-    el.setAttribute('aria-label', label);
-    return el;
+/* Shared full-gallery viewer: originals are fetched only when opened. */
+const openGalleryPhoto = (() => {
+  const sources = Array.from({length:216}, (_, i) => `images/gallery-p${Math.floor(i/18)+1}-${String(i%18+1).padStart(2,'0')}.jpg`);
+  if (!document.querySelector('.gallery-grid, .home-mini-gallery__item')) return () => {};
+  const box = document.createElement('div');
+  box.className = 'gallery-lightbox';
+  box.setAttribute('role','dialog'); box.setAttribute('aria-modal','true');
+  box.setAttribute('aria-label','Просмотр фотографий');
+  box.innerHTML = '<div class="gallery-lightbox__stage"><img class="gallery-lightbox__image" alt=""><div class="gallery-lightbox__counter" aria-live="polite"></div><button type="button" class="gallery-lightbox__control gallery-lightbox__prev" aria-label="Предыдущее фото"></button><button type="button" class="gallery-lightbox__control gallery-lightbox__next" aria-label="Следующее фото"></button><button type="button" class="gallery-lightbox__control gallery-lightbox__collapse" aria-label="Свернуть фото"></button></div>';
+  document.body.append(box);
+  const stage=box.firstElementChild, img=box.querySelector('img'), counter=box.querySelector('.gallery-lightbox__counter');
+  const prev=box.querySelector('.gallery-lightbox__prev'),next=box.querySelector('.gallery-lightbox__next'),close=box.querySelector('.gallery-lightbox__collapse');
+  let index=0,trigger=null,touch=null;
+  const update = n => {
+    if(n<0 || n>=sources.length)return;
+    index=n;img.src=sources[n];img.alt=`Фотография ${n+1}`;
+    counter.textContent=`${n+1} / ${sources.length}`;
+    prev.disabled=n===0;next.disabled=n===sources.length-1;
   };
-
-  const prev = button('gallery-lightbox__prev', 'Предыдущее фото');
-  const next = button('gallery-lightbox__next', 'Следующее фото');
-  const close = button('gallery-lightbox__collapse', 'Свернуть фото');
-  stage.append(fullImage, counter, prev, next, close);
-  lightbox.append(stage);
-  document.body.append(lightbox);
-
-  const update = (index) => {
-    if (index < 0 || index >= images.length) return;
-    currentIndex = index;
-    const source = images[index];
-    fullImage.src = source.currentSrc || source.src;
-    fullImage.alt = source.alt || 'Фотография';
-    counter.textContent = `${index + 1} / ${images.length}`;
-    prev.disabled = index === 0;
-    next.disabled = index === images.length - 1;
+  const dismiss=()=>{
+    box.classList.remove('is-open');document.body.classList.remove('gallery-lightbox-open');
+    img.removeAttribute('src');trigger?.focus({preventScroll:true});touch=null;
   };
-
-  const open = (index) => {
-    update(index);
-    lightbox.classList.add('is-open');
-    document.body.classList.add('gallery-lightbox-open');
-    close.focus({ preventScroll: true });
-  };
-
-  const dismiss = () => {
-    lightbox.classList.remove('is-open');
-    document.body.classList.remove('gallery-lightbox-open');
-    fullImage.removeAttribute('src');
-    fullImage.alt = '';
-    images[currentIndex]?.focus({ preventScroll: true });
-  };
-
-  images.forEach((image, index) => {
-    image.tabIndex = 0;
-    image.setAttribute('role', 'button');
-    image.setAttribute('aria-label', `${image.alt || 'Фотография'}. Открыть в полном размере`);
-    image.addEventListener('click', () => open(index));
-    image.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        open(index);
-      }
-    });
+  prev.addEventListener('click',()=>update(index-1));next.addEventListener('click',()=>update(index+1));close.addEventListener('click',dismiss);
+  box.addEventListener('click',e=>{if(e.target===box)dismiss();});
+  img.draggable=false;
+  stage.addEventListener('touchstart',e=>{touch=e.touches.length===1?{x:e.touches[0].clientX,y:e.touches[0].clientY}:null;},{passive:true});
+  stage.addEventListener('touchend',e=>{
+    if(!touch)return;const dx=e.changedTouches[0].clientX-touch.x,dy=e.changedTouches[0].clientY-touch.y;touch=null;
+    if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.5)update(index+(dx<0?1:-1));
+  },{passive:true});
+  stage.addEventListener('touchcancel',()=>{touch=null;},{passive:true});
+  document.addEventListener('keydown',e=>{
+    if(!box.classList.contains('is-open'))return;
+    if(e.key==='Escape')dismiss();
+    if(e.key==='ArrowLeft'){e.preventDefault();update(index-1);}
+    if(e.key==='ArrowRight'){e.preventDefault();update(index+1);}
+    if(e.key==='Tab'){
+      const buttons=[prev,next,close].filter(b=>!b.disabled),i=buttons.indexOf(document.activeElement);
+      e.preventDefault();buttons[(i+(e.shiftKey?-1:1)+buttons.length)%buttons.length].focus();
+    }
   });
-
-  prev.addEventListener('click', (event) => { event.stopPropagation(); update(currentIndex - 1); });
-  next.addEventListener('click', (event) => { event.stopPropagation(); update(currentIndex + 1); });
-  close.addEventListener('click', (event) => { event.stopPropagation(); dismiss(); });
-  stage.addEventListener('click', (event) => event.stopPropagation());
-  lightbox.addEventListener('click', dismiss);
-  document.addEventListener('keydown', (event) => {
-    if (!lightbox.classList.contains('is-open')) return;
-    if (event.key === 'Escape') dismiss();
-    if (event.key === 'ArrowLeft' && currentIndex > 0) update(currentIndex - 1);
-    if (event.key === 'ArrowRight' && currentIndex < images.length - 1) update(currentIndex + 1);
+  const open=(source,element)=>{
+    const filename=source?.split('/').pop()?.split('?')[0],n=sources.findIndex(s=>s.endsWith('/'+filename));
+    if(n<0)return;trigger=element;update(n);box.classList.add('is-open');document.body.classList.add('gallery-lightbox-open');close.focus({preventScroll:true});
+  };
+  document.querySelectorAll('.gallery-grid .portfolio-card img').forEach(image=>{
+    image.tabIndex=0;image.setAttribute('role','button');image.setAttribute('aria-label',`${image.alt}. Открыть в полном размере`);
+    image.addEventListener('click',()=>open(image.getAttribute('src'),image));
+    image.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(image.getAttribute('src'),image);}});
   });
+  return open;
 })();
+
 
 /* Homepage mini gallery */
 (() => {
@@ -690,73 +657,11 @@ window.addEventListener('resize', equalizeHeroHeadlineLines);
     });
   };
 
-  // Homepage mini-gallery full-size preview. Thumbnails stay lightweight;
-  // the original gallery file is requested only after the user clicks a mini photo.
-  const preview = document.createElement('div');
-  preview.className = 'home-mini-lightbox';
-  preview.setAttribute('role', 'dialog');
-  preview.setAttribute('aria-modal', 'true');
-  preview.setAttribute('aria-label', 'Увеличенное фото');
-
-  const previewImage = document.createElement('img');
-  previewImage.className = 'home-mini-lightbox__image';
-  previewImage.alt = '';
-
-  const previewClose = document.createElement('button');
-  previewClose.type = 'button';
-  previewClose.className = 'home-mini-lightbox__close gallery-lightbox__control gallery-lightbox__collapse';
-  previewClose.setAttribute('aria-label', 'Закрыть фото');
-
-  const previewStage = document.createElement('div');
-  previewStage.className = 'home-mini-lightbox__stage';
-  previewStage.append(previewImage, previewClose);
-  preview.append(previewStage);
-  document.body.append(preview);
-
-  let previewSourceIndex = null;
-  const closePreview = () => {
-    preview.classList.remove('is-open');
-    document.body.classList.remove('gallery-lightbox-open');
-    previewImage.removeAttribute('src');
-    previewImage.alt = '';
-    if (previewSourceIndex !== null) {
-      thumbs[previewSourceIndex]?.focus({ preventScroll: true });
-    }
-    previewSourceIndex = null;
-  };
-
-  const openPreview = (index) => {
-    const fullSource = currentSources.get(index);
-    if (!fullSource) return;
-    previewSourceIndex = index;
-    previewImage.src = fullSource;
-    previewImage.alt = 'Фотография в полном размере';
-    preview.classList.add('is-open');
-    document.body.classList.add('gallery-lightbox-open');
-    previewClose.focus({ preventScroll: true });
-  };
-
-  thumbs.forEach((thumb, index) => {
-    thumb.tabIndex = 0;
-    thumb.setAttribute('role', 'button');
-    thumb.setAttribute('aria-label', 'Открыть фото в полном размере');
-    thumb.addEventListener('click', () => openPreview(index));
-    thumb.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        openPreview(index);
-      }
-    });
-  });
-
-  previewClose.addEventListener('click', (event) => {
-    event.stopPropagation();
-    closePreview();
-  });
-  previewImage.addEventListener('click', (event) => event.stopPropagation());
-  preview.addEventListener('click', closePreview);
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && preview.classList.contains('is-open')) closePreview();
+  thumbs.forEach((thumb,index)=>{
+    thumb.tabIndex=0;thumb.setAttribute('role','button');thumb.setAttribute('aria-label','Открыть фото в полном размере');
+    const open=()=>openGalleryPhoto(currentSources.get(index),thumb);
+    thumb.addEventListener('click',open);
+    thumb.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
   });
 
   const start = () => {

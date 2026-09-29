@@ -1448,3 +1448,7 @@ body { font-size: 14px; }
 .home-comparison-label, .home-occupancy-card  { z-index: 2; }
 @media (max-width: 739px) { .home-intro-row__fill  { justify-content: center; } }
 
+
+/* v206: gallery panel matches the header; shared viewer on all pages. */
+.gallery-block { background: var(--header-bg); }
+.portfolio-card > picture { display: block; }
